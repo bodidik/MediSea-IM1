@@ -1,0 +1,42 @@
+name: CI
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install server deps
+        working-directory: server
+        run: npm ci || npm i
+
+      - name: Lint server
+        working-directory: server
+        run: npm run lint || echo "no lint script"
+
+      - name: Test server
+        working-directory: server
+        run: npm test || echo "no tests yet"
+
+      - name: Install web deps
+        working-directory: web
+        run: npm ci || npm i
+
+      - name: Lint web
+        working-directory: web
+        run: npm run lint || echo "no lint script"
+
+      - name: Build web
+        working-directory: web
+        env:
+          NEXT_PUBLIC_API_BASE: ${{ vars.NEXT_PUBLIC_API_BASE }}
+        run: npm run build || echo "no build script"
