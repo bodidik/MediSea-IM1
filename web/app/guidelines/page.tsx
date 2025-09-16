@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+﻿export const dynamic = "force-dynamic";
 
 type Guideline = {
   _id?: string;
@@ -18,7 +18,7 @@ export default async function GuidelinesPage({
 }: {
   searchParams: Record<string, string | string[] | undefined>;
 }) {
-  // URL → filtreler
+  // URL â†’ filtreler
   const lang =
     (Array.isArray(searchParams.lang) ? searchParams.lang[0] : searchParams.lang) || "TR";
   const section =
@@ -26,7 +26,7 @@ export default async function GuidelinesPage({
   const q =
     (Array.isArray(searchParams.q) ? searchParams.q[0] : searchParams.q) || "";
 
-  // API çağrısı
+  // API Ã§aÄŸrÄ±sÄ±
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
   const api = new URL(`${backend}/api/guidelines`);
   if (lang) api.searchParams.set("lang", lang);
@@ -46,15 +46,15 @@ export default async function GuidelinesPage({
     "endokrinoloji",
     "kardiyoloji",
     "infeksiyon",
-    "göğüs",
+    "gÃ¶ÄŸÃ¼s",
   ];
 
   return (
     <div className="p-6 md:p-10 max-w-5xl mx-auto space-y-6">
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-2xl md:text-3xl font-bold">Kılavuzlar</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">KÄ±lavuzlar</h1>
         <a href="/topics" className="text-sm underline opacity-80 hover:opacity-100">
-          Konular →
+          Konular â†’
         </a>
       </div>
 
@@ -77,11 +77,11 @@ export default async function GuidelinesPage({
           name="section"
           defaultValue={section}
           className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
-          aria-label="Bölüm"
+          aria-label="BÃ¶lÃ¼m"
         >
           {SECTION_OPTIONS.map((s) => (
             <option key={s || "all"} value={s}>
-              {s ? s : "Bölüm: Hepsi"}
+              {s ? s : "BÃ¶lÃ¼m: Hepsi"}
             </option>
           ))}
         </select>
@@ -89,7 +89,7 @@ export default async function GuidelinesPage({
         <input
           name="q"
           defaultValue={q}
-          placeholder="Ara: KDIGO, EULAR, ESC, ADA…"
+          placeholder="Ara: KDIGO, EULAR, ESC, ADAâ€¦"
           className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
           aria-label="Arama"
         />
@@ -97,10 +97,10 @@ export default async function GuidelinesPage({
         <div className="md:col-span-5 flex items-center gap-3">
           <button className="px-3 py-2 rounded-lg border text-sm">Uygula</button>
           <a href="/guidelines" className="text-sm underline opacity-70 hover:opacity-100">
-            Sıfırla
+            SÄ±fÄ±rla
           </a>
           <span className="ml-auto text-xs text-gray-500">
-            {typeof data.count === "number" ? `Toplam ${data.count} kayıt` : `${items.length} sonuç`}
+            {typeof data.count === "number" ? `Toplam ${data.count} kayÄ±t` : `${items.length} sonuÃ§`}
           </span>
         </div>
       </form>
@@ -108,10 +108,10 @@ export default async function GuidelinesPage({
       {/* Liste */}
       {!data.ok ? (
         <div className="rounded-xl border p-4 text-sm text-red-600 bg-white">
-          {data.error || "Liste alınamadı"}
+          {data.error || "Liste alÄ±namadÄ±"}
         </div>
       ) : items.length === 0 ? (
-        <div className="text-sm text-gray-500">Kayıt bulunamadı.</div>
+        <div className="text-sm text-gray-500">KayÄ±t bulunamadÄ±.</div>
       ) : (
         <ul className="space-y-3">
           {items.map((g, idx) => (
@@ -128,8 +128,8 @@ export default async function GuidelinesPage({
                     )}
                   </div>
                   <div className="text-xs text-gray-500 mt-1">
-                    {(g.org || "—")} {g.year ? `· ${g.year}` : ""}{" "}
-                    {g.section ? `· ${g.section}` : ""} {g.lang ? `· ${g.lang}` : ""}
+                    {(g.org || "â€”")} {g.year ? `Â· ${g.year}` : ""}{" "}
+                    {g.section ? `Â· ${g.section}` : ""} {g.lang ? `Â· ${g.lang}` : ""}
                   </div>
                 </div>
                 {g.createdAt && (

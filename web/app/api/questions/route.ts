@@ -1,8 +1,8 @@
-import { cookies } from "next/headers";
+﻿import { cookies } from "next/headers";
 
 /**
- * Proxy: /api/questions  →  BACKEND:/api/questions
- * Örnek: /api/questions?module=nefroloji&limit=5
+ * Proxy: /api/questions  â†’  BACKEND:/api/questions
+ * Ã–rnek: /api/questions?module=nefroloji&limit=5
  */
 export async function GET(req: Request) {
   try {
@@ -12,16 +12,16 @@ export async function GET(req: Request) {
 
     const inUrl = new URL(req.url);
 
-    // Backend URL’sini hazırlayalım
+    // Backend URLâ€™sini hazÄ±rlayalÄ±m
     const outUrl = new URL(backend + "/api/questions");
 
-    // İzin verdiğimiz query parametreleri (gerektikçe ekleyebilirsin)
+    // Ä°zin verdiÄŸimiz query parametreleri (gerektikÃ§e ekleyebilirsin)
     const passthroughParams = [
-      "module",       // bizim FE’de kullandığımız isim
+      "module",       // bizim FEâ€™de kullandÄ±ÄŸÄ±mÄ±z isim
       "section",      // BE "section" bekliyorsa
       "limit",
       "offset",
-      "planLevel",    // V/M/P override için testlerde işe yarar
+      "planLevel",    // V/M/P override iÃ§in testlerde iÅŸe yarar
       "seed",         // randomizasyon varsa
       "lang",         // TR/EN
     ] as const;
@@ -31,12 +31,12 @@ export async function GET(req: Request) {
       if (v !== null) outUrl.searchParams.set(key, v);
     }
 
-    // module alias’ını section’a da yansıt (BE section beklerse)
+    // module aliasâ€™Ä±nÄ± sectionâ€™a da yansÄ±t (BE section beklerse)
     if (inUrl.searchParams.has("module") && !inUrl.searchParams.has("section")) {
       outUrl.searchParams.set("section", String(inUrl.searchParams.get("module")));
     }
 
-    // Kullanıcı ve plan bilgisi (cookie → backend)
+    // KullanÄ±cÄ± ve plan bilgisi (cookie â†’ backend)
     const jar = cookies();
     const mkUid = jar.get("mk_uid")?.value || "guest";
     outUrl.searchParams.set("externalId", mkUid);
@@ -47,14 +47,14 @@ export async function GET(req: Request) {
       headers.set("x-plan", planCookie);
     }
 
-    // Backend’e isteği ilet
+    // Backendâ€™e isteÄŸi ilet
     const res = await fetch(outUrl.toString(), {
       headers,
       cache: "no-store",
       // timeout/cors vs. gerekirse buraya eklenir
     });
 
-    // Backend ne döndürdüyse onu iletelim
+    // Backend ne dÃ¶ndÃ¼rdÃ¼yse onu iletelim
     const text = await res.text();
     return new Response(text, {
       status: res.status,

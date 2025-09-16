@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
 
 /**
- * HAS-BLED (kanama riski) — örnek/şablon.
- * Maddeler ve yorumlama klinik uygulamaya geçmeden doğrulanmalıdır.
+ * HAS-BLED (kanama riski) â€” Ã¶rnek/ÅŸablon.
+ * Maddeler ve yorumlama klinik uygulamaya geÃ§meden doÄŸrulanmalÄ±dÄ±r.
  */
 
 type Item = { key: keyof State; label: string; pts: number };
@@ -24,13 +24,13 @@ type State = {
 
 const ITEMS: Item[] = [
   { key: "htn",        label: "Hipertansiyon (SBP >160)", pts: 1 },
-  { key: "abnRenal",   label: "Böbrek fonksiyon bozukluğu", pts: 1 },
-  { key: "abnLiver",   label: "Karaciğer fonksiyon bozukluğu", pts: 1 },
-  { key: "stroke",     label: "Geçirilmiş inme", pts: 1 },
-  { key: "bleed",      label: "Kanama öyküsü/riski", pts: 1 },
+  { key: "abnRenal",   label: "BÃ¶brek fonksiyon bozukluÄŸu", pts: 1 },
+  { key: "abnLiver",   label: "KaraciÄŸer fonksiyon bozukluÄŸu", pts: 1 },
+  { key: "stroke",     label: "GeÃ§irilmiÅŸ inme", pts: 1 },
+  { key: "bleed",      label: "Kanama Ã¶ykÃ¼sÃ¼/riski", pts: 1 },
   { key: "labileINR",  label: "Labile INR", pts: 1 },
-  { key: "elderly65",  label: "Yaş > 65", pts: 1 },
-  { key: "drugs",      label: "İlaçlar (antiplatelet/NSAID)", pts: 1 },
+  { key: "elderly65",  label: "YaÅŸ > 65", pts: 1 },
+  { key: "drugs",      label: "Ä°laÃ§lar (antiplatelet/NSAID)", pts: 1 },
   { key: "alcohol",    label: "Alkol", pts: 1 },
 ];
 
@@ -59,10 +59,10 @@ export default function HasBledPage() {
 
   const score = ITEMS.reduce((sum, it) => sum + (state[it.key] ? it.pts : 0), 0);
 
-  let comment = "—";
-  if (score >= 3) comment = "Yüksek kanama riski; yakından izlem ve düzeltilebilir riskleri iyileştirme.";
+  let comment = "â€”";
+  if (score >= 3) comment = "YÃ¼ksek kanama riski; yakÄ±ndan izlem ve dÃ¼zeltilebilir riskleri iyileÅŸtirme.";
   else if (score === 2) comment = "Orta risk; dikkatli takip.";
-  else comment = "Düşük risk.";
+  else comment = "DÃ¼ÅŸÃ¼k risk.";
 
   const shareParams = {
     htn: state.htn ? 1 : "",
@@ -99,7 +99,7 @@ export default function HasBledPage() {
       </div>
 
       <ToolShare params={shareParams} />
-      <p className="text-xs text-muted-foreground">Eğitim amaçlıdır; kılavuzları doğrulayın.</p>
+      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; kÄ±lavuzlarÄ± doÄŸrulayÄ±n.</p>
     </div>
   );
 }

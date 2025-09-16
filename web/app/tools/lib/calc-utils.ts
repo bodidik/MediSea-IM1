@@ -1,9 +1,9 @@
-// FILE: web/app/tools/lib/calc-utils.ts
+﻿// FILE: web/app/tools/lib/calc-utils.ts
 
-// ---------- Türler ----------
+// ---------- TÃ¼rler ----------
 export type Sex = "male" | "female";
 
-// ---------- Yardımcılar ----------
+// ---------- YardÄ±mcÄ±lar ----------
 const clamp = (n: number, min: number, max: number) =>
   Math.max(min, Math.min(max, n));
 
@@ -14,8 +14,8 @@ const round = (n: number, dp = 2) =>
 /**
  * CKD-EPI 2021 race-free (serum kreatinin, mg/dL)
  * Kaynak: Inker LA et al., N Engl J Med 2021.
- * eGFR = 142 * min(Scr/κ,1)^α * max(Scr/κ,1)^(-1.200) * 0.9938^Age * [1.012 if female]
- *  κ: 0.7 (kadın), 0.9 (erkek) ; α: −0.241 (kadın), −0.302 (erkek)
+ * eGFR = 142 * min(Scr/Îº,1)^Î± * max(Scr/Îº,1)^(-1.200) * 0.9938^Age * [1.012 if female]
+ *  Îº: 0.7 (kadÄ±n), 0.9 (erkek) ; Î±: âˆ’0.241 (kadÄ±n), âˆ’0.302 (erkek)
  */
 export function egfrCkdEpi2021(
   scrMgdl: number,
@@ -33,8 +33,8 @@ export function egfrCkdEpi2021(
 }
 
 /**
- * CKD-EPI 2009 (serum kreatinin, mg/dL) — isteğe bağlı
- * ırk faktörü içermez (race katsayısı 1 alınmıştır).
+ * CKD-EPI 2009 (serum kreatinin, mg/dL) â€” isteÄŸe baÄŸlÄ±
+ * Ä±rk faktÃ¶rÃ¼ iÃ§ermez (race katsayÄ±sÄ± 1 alÄ±nmÄ±ÅŸtÄ±r).
  */
 export function egfrCkdEpi2009(
   scrMgdl: number,
@@ -51,9 +51,9 @@ export function egfrCkdEpi2009(
   return round(egfr, 1);
 }
 
-// ---------- Düzeltmiş kalsiyum (Payne) ----------
+// ---------- DÃ¼zeltmiÅŸ kalsiyum (Payne) ----------
 /**
- * Corrected Ca (mg/dL) = measured + 0.8 * (4.0 − albumin)
+ * Corrected Ca (mg/dL) = measured + 0.8 * (4.0 âˆ’ albumin)
  * (albumin g/dL)
  */
 export function correctedCalciumMgdl(
@@ -64,24 +64,24 @@ export function correctedCalciumMgdl(
   return round(corr, 2);
 }
 
-// ---------- Birim çevirileri ----------
+// ---------- Birim Ã§evirileri ----------
 export const factor = {
   // mmol/L = mg/dL * factor.mmolFromMgdl.X
   mmolFromMgdl: {
     glucose: 0.0555, // mmol/L
     ureaNitrogen: 0.357, // BUN
-    creatinine: 0.0884, // mg/dL → mmol/L (ya da 88.4 → µmol/L)
-    calcium: 0.2495, // ≈0.25
-    sodium: 0.0435, // örnek (mg/dL → mmol/L), pratikte Na mg/dL pek kullanılmaz
+    creatinine: 0.0884, // mg/dL â†’ mmol/L (ya da 88.4 â†’ Âµmol/L)
+    calcium: 0.2495, // â‰ˆ0.25
+    sodium: 0.0435, // Ã¶rnek (mg/dL â†’ mmol/L), pratikte Na mg/dL pek kullanÄ±lmaz
   },
   // mg/dL = mmol/L * factor.mgdlFromMmol.X
   mgdlFromMmol: {
     glucose: 18.0182,
-    ureaNitrogen: 2.800, // ≈ 1/0.357
-    creatinine: 11.314, // mmol/L → mg/dL
-    calcium: 4.006, // ≈ 1/0.2495
+    ureaNitrogen: 2.800, // â‰ˆ 1/0.357
+    creatinine: 11.314, // mmol/L â†’ mg/dL
+    calcium: 4.006, // â‰ˆ 1/0.2495
   },
-  // µmol/L ↔ mg/dL (kreatinin)
+  // Âµmol/L â†” mg/dL (kreatinin)
   umolFromCreatMgdl: 88.4,
   creatMgdlFromUmol: 1 / 88.4,
 };
@@ -102,7 +102,7 @@ export function creatUmolLToMgdl(x: number) {
 }
 
 
-// Ek: infüzyon yardımcıları
+// Ek: infÃ¼zyon yardÄ±mcÄ±larÄ±
 export const infusion = {
   gttPerMin(rateMlPerHour: number, dropFactorGttPerMl: number) {
     return Math.round(((rateMlPerHour * dropFactorGttPerMl) / 60) * 10) / 10;

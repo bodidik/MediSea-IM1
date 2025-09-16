@@ -1,15 +1,15 @@
-// FILE: web/app/sitemap.ts
+﻿// FILE: web/app/sitemap.ts
 import type { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-  // Ana kılavuz/araç/bölüm girişleri (gerektikçe genişlet)
+  // Ana kÄ±lavuz/araÃ§/bÃ¶lÃ¼m giriÅŸleri (gerektikÃ§e geniÅŸlet)
   const staticPaths = [
     "", "tools", "guidelines", "sections", "premium", "programs", "kayseritip"
   ];
 
-  // Bölüm altı: ilk etap örnek
+  // BÃ¶lÃ¼m altÄ±: ilk etap Ã¶rnek
   const sections = [
     "nefroloji","gastroenteroloji","hematoloji","romatoloji",
     "kardiyoloji","endokrinoloji","infeksiyon","gogus"

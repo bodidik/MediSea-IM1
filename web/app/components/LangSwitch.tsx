@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import { setLang, getLangFromCookie, type Lang } from "@/app/lib/i18n";
 export default function LangSwitch(){ const [lang, setL] = React.useState<Lang>(getLangFromCookie()); return (

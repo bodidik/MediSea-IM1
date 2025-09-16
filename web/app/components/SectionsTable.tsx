@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import Link from "next/link";
 export default function SectionsTable({ rows }: { rows: Array<{ section: string; topics: number; boardQuestions: number; cases: number; videos: number; notes: number; total: number }> }){
@@ -7,7 +7,7 @@ export default function SectionsTable({ rows }: { rows: Array<{ section: string;
       <table className="w-full text-sm">
         <thead>
           <tr className="text-left border-b">
-            <th className="py-2 pr-4">Bölüm</th><th className="py-2 pr-4">Topik</th><th className="py-2 pr-4">Board</th><th className="py-2 pr-4">Vaka</th><th className="py-2 pr-4">Video</th><th className="py-2 pr-4">Not</th><th className="py-2 pr-4">Toplam</th>
+            <th className="py-2 pr-4">BÃ¶lÃ¼m</th><th className="py-2 pr-4">Topik</th><th className="py-2 pr-4">Board</th><th className="py-2 pr-4">Vaka</th><th className="py-2 pr-4">Video</th><th className="py-2 pr-4">Not</th><th className="py-2 pr-4">Toplam</th>
           </tr>
         </thead>
         <tbody>

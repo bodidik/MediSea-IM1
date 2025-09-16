@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 import React from "react";
-import RequirePlan from "@/app/components/RequirePlan";
+import RequirePlan from "@/components/RequirePlan";
 
 export default function PremiumCard({
   title,

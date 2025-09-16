@@ -1,10 +1,10 @@
-// FILE: web/app/sections/[section]/page.tsx
+﻿// FILE: web/app/sections/[section]/page.tsx
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { t } from "@/app/lib/i18n";
-import SectionDetailFilters, { type Item } from "@/app/components/SectionDetailFilters";
-import AddToSRButton from "@/app/components/AddToSRButton";
+import SectionDetailFilters, { type Item } from "@/components/SectionDetailFilters";
+import AddToSRButton from "@/components/AddToSRButton";
 
 type DetailResp = {
   section: string;
@@ -43,7 +43,7 @@ export default function SectionDetail(){
           contentIds={selectedIds}
           section={section}
           type={undefined}
-          label={`Seçili (${selectedIds.length}) SR’ye ekle`}
+          label={`SeÃ§ili (${selectedIds.length}) SRâ€™ye ekle`}
           className="px-3 py-2 rounded-lg border text-sm"
         />
       </div>
@@ -68,12 +68,12 @@ export default function SectionDetail(){
           <div className="rounded-2xl border p-4">
             <div className="flex items-center justify-between mb-2">
               <div className="font-semibold">{t("latestItems")}</div>
-              {/* Filtrelenmiş tümünü SR’ye ekle */}
+              {/* FiltrelenmiÅŸ tÃ¼mÃ¼nÃ¼ SRâ€™ye ekle */}
               <AddToSRButton
                 contentIds={(filtered||[]).map(x=>x.id)}
                 section={section}
                 type={undefined}
-                label={`Listeyi SR’ye ekle (${filtered?.length||0})`}
+                label={`Listeyi SRâ€™ye ekle (${filtered?.length||0})`}
                 className="px-3 py-1 rounded-lg border text-xs"
               />
             </div>
@@ -91,7 +91,7 @@ export default function SectionDetail(){
                     <span className="text-gray-500">{new Date(x.createdAt).toLocaleDateString("tr-TR")}</span>
                   </div>
 
-                  {/* Tek tek SR’ye ekle */}
+                  {/* Tek tek SRâ€™ye ekle */}
                   <AddToSRButton
                     contentIds={[x.id]}
                     section={section}
@@ -101,7 +101,7 @@ export default function SectionDetail(){
                   />
                 </li>
               ))}
-              {!filtered?.length && (<li className="text-sm text-muted-foreground">Seçilen filtrelere uygun sonuç yok.</li>)}
+              {!filtered?.length && (<li className="text-sm text-muted-foreground">SeÃ§ilen filtrelere uygun sonuÃ§ yok.</li>)}
             </ul>
           </div>
         </>

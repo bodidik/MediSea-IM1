@@ -1,15 +1,15 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
 
 /**
- * Wells (PE) — klasik puanlama:
- * - Klinik DVT bulguları: +3
- * - PE olasılığı alternatif tanıdan daha yüksek: +3
- * - Taşikardi (HR > 100): +1.5
- * - Geçirilmiş immobilizasyon/cerrahi (son 4 hafta): +1.5
- * - Geçirilmiş DVT/PE: +1.5
+ * Wells (PE) â€” klasik puanlama:
+ * - Klinik DVT bulgularÄ±: +3
+ * - PE olasÄ±lÄ±ÄŸÄ± alternatif tanÄ±dan daha yÃ¼ksek: +3
+ * - TaÅŸikardi (HR > 100): +1.5
+ * - GeÃ§irilmiÅŸ immobilizasyon/cerrahi (son 4 hafta): +1.5
+ * - GeÃ§irilmiÅŸ DVT/PE: +1.5
  * - Hemoptizi: +1
  * - Malignite (aktif/tedavi): +1
  */
@@ -17,11 +17,11 @@ import ToolShare from "@/app/tools/components/ToolShare";
 type Item = { key: string; label: string; pts: number };
 
 const ITEMS: Item[] = [
-  { key: "dvt", label: "Klinik DVT bulguları", pts: 3 },
-  { key: "altHigher", label: "PE olasılığı alternatif tanıdan daha yüksek", pts: 3 },
-  { key: "tachy", label: "Taşikardi (HR &gt; 100)", pts: 1.5 },
-  { key: "immob", label: "İmmobilizasyon/Cerrahi (≤4 hf)", pts: 1.5 },
-  { key: "prevVTE", label: "Önceki DVT/PE", pts: 1.5 },
+  { key: "dvt", label: "Klinik DVT bulgularÄ±", pts: 3 },
+  { key: "altHigher", label: "PE olasÄ±lÄ±ÄŸÄ± alternatif tanÄ±dan daha yÃ¼ksek", pts: 3 },
+  { key: "tachy", label: "TaÅŸikardi (HR &gt; 100)", pts: 1.5 },
+  { key: "immob", label: "Ä°mmobilizasyon/Cerrahi (â‰¤4 hf)", pts: 1.5 },
+  { key: "prevVTE", label: "Ã–nceki DVT/PE", pts: 1.5 },
   { key: "hemoptysis", label: "Hemoptizi", pts: 1 },
   { key: "malignancy", label: "Malignite (aktif/tedavi)", pts: 1 },
 ];
@@ -38,8 +38,8 @@ export default function WellsPEPage(){
 
   const score = round(ITEMS.reduce((sum, it)=> sum + (sel[it.key] ? it.pts : 0), 0), 1);
 
-  let prob = "Düşük";
-  if (score > 4) prob = "Yüksek";
+  let prob = "DÃ¼ÅŸÃ¼k";
+  if (score > 4) prob = "YÃ¼ksek";
   else if (score > 1.5) prob = "Orta";
 
   const params: Record<string, string|number> = {};
@@ -65,7 +65,7 @@ export default function WellsPEPage(){
         <div className="text-xs text-muted-foreground">Risk kategorisi: <b>{prob}</b></div>
       </div>
       <ToolShare params={params}/>
-      <p className="text-xs text-muted-foreground">Eğitim amaçlıdır; kılavuzlarla doğrulayın.</p>
+      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; kÄ±lavuzlarla doÄŸrulayÄ±n.</p>
     </div>
   );
 }

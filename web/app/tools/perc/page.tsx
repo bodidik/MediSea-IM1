@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
 
 /**
  * PERC (Pulmonary Embolism Rule-out Criteria)
- * Düşük klinik olasılık + 8 kriterin tamamı NEGATİF ise görüntüleme olmaksızın PE dışlanabilir.
- * Kriterler pozitifse/şüphe varsa D-dimer veya görüntüleme düşünülür.
+ * DÃ¼ÅŸÃ¼k klinik olasÄ±lÄ±k + 8 kriterin tamamÄ± NEGATÄ°F ise gÃ¶rÃ¼ntÃ¼leme olmaksÄ±zÄ±n PE dÄ±ÅŸlanabilir.
+ * Kriterler pozitifse/ÅŸÃ¼phe varsa D-dimer veya gÃ¶rÃ¼ntÃ¼leme dÃ¼ÅŸÃ¼nÃ¼lÃ¼r.
  */
 
 type State = {
@@ -42,24 +42,24 @@ export default function PERCPage(){
     <div className="p-4 md:p-8 max-w-3xl mx-auto space-y-6">
       <h1 className="text-2xl md:text-3xl font-bold">PERC</h1>
       <div className="rounded-2xl border p-4 text-sm space-y-2">
-        <label className="flex items-center gap-2"><input type="checkbox" checked={st.age50} onChange={()=>toggle("age50")} /> Yaş ≥ 50</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={st.hr100} onChange={()=>toggle("hr100")} /> Kalp hızı ≥ 100/dk</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={st.sao2_95} onChange={()=>toggle("sao2_95")} /> SpO₂ &lt; 95%</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={st.age50} onChange={()=>toggle("age50")} /> YaÅŸ â‰¥ 50</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={st.hr100} onChange={()=>toggle("hr100")} /> Kalp hÄ±zÄ± â‰¥ 100/dk</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={st.sao2_95} onChange={()=>toggle("sao2_95")} /> SpOâ‚‚ &lt; 95%</label>
         <label className="flex items-center gap-2"><input type="checkbox" checked={st.hemoptysis} onChange={()=>toggle("hemoptysis")} /> Hemoptizi</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={st.estrogen} onChange={()=>toggle("estrogen")} /> Östrojen kullanımı</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={st.priorVTE} onChange={()=>toggle("priorVTE")} /> Önceki DVT/PE</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={st.unilateralLeg} onChange={()=>toggle("unilateralLeg")} /> Tek taraflı bacak şişliği</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={st.recentSurgeryTrauma} onChange={()=>toggle("recentSurgeryTrauma")} /> Yakın cerrahi/Travma</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={st.estrogen} onChange={()=>toggle("estrogen")} /> Ã–strojen kullanÄ±mÄ±</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={st.priorVTE} onChange={()=>toggle("priorVTE")} /> Ã–nceki DVT/PE</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={st.unilateralLeg} onChange={()=>toggle("unilateralLeg")} /> Tek taraflÄ± bacak ÅŸiÅŸliÄŸi</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={st.recentSurgeryTrauma} onChange={()=>toggle("recentSurgeryTrauma")} /> YakÄ±n cerrahi/Travma</label>
       </div>
       <div className="rounded-2xl border p-4">
         {allNegative ? (
-          <div className="text-sm">Düşük klinik şüphe + tüm kriterler negatif → <b>PE dışlanabilir</b> (PERC negatif).</div>
+          <div className="text-sm">DÃ¼ÅŸÃ¼k klinik ÅŸÃ¼phe + tÃ¼m kriterler negatif â†’ <b>PE dÄ±ÅŸlanabilir</b> (PERC negatif).</div>
         ) : (
-          <div className="text-sm">En az bir kriter pozitif. <b>PERC pozitif</b>; D-dimer/görüntüleme düşünülür.</div>
+          <div className="text-sm">En az bir kriter pozitif. <b>PERC pozitif</b>; D-dimer/gÃ¶rÃ¼ntÃ¼leme dÃ¼ÅŸÃ¼nÃ¼lÃ¼r.</div>
         )}
       </div>
       <ToolShare params={params}/>
-      <p className="text-xs text-muted-foreground">Eğitim amaçlıdır; kılavuzlarla doğrulayın.</p>
+      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; kÄ±lavuzlarla doÄŸrulayÄ±n.</p>
     </div>
   );
 }

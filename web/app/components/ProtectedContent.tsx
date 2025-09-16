@@ -1,4 +1,4 @@
-use client;
+﻿use client;
 
 import React from react;
 
@@ -51,7 +51,7 @@ export default function ProtectedContent({ chunkId = sample } { chunkId string }
       const canvas = ref.current!;
       const dpi = Math.min(window.devicePixelRatio  1, 2);
       const W = Math.min(900, window.innerWidth - 32);
-      const H = 300;  basit bir alan; istersen dinamik ölç
+      const H = 300;  basit bir alan; istersen dinamik Ã¶lÃ§
       canvas.width = Math.floor(W  dpi);
       canvas.height = Math.floor(H  dpi);
       canvas.style.width = `${W}px`;
@@ -66,9 +66,9 @@ export default function ProtectedContent({ chunkId = sample } { chunkId string }
        Watermark
       const cookie = document.cookie.match((^; )mk_uid=([^;]+));
       const uid = cookie.[1]  anon;
-      tileWatermark(ctx, W, H, `${uid} • Medknowledge`);
+      tileWatermark(ctx, W, H, `${uid} â€¢ Medknowledge`);
 
-       İçerik
+       Ä°Ã§erik
       ctx.fillStyle = #111;
       ctx.font = 15px system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       drawWrappedText(ctx, j.chunk.content, 16, 28, W - 32, 22);
@@ -82,7 +82,7 @@ export default function ProtectedContent({ chunkId = sample } { chunkId string }
 
   React.useEffect(() = {
     load();
-     kopya & sağ tık engelleri
+     kopya & saÄŸ tÄ±k engelleri
     const stop = (ev Event) = ev.preventDefault();
     document.addEventListener(copy, stop);
     document.addEventListener(cut, stop);
@@ -98,16 +98,16 @@ export default function ProtectedContent({ chunkId = sample } { chunkId string }
 
   return (
     div className=rounded-2xl border p-4
-      div className=text-sm mb-2🔒 Korumalı Alan (Premium)div
+      div className=text-sm mb-2ğŸ”’ KorumalÄ± Alan (Premium)div
       {err && div className=text-sm text-red-600{err}div}
       canvas ref={ref} 
       div className=mt-3
         button onClick={load} disabled={loading} className=px-3 py-2 rounded-lg border text-sm
-          {loading  Yükleniyor…  Yenile}
+          {loading  YÃ¼kleniyorâ€¦  Yenile}
         button
       div
 
-      { Yazdırmayı kapat }
+      { YazdÄ±rmayÄ± kapat }
       style jsx global{`
         @media print { body { display none !important; } }
         canvas { user-select none; -webkit-user-select none; }

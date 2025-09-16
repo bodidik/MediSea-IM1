@@ -1,4 +1,4 @@
-// FILE: web/app/components/PremiumVideoRecommendations.tsx
+﻿// FILE: web/app/components/PremiumVideoRecommendations.tsx
 "use client";
 import React, { useEffect, useState } from "react";
 
@@ -25,22 +25,22 @@ export default function PremiumVideoRecommendations({ limit = 3 }: { limit?: num
   if (!data) return <div className="h-16 bg-gray-100 rounded" />;
 
   if (data.locked) {
-    return <div className="text-sm">Premium değil: video önerileri kilitli.</div>;
+    return <div className="text-sm">Premium deÄŸil: video Ã¶nerileri kilitli.</div>;
   }
 
   const items = data.items || [];
-  if (!items.length) return <div className="text-sm text-muted-foreground">Öneri bulunamadı.</div>;
+  if (!items.length) return <div className="text-sm text-muted-foreground">Ã–neri bulunamadÄ±.</div>;
 
   return (
     <ul className="text-sm space-y-2">
       {items.map((x, i) => (
         <li key={`${x.title}-${i}`} className="rounded border p-2 flex items-center justify-between">
           <div className="truncate mr-3">
-            <b>{x.section}</b> — {x.title}
+            <b>{x.section}</b> â€” {x.title}
             {!!x.duration && <span className="ml-2 text-xs opacity-70">({Math.round(x.duration)} dk)</span>}
           </div>
           {x.url ? (
-            <a href={x.url} target="_blank" rel="noreferrer" className="text-xs underline">İzle</a>
+            <a href={x.url} target="_blank" rel="noreferrer" className="text-xs underline">Ä°zle</a>
           ) : (
             <span className="text-xs opacity-60">Link yok</span>
           )}

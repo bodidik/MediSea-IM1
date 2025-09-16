@@ -1,4 +1,4 @@
-// FILE: web/app/programs/page.tsx
+﻿// FILE: web/app/programs/page.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -64,14 +64,14 @@ export default function ProgramsPage() {
           onChange={(e) => setTrack(e.target.value as any)}
           className="border rounded-lg p-2 text-sm"
         >
-          <option value="">Tümü</option>
+          <option value="">TÃ¼mÃ¼</option>
           <option value="TUS">TUS</option>
           <option value="YDUS">YDUS</option>
           <option value="USMLE">USMLE</option>
         </select>
       </div>
 
-      {loading && <div className="text-muted-foreground">Yükleniyor...</div>}
+      {loading && <div className="text-muted-foreground">YÃ¼kleniyor...</div>}
       {err && <div className="text-red-600 text-sm">{err}</div>}
 
       <div className="grid gap-4">
@@ -88,12 +88,12 @@ export default function ProgramsPage() {
               </div>
             )}
             <div className="text-xs mt-2 text-gray-500">
-              {p.track} · {p.durationDays} gün
+              {p.track} Â· {p.durationDays} gÃ¼n
             </div>
           </Link>
         ))}
         {!loading && programs.length === 0 && !err && (
-          <div className="text-sm text-muted-foreground">Kayıtlı program yok.</div>
+          <div className="text-sm text-muted-foreground">KayÄ±tlÄ± program yok.</div>
         )}
       </div>
     </div>

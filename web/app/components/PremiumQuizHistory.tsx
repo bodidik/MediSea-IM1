@@ -1,4 +1,4 @@
-// FILE: web/app/components/PremiumQuizHistory.tsx
+﻿// FILE: web/app/components/PremiumQuizHistory.tsx
 "use client";
 import React from "react";
 
@@ -56,21 +56,21 @@ export default function PremiumQuizHistory({ days = 30 }: { days?: number }) {
   if (err) return <div className="text-sm text-red-600">{err}</div>;
   if (!data) return <div className="h-16 bg-gray-100 rounded" />;
 
-  const items = [...(data.items || [])].reverse(); // eski→yeni
+  const items = [...(data.items || [])].reverse(); // eskiâ†’yeni
   const accuracy = items.map(it => (it.total ? Math.round((it.correct / it.total) * 100) : 0));
 
   return (
     <div className="rounded-2xl border p-4 space-y-3">
       <div className="flex items-center justify-between">
-        <div className="font-semibold">Quiz Geçmişi (Son {data.days} gün)</div>
+        <div className="font-semibold">Quiz GeÃ§miÅŸi (Son {data.days} gÃ¼n)</div>
         <div className="text-xs text-gray-500">
-          Ort. Doğruluk: <b>
+          Ort. DoÄŸruluk: <b>
             {accuracy.length ? Math.round(accuracy.reduce((a, b) => a + b, 0) / accuracy.length) : 0}%
           </b>
         </div>
       </div>
 
-      <div className="text-xs text-gray-500">Günlük doğruluk yüzdesi</div>
+      <div className="text-xs text-gray-500">GÃ¼nlÃ¼k doÄŸruluk yÃ¼zdesi</div>
       <div className="text-gray-900">
         <Sparkline values={accuracy} />
       </div>

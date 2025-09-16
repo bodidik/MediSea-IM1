@@ -1,4 +1,4 @@
-// FILE: web/app/components/PremiumDailyProgram.tsx
+﻿// FILE: web/app/components/PremiumDailyProgram.tsx
 "use client";
 import React, { useEffect, useState } from "react";
 
@@ -23,7 +23,7 @@ export default function PremiumDailyProgram(){
   if (data.locked) {
     return (
       <div className="rounded-xl border p-4 text-sm">
-        Premium değil: günlük program kilitli. <span className="opacity-70">Planını yükselterek açabilirsin.</span>
+        Premium deÄŸil: gÃ¼nlÃ¼k program kilitli. <span className="opacity-70">PlanÄ±nÄ± yÃ¼kselterek aÃ§abilirsin.</span>
       </div>
     );
   }
@@ -34,13 +34,13 @@ export default function PremiumDailyProgram(){
   return (
     <div className="rounded-2xl border p-4 space-y-3">
       <div className="flex items-center justify-between">
-        <div className="font-semibold">Günlük Program</div>
+        <div className="font-semibold">GÃ¼nlÃ¼k Program</div>
         <div className="text-xs text-gray-500">Toplam: <b>{total}</b></div>
       </div>
       <ul className="text-sm space-y-2">
         {items.map((it, idx)=>(
           <li key={idx} className="rounded border p-2 flex items-center justify-between">
-            <span>{it.section} — {it.type}</span>
+            <span>{it.section} â€” {it.type}</span>
             <span className="opacity-70">{it.qty} adet</span>
           </li>
         ))}

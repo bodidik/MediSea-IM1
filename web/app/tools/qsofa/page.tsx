@@ -1,20 +1,20 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
 
-/** qSOFA: SBP ≤100, RR ≥22, mental durum değişikliği (GKS<15) → her biri 1 puan */
+/** qSOFA: SBP â‰¤100, RR â‰¥22, mental durum deÄŸiÅŸikliÄŸi (GKS<15) â†’ her biri 1 puan */
 
 export default function QsOFA() {
   const search = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
-  const [sbpLow, setSbpLow] = React.useState(search?.get("sbp") === "1");      // ≤100
-  const [rrHigh, setRrHigh] = React.useState(search?.get("rr") === "1");       // ≥22
+  const [sbpLow, setSbpLow] = React.useState(search?.get("sbp") === "1");      // â‰¤100
+  const [rrHigh, setRrHigh] = React.useState(search?.get("rr") === "1");       // â‰¥22
   const [gcsLow, setGcsLow] = React.useState(search?.get("gcs") === "1");      // GKS < 15
 
   const score = (sbpLow?1:0) + (rrHigh?1:0) + (gcsLow?1:0);
-  let comment = "—";
-  if (score >= 2) comment = "Kötü prognoz açısından artmış risk; yakın izlem ve değerlendirme.";
-  else comment = "Düşük risk, klinik bağlam önemli.";
+  let comment = "â€”";
+  if (score >= 2) comment = "KÃ¶tÃ¼ prognoz aÃ§Ä±sÄ±ndan artmÄ±ÅŸ risk; yakÄ±n izlem ve deÄŸerlendirme.";
+  else comment = "DÃ¼ÅŸÃ¼k risk, klinik baÄŸlam Ã¶nemli.";
 
   const params = { sbp: sbpLow?1:"", rr: rrHigh?1:"", gcs: gcsLow?1:"" };
 
@@ -24,15 +24,15 @@ export default function QsOFA() {
       <div className="rounded-2xl border p-4 space-y-2 text-sm">
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={sbpLow} onChange={()=>setSbpLow(v=>!v)} />
-          Sistolik KB ≤ 100 mmHg
+          Sistolik KB â‰¤ 100 mmHg
         </label>
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={rrHigh} onChange={()=>setRrHigh(v=>!v)} />
-          Solunum sayısı ≥ 22/dk
+          Solunum sayÄ±sÄ± â‰¥ 22/dk
         </label>
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={gcsLow} onChange={()=>setGcsLow(v=>!v)} />
-          Mental durumda değişiklik (GKS &lt; 15)
+          Mental durumda deÄŸiÅŸiklik (GKS &lt; 15)
         </label>
       </div>
       <div className="rounded-2xl border p-4">
@@ -41,7 +41,7 @@ export default function QsOFA() {
         <div className="text-xs text-muted-foreground mt-1">{comment}</div>
       </div>
       <ToolShare params={params} />
-      <p className="text-xs text-muted-foreground">Eğitim amaçlıdır; sepsis kılavuzlarıyla karşılaştırınız.</p>
+      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; sepsis kÄ±lavuzlarÄ±yla karÅŸÄ±laÅŸtÄ±rÄ±nÄ±z.</p>
     </div>
   );
 }

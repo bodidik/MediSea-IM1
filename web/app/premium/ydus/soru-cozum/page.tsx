@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useMemo, useState } from 'react';
 
@@ -17,7 +17,7 @@ type Q = {
 };
 
 const SECTION_LIST = [
-  { key:'all', title:'Tümü' },
+  { key:'all', title:'TÃ¼mÃ¼' },
   { key:'romatoloji', title:'Romatoloji' },
   { key:'hematoloji', title:'Hematoloji' },
   { key:'gastroenteroloji', title:'Gastroenteroloji' },
@@ -25,10 +25,10 @@ const SECTION_LIST = [
   { key:'geriatri', title:'Geriatri' },
   { key:'nefroloji', title:'Nefroloji' },
   { key:'onkoloji', title:'Onkoloji' },
-  { key:'immünoloji', title:'İmmünoloji' },
+  { key:'immÃ¼noloji', title:'Ä°mmÃ¼noloji' },
   { key:'kardiyoloji', title:'Kardiyoloji' },
-  { key:'infeksiyon', title:'İnfeksiyon' },
-  { key:'göğüs', title:'Göğüs Hastalıkları' },
+  { key:'infeksiyon', title:'Ä°nfeksiyon' },
+  { key:'gÃ¶ÄŸÃ¼s', title:'GÃ¶ÄŸÃ¼s HastalÄ±klarÄ±' },
 ];
 
 export default function YdusSoruCozum() {
@@ -40,7 +40,7 @@ export default function YdusSoruCozum() {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
 
-  // URL’den role/section/q okumak (ilk açılış)
+  // URLâ€™den role/section/q okumak (ilk aÃ§Ä±lÄ±ÅŸ)
   useEffect(() => {
     const sp = new URLSearchParams(location.search);
     const r = (sp.get('role') || 'V') as 'V'|'M'|'P';
@@ -49,7 +49,7 @@ export default function YdusSoruCozum() {
     setRole(r); setSection(s); setQ(qq);
   }, []);
 
-  // veri çek
+  // veri Ã§ek
   useEffect(() => {
     setLoading(true);
     const url = new URL(`${API}/api/questions`);
@@ -84,7 +84,7 @@ export default function YdusSoruCozum() {
   return (
     <main style={{display:'grid', gap:12}}>
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', gap:8, flexWrap:'wrap'}}>
-        <h1 style={{fontSize:22, fontWeight:800}}>YDUS – Soru Çözümü</h1>
+        <h1 style={{fontSize:22, fontWeight:800}}>YDUS â€“ Soru Ã‡Ã¶zÃ¼mÃ¼</h1>
         <div style={{display:'flex', gap:8, alignItems:'center'}}>
           <label>Rol:</label>
           <select value={role} onChange={e=>applyFilters({ role: e.target.value as 'V'|'M'|'P' })}
@@ -104,15 +104,15 @@ export default function YdusSoruCozum() {
         </select>
 
         <div style={{display:'flex', gap:8}}>
-          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Konu / anahtar kelime ara…"
+          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Konu / anahtar kelime araâ€¦"
             style={{flex:1, border:'1px solid #e5e7eb', borderRadius:8, padding:'8px 10px'}}/>
           <button onClick={()=>applyFilters()} style={{border:'1px solid #e5e7eb', borderRadius:8, padding:'8px 12px', background:'#fff'}}>Ara</button>
         </div>
       </div>
 
       {/* Liste */}
-      {loading && <div>Yükleniyor…</div>}
-      {!loading && items.length === 0 && <div>Soru bulunamadı.</div>}
+      {loading && <div>YÃ¼kleniyorâ€¦</div>}
+      {!loading && items.length === 0 && <div>Soru bulunamadÄ±.</div>}
       <ol style={{display:'grid', gap:12, listStyle:'decimal', paddingInlineStart:20}}>
         {items.map((qitem, idx) => (
           <li key={qitem._id || idx} style={{border:'1px solid #e5e7eb', borderRadius:12, padding:12, background:'#fff'}}>
@@ -125,12 +125,12 @@ export default function YdusSoruCozum() {
             </ul>
             {qitem.correct && (
               <div style={{marginTop:8, background:'#ecfeff', border:'1px solid #e5e7eb', borderRadius:8, padding:'6px 8px'}}>
-                Doğru: <b>{qitem.correct}</b>
+                DoÄŸru: <b>{qitem.correct}</b>
               </div>
             )}
             {qitem.explain && (
               <div style={{marginTop:8, background:'#f8fafc', border:'1px solid #e5e7eb', borderRadius:8, padding:'8px 10px'}}>
-                <b>Açıklama:</b> {qitem.explain}
+                <b>AÃ§Ä±klama:</b> {qitem.explain}
               </div>
             )}
           </li>
@@ -141,7 +141,7 @@ export default function YdusSoruCozum() {
       {totalPages > 1 && (
         <div style={{display:'flex', gap:8, alignItems:'center', justifyContent:'flex-end'}}>
           <button disabled={page<=1} onClick={()=>setPage(p=>Math.max(1,p-1))}
-            style={{padding:'6px 10px', border:'1px solid #e5e7eb', borderRadius:8, background:'#fff'}}>Önceki</button>
+            style={{padding:'6px 10px', border:'1px solid #e5e7eb', borderRadius:8, background:'#fff'}}>Ã–nceki</button>
           <span style={{opacity:.8}}>Sayfa {page}/{totalPages}</span>
           <button disabled={page>=totalPages} onClick={()=>setPage(p=>Math.min(totalPages,p+1))}
             style={{padding:'6px 10px', border:'1px solid #e5e7eb', borderRadius:8, background:'#fff'}}>Sonraki</button>

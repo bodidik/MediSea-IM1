@@ -1,10 +1,9 @@
 ﻿import { NextResponse } from "next/server";
 
-export const runtime = "nodejs";          // edge deÄŸil, Node runtime
-export const dynamic = "force-dynamic";   // cache yok
+export const runtime = "nodejs";        // Node runtime
+export const dynamic = "force-dynamic"; // no cache
 
 export async function GET(req: Request) {
-  // Ã–nce server runtime env, sonra public, en sonda dev fallback
   const backend =
     process.env.BACKEND_URL ||
     process.env.NEXT_PUBLIC_BACKEND_URL ||
@@ -12,7 +11,6 @@ export async function GET(req: Request) {
 
   const { search } = new URL(req.url);
 
-  // 8 sn timeout (upstream takÄ±lÄ±rsa kullanÄ±cÄ± beklemesin)
   const controller = new AbortController();
   const t = setTimeout(() => controller.abort(), 8000);
 

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
@@ -14,14 +14,14 @@ export default function YdusDeneme(){
   const [done,setDone] = useState(false);
   const roleRef = useRef<'V'|'M'|'P'>('V');
 
-  // rolü URL’den oku
+  // rolÃ¼ URLâ€™den oku
   useEffect(()=>{
     const params = new URLSearchParams(location.search);
     const r = (params.get('role')||'V') as 'V'|'M'|'P';
     roleRef.current = r;
   },[]);
 
-  // soruları çek
+  // sorularÄ± Ã§ek
   useEffect(()=>{
     const url = new URL(`${API}/api/questions`);
     url.searchParams.set('examType','ydus');
@@ -61,11 +61,11 @@ export default function YdusDeneme(){
   return (
     <main style={{padding:16, display:'grid', gap:12}}>
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-        <h1 style={{fontSize:22,fontWeight:800}}>YDUS – Deneme (20 Soru)</h1>
-        <div style={{fontWeight:700, fontVariantNumeric:'tabular-nums'}}>⏱ {mm}:{ss}</div>
+        <h1 style={{fontSize:22,fontWeight:800}}>YDUS â€“ Deneme (20 Soru)</h1>
+        <div style={{fontWeight:700, fontVariantNumeric:'tabular-nums'}}>â± {mm}:{ss}</div>
       </div>
 
-      {items.length===0 && <div>Yükleniyor veya soru bulunamadı.</div>}
+      {items.length===0 && <div>YÃ¼kleniyor veya soru bulunamadÄ±.</div>}
 
       {current && !done && (
         <div style={{border:'1px solid #e5e7eb', borderRadius:12, padding:12, background:'#fff'}}>
@@ -85,30 +85,30 @@ export default function YdusDeneme(){
           </ul>
 
           <div style={{display:'flex', gap:8, marginTop:12}}>
-            <button onClick={()=>setI(v=>Math.max(0,v-1))} disabled={i===0}>Önceki</button>
+            <button onClick={()=>setI(v=>Math.max(0,v-1))} disabled={i===0}>Ã–nceki</button>
             <button onClick={()=>setI(v=>Math.min(items.length-1,v+1))} disabled={i===items.length-1}>Sonraki</button>
-            <button onClick={finish} style={{marginLeft:'auto'}}>Sınavı Bitir</button>
+            <button onClick={finish} style={{marginLeft:'auto'}}>SÄ±navÄ± Bitir</button>
           </div>
         </div>
       )}
 
       {done && (
         <div style={{border:'1px solid #e5e7eb', borderRadius:12, padding:12, background:'#fff'}}>
-          <h2 style={{fontWeight:700, marginBottom:8}}>Sonuç</h2>
+          <h2 style={{fontWeight:700, marginBottom:8}}>SonuÃ§</h2>
           <p>Cevaplanan: {answered} / {items.length}</p>
           {roleRef.current!=='V' && (
             <ul style={{marginTop:10, display:'grid', gap:8}}>
               {items.map((q,idx)=>(
                 <li key={q._id||idx} style={{border:'1px solid #eef',borderRadius:8,padding:8}}>
                   <div style={{fontWeight:600}}>Soru {idx+1}</div>
-                  <div>Senin: {picked[q._id||String(idx)] || '—'}</div>
-                  {q.correct && <div>Doğru: {q.correct}</div>}
-                  {q.explain && <div style={{opacity:.9}}>Açıklama: {q.explain}</div>}
+                  <div>Senin: {picked[q._id||String(idx)] || 'â€”'}</div>
+                  {q.correct && <div>DoÄŸru: {q.correct}</div>}
+                  {q.explain && <div style={{opacity:.9}}>AÃ§Ä±klama: {q.explain}</div>}
                 </li>
               ))}
             </ul>
           )}
-          {roleRef.current==='V' && <div style={{marginTop:10,opacity:.8}}>Detaylı anahtar ve açıklamalar üyelik/Premium ile görünür.</div>}
+          {roleRef.current==='V' && <div style={{marginTop:10,opacity:.8}}>DetaylÄ± anahtar ve aÃ§Ä±klamalar Ã¼yelik/Premium ile gÃ¶rÃ¼nÃ¼r.</div>}
         </div>
       )}
     </main>

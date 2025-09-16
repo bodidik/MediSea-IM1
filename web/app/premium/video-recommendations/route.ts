@@ -1,4 +1,4 @@
-// FILE: web/app/api/premium/video-recommendations/route.ts
+﻿// FILE: web/app/api/premium/video-recommendations/route.ts
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {

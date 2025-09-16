@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 
 /**
- * Basit i18n yardımcıları
+ * Basit i18n yardÄ±mcÄ±larÄ±
  * - Lang tipi
- * - dict: TR/EN sözlükleri (genişletilmiş)
+ * - dict: TR/EN sÃ¶zlÃ¼kleri (geniÅŸletilmiÅŸ)
  * - getLangFromCookie / setLang
- * - t(key) anahtarı
+ * - t(key) anahtarÄ±
  *
- * Not: Eksik anahtarlar için key geri döner; UI kırılmaz.
+ * Not: Eksik anahtarlar iÃ§in key geri dÃ¶ner; UI kÄ±rÄ±lmaz.
  */
 
 export type Lang = "tr" | "en";
@@ -17,23 +17,23 @@ type Dict = Record<string, string>;
 const tr: Dict = {
   // ---- Genel / Navbar / Footer
   appTitle: "Medknowledge",
-  appSubtitle: "İç hastalıkları eğitim ve sınav platformu",
+  appSubtitle: "Ä°Ã§ hastalÄ±klarÄ± eÄŸitim ve sÄ±nav platformu",
   home: "Ana sayfa",
-  sections: "Bölümler",
-  summary: "Özet",
+  sections: "BÃ¶lÃ¼mler",
+  summary: "Ã–zet",
   latestItems: "Son eklenenler",
   search: "Ara",
   back: "Geri",
   save: "Kaydet",
-  cancel: "İptal",
+  cancel: "Ä°ptal",
   close: "Kapat",
-  loading: "Yükleniyor…",
-  error: "Bağlantı hatası",
+  loading: "YÃ¼kleniyorâ€¦",
+  error: "BaÄŸlantÄ± hatasÄ±",
   ok: "Tamam",
 
-  // ---- Sayaç / Toplamlar
-  platformSummary: "Platform Özeti",
-  totalsAndPlan: "Toplam içerik & plan",
+  // ---- SayaÃ§ / Toplamlar
+  platformSummary: "Platform Ã–zeti",
+  totalsAndPlan: "Toplam iÃ§erik & plan",
   topics: "Topikler",
   board: "Board",
   cases: "Vaka",
@@ -41,116 +41,116 @@ const tr: Dict = {
   notes: "Not",
   plan: "Plan",
 
-  // ---- Bölümler listesi
-  sectionCountsTitle: "Bölüm Bazlı İçerik Sayıları",
-  sectionCountsDesc: "Toplamlara göre sıralı görünüm",
-  sectionDetail: "Bölüm Detayı",
+  // ---- BÃ¶lÃ¼mler listesi
+  sectionCountsTitle: "BÃ¶lÃ¼m BazlÄ± Ä°Ã§erik SayÄ±larÄ±",
+  sectionCountsDesc: "Toplamlara gÃ¶re sÄ±ralÄ± gÃ¶rÃ¼nÃ¼m",
+  sectionDetail: "BÃ¶lÃ¼m DetayÄ±",
   total: "Toplam",
-  updatedAt: "Güncelleme",
+  updatedAt: "GÃ¼ncelleme",
 
-  // ---- Dil anahtarları
-  tr: "Türkçe",
-  en: "İngilizce",
+  // ---- Dil anahtarlarÄ±
+  tr: "TÃ¼rkÃ§e",
+  en: "Ä°ngilizce",
 
   // ---- Premium / Plan / Rozetler
   premiumPageTitle: "MediSea Premium",
-  premiumPageSubtitle: "Kişiselleştirilmiş ilerleme, rozetler ve premium özetler",
-  progressBadges: "İlerleme ve Rozetler",
-  progressBadgesDesc: "Çalışma alışkanlığına göre rozet seviyelerin hesaplanır",
-  todaysSummary: "Bugünün Özeti",
+  premiumPageSubtitle: "KiÅŸiselleÅŸtirilmiÅŸ ilerleme, rozetler ve premium Ã¶zetler",
+  progressBadges: "Ä°lerleme ve Rozetler",
+  progressBadgesDesc: "Ã‡alÄ±ÅŸma alÄ±ÅŸkanlÄ±ÄŸÄ±na gÃ¶re rozet seviyelerin hesaplanÄ±r",
+  todaysSummary: "BugÃ¼nÃ¼n Ã–zeti",
   goal20: "Hedef: en az 20 soru",
-  continueStudy: "Çalışmaya devam et",
-  roadmap: "Yol Haritası",
-  rewards: "Ödüller",
-  upgradePlan: "Planı Yükselt",
-  upgraded: "Plan yükseltildi",
-  lockedPremium: "Premium içerikler kilitli. Yükselterek açabilirsin.",
-  premiumOnly: "Bu içerik sadece Premium ve üzeri planlarda erişilebilir.",
-  open: "Aç",
+  continueStudy: "Ã‡alÄ±ÅŸmaya devam et",
+  roadmap: "Yol HaritasÄ±",
+  rewards: "Ã–dÃ¼ller",
+  upgradePlan: "PlanÄ± YÃ¼kselt",
+  upgraded: "Plan yÃ¼kseltildi",
+  lockedPremium: "Premium iÃ§erikler kilitli. YÃ¼kselterek aÃ§abilirsin.",
+  premiumOnly: "Bu iÃ§erik sadece Premium ve Ã¼zeri planlarda eriÅŸilebilir.",
+  open: "AÃ§",
   seeMore: "Daha fazla",
   points: "Puan",
-  solved: "Çözülen",
+  solved: "Ã‡Ã¶zÃ¼len",
   streak: "Seri",
-  accuracy: "Doğruluk",
-  percentile: "Üst %",
-  today: "Bugün",
+  accuracy: "DoÄŸruluk",
+  percentile: "Ãœst %",
+  today: "BugÃ¼n",
 
   // ---- Quiz
   quiz: "Quiz",
-  dailyQuiz: "Günlük Quiz",
-  startQuiz: "Quize başla",
-  submit: "Gönder",
-  correct: "Doğru",
-  wrong: "Yanlış",
+  dailyQuiz: "GÃ¼nlÃ¼k Quiz",
+  startQuiz: "Quize baÅŸla",
+  submit: "GÃ¶nder",
+  correct: "DoÄŸru",
+  wrong: "YanlÄ±ÅŸ",
   later: "Sonra",
-  explanation: "Açıklama",
-  showExplanation: "Açıklamayı gör",
-  hideExplanation: "Açıklamayı gizle",
-  nextQuestion: "Yeni soruya geç",
-  openTopic: "Konu anlatımını aç",
-  choices: "Şıklar",
+  explanation: "AÃ§Ä±klama",
+  showExplanation: "AÃ§Ä±klamayÄ± gÃ¶r",
+  hideExplanation: "AÃ§Ä±klamayÄ± gizle",
+  nextQuestion: "Yeni soruya geÃ§",
+  openTopic: "Konu anlatÄ±mÄ±nÄ± aÃ§",
+  choices: "ÅÄ±klar",
 
   // ---- SR (Spaced Repetition / Review)
   review: "Tekrar",
-  reviewDaily: "Günlük Tekrar",
+  reviewDaily: "GÃ¼nlÃ¼k Tekrar",
   due: "Vadesi gelen",
-  noDueCards: "Şu an için vadesi gelen kart yok.",
+  noDueCards: "Åu an iÃ§in vadesi gelen kart yok.",
   addToSR: "SR'ye ekle",
   added: "Eklendi",
   srLater: "Sonra",
-  srWrong: "Yanlış",
-  srCorrect: "Doğru",
-  progress: "İlerleme",
+  srWrong: "YanlÄ±ÅŸ",
+  srCorrect: "DoÄŸru",
+  progress: "Ä°lerleme",
   filters: "Filtreler",
-  typeAll: "Tür: Hepsi",
-  section: "Bölüm",
-  type: "Tür",
-  startDate: "Başlangıç",
-  endDate: "Bitiş",
+  typeAll: "TÃ¼r: Hepsi",
+  section: "BÃ¶lÃ¼m",
+  type: "TÃ¼r",
+  startDate: "BaÅŸlangÄ±Ã§",
+  endDate: "BitiÅŸ",
   refresh: "Yenile",
 
   // ---- Programs (TUS/YDUS/USMLE)
   programs: "Programlar",
   program: "Program",
-  enroll: "Programa katıl",
-  enrolled: "Kayıtlı",
-  notEnrolled: "Kayıtlı değil",
-  progressShort: "İlerleme",
-  days: "gün",
-  day: "gün",
-  complete: "Tamamlandı",
+  enroll: "Programa katÄ±l",
+  enrolled: "KayÄ±tlÄ±",
+  notEnrolled: "KayÄ±tlÄ± deÄŸil",
+  progressShort: "Ä°lerleme",
+  days: "gÃ¼n",
+  day: "gÃ¼n",
+  complete: "TamamlandÄ±",
   continue: "Devam et",
-  tickDone: "Bugünü işaretle",
-  programEndsAt: "Bitiş",
-  programStartedAt: "Başlangıç",
+  tickDone: "BugÃ¼nÃ¼ iÅŸaretle",
+  programEndsAt: "BitiÅŸ",
+  programStartedAt: "BaÅŸlangÄ±Ã§",
   trackTUS: "TUS",
   trackYDUS: "YDUS",
   trackUSMLE: "USMLE",
 
-  // ---- Tools (Hesaplama araçları)
-  tools: "Araçlar",
-  calculators: "Hesaplayıcılar",
-  openCalculator: "Hesaplayıcıyı aç",
+  // ---- Tools (Hesaplama araÃ§larÄ±)
+  tools: "AraÃ§lar",
+  calculators: "HesaplayÄ±cÄ±lar",
+  openCalculator: "HesaplayÄ±cÄ±yÄ± aÃ§",
   ckdEpi: "CKD-EPI (GFR)",
-  correctedCalcium: "Düzeltilmiş kalsiyum",
-  unitConverters: "Birim çeviriciler",
-  mgdlToMmoll: "mg/dL → mmol/L",
-  sleScore: "SLE Puanı",
+  correctedCalcium: "DÃ¼zeltilmiÅŸ kalsiyum",
+  unitConverters: "Birim Ã§eviriciler",
+  mgdlToMmoll: "mg/dL â†’ mmol/L",
+  sleScore: "SLE PuanÄ±",
   dukeIE: "Enfektif Endokardit (Duke)",
-  infusionCalc: "İnfüzyon hesapları",
+  infusionCalc: "Ä°nfÃ¼zyon hesaplarÄ±",
 
   // ---- Admin
-  admin: "Yönetim",
+  admin: "YÃ¶netim",
   audit: "Denetim",
-  sectionAuditReport: "Bölüm Eşleme Raporu",
-  generate: "Oluştur",
+  sectionAuditReport: "BÃ¶lÃ¼m EÅŸleme Raporu",
+  generate: "OluÅŸtur",
   details: "Detaylar",
-  none: "Kayıt bulunmuyor.",
+  none: "KayÄ±t bulunmuyor.",
 
   // ---- KayseriTIP
   kayseritip: "KayseriTIP",
-  facultyUploads: "Hoca yüklemeleri",
-  pptSlides: "Sunum slaytları",
+  facultyUploads: "Hoca yÃ¼klemeleri",
+  pptSlides: "Sunum slaytlarÄ±",
   pdfNotes: "PDF notlar",
   externalLink: "Harici link",
 };
@@ -168,7 +168,7 @@ const en: Dict = {
   save: "Save",
   cancel: "Cancel",
   close: "Close",
-  loading: "Loading…",
+  loading: "Loadingâ€¦",
   error: "Connection error",
   ok: "OK",
 
@@ -275,7 +275,7 @@ const en: Dict = {
   ckdEpi: "CKD-EPI (GFR)",
   correctedCalcium: "Corrected calcium",
   unitConverters: "Unit converters",
-  mgdlToMmoll: "mg/dL → mmol/L",
+  mgdlToMmoll: "mg/dL â†’ mmol/L",
   sleScore: "SLE Score",
   dukeIE: "Infective Endocarditis (Duke)",
   infusionCalc: "Infusion calculators",

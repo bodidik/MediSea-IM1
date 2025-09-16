@@ -1,4 +1,4 @@
-// FILE: web/app/components/SiteHeader.tsx
+﻿// FILE: web/app/components/SiteHeader.tsx
 "use client";
 import Link from "next/link";
 import React from "react";
@@ -9,9 +9,9 @@ export default function SiteHeader(){
       <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between">
         <Link href="/" className="font-bold tracking-tight">Medknowledge</Link>
         <nav className="flex items-center gap-4 text-sm">
-          <Link href="/sections" className="hover:underline">Bölümler</Link>
+          <Link href="/sections" className="hover:underline">BÃ¶lÃ¼mler</Link>
           <Link href="/programs" className="hover:underline">Programlar</Link>
-          <Link href="/tools" className="hover:underline">Araçlar</Link>
+          <Link href="/tools" className="hover:underline">AraÃ§lar</Link>
           <Link href="/premium" className="px-3 py-1 rounded-lg border hover:bg-gray-50">Premium</Link>
         </nav>
       </div>

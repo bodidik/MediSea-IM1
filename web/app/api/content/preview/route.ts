@@ -1,13 +1,13 @@
-// FILE: web/app/api/content/preview/route.ts
+﻿// FILE: web/app/api/content/preview/route.ts
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest){
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
-  const ids = req.nextUrl.searchParams.getAll("ids"); // çoklu ids desteği
+  const ids = req.nextUrl.searchParams.getAll("ids"); // Ã§oklu ids desteÄŸi
   const url = new URL("/api/content/preview", backend);
   if (ids.length) {
     for (const v of ids) {
-      // virgüllüyse bölmeden olduğu gibi geçelim (backend bölüyor)
+      // virgÃ¼llÃ¼yse bÃ¶lmeden olduÄŸu gibi geÃ§elim (backend bÃ¶lÃ¼yor)
       url.searchParams.append("ids", v);
     }
   }

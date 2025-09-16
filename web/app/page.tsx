@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic";
+﻿export const dynamic = "force-dynamic";
 
 type TopicLite = {
   slug: string;
@@ -22,16 +22,16 @@ type GuidelineLite = {
 async function getFeatured() {
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
 
-  // Son güncellenen 8 konu
+  // Son gÃ¼ncellenen 8 konu
   const topicsUrl = new URL(`${backend}/api/topics`);
   topicsUrl.searchParams.set("limit", "8");
   topicsUrl.searchParams.set("sort", "-updatedAt");
 
-  // Kılavuzlar: API limit desteklemese bile FE tarafında slice ederiz
+  // KÄ±lavuzlar: API limit desteklemese bile FE tarafÄ±nda slice ederiz
   const glUrl = new URL(`${backend}/api/guidelines`);
   glUrl.searchParams.set("lang", "TR");
 
-  // counts (opsiyonel — varsa hoş bir özet veriyor)
+  // counts (opsiyonel â€” varsa hoÅŸ bir Ã¶zet veriyor)
   const countsUrl = `${backend}/api/counts`;
 
   const [tRes, gRes, cRes] = await Promise.all([
@@ -75,7 +75,7 @@ export default async function Home() {
     "romatoloji",
     "kardiyoloji",
     "infeksiyon",
-    "göğüs",
+    "gÃ¶ÄŸÃ¼s",
   ];
 
   return (
@@ -86,18 +86,18 @@ export default async function Home() {
           <div className="flex-1">
             <div className="text-xs uppercase tracking-wide text-gray-500">Medknowledge</div>
             <h1 className="text-3xl md:text-5xl font-semibold mt-1">
-              Klinik Bilgi • Hızlı • Mobil
+              Klinik Bilgi â€¢ HÄ±zlÄ± â€¢ Mobil
             </h1>
             <p className="mt-3 text-gray-700 max-w-2xl">
-              İç hastalıkları müfredatını bölümlere ayrılmış konular, kısa özetler, ilişkili
-              vakalar ve kılavuzlarla sunuyoruz. Hedef: aradığını 30 sn içinde bul.
+              Ä°Ã§ hastalÄ±klarÄ± mÃ¼fredatÄ±nÄ± bÃ¶lÃ¼mlere ayrÄ±lmÄ±ÅŸ konular, kÄ±sa Ã¶zetler, iliÅŸkili
+              vakalar ve kÄ±lavuzlarla sunuyoruz. Hedef: aradÄ±ÄŸÄ±nÄ± 30 sn iÃ§inde bul.
             </p>
 
-            {/* Hızlı arama */}
+            {/* HÄ±zlÄ± arama */}
             <form action="/topics" method="GET" className="mt-5 flex gap-2">
               <input
                 name="q"
-                placeholder="Ara: membranöz glomerülonefrit, KDIGO, vaskülit…"
+                placeholder="Ara: membranÃ¶z glomerÃ¼lonefrit, KDIGO, vaskÃ¼litâ€¦"
                 className="w-full px-4 py-3 rounded-xl border text-sm"
               />
               <button className="px-4 py-3 rounded-xl border text-sm whitespace-nowrap">
@@ -105,7 +105,7 @@ export default async function Home() {
               </button>
             </form>
 
-            {/* Hızlı bölüm kısayolları */}
+            {/* HÄ±zlÄ± bÃ¶lÃ¼m kÄ±sayollarÄ± */}
             <div className="mt-4 flex flex-wrap gap-2">
               {SECTIONS.map((s) => (
                 <a
@@ -117,12 +117,12 @@ export default async function Home() {
                 </a>
               ))}
               <a href="/topics" className="text-xs px-3 py-1.5 rounded-full border">
-                Tümü →
+                TÃ¼mÃ¼ â†’
               </a>
             </div>
           </div>
 
-          {/* Özet kart (counts varsa) */}
+          {/* Ã–zet kart (counts varsa) */}
           <div className="w-full md:w-72 grid grid-cols-2 gap-3">
             <div className="rounded-2xl border p-4 text-center">
               <div className="text-2xl font-bold">
@@ -134,7 +134,7 @@ export default async function Home() {
               <div className="text-2xl font-bold">
                 {counts?.guidelines ?? (guidelines?.length ?? 0)}
               </div>
-              <div className="text-xs text-gray-600">Kılavuz</div>
+              <div className="text-xs text-gray-600">KÄ±lavuz</div>
             </div>
             <div className="rounded-2xl border p-4 text-center">
               <div className="text-2xl font-bold">{counts?.cases ?? "-"}</div>
@@ -148,19 +148,19 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ÖNE ÇIKAN KONULAR */}
+      {/* Ã–NE Ã‡IKAN KONULAR */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl md:text-2xl font-semibold">Öne Çıkan Konular</h2>
+          <h2 className="text-xl md:text-2xl font-semibold">Ã–ne Ã‡Ä±kan Konular</h2>
           <a className="text-sm underline" href="/topics">
-            Tüm Konular →
+            TÃ¼m Konular â†’
           </a>
         </div>
 
         {!topics.length ? (
           <div className="rounded-2xl border p-4 bg-white text-sm text-gray-500">
-            Henüz konu verisi bulunamadı. <a className="underline" href="/topics">Konular</a>{" "}
-            sayfasından arama yapabilirsiniz.
+            HenÃ¼z konu verisi bulunamadÄ±. <a className="underline" href="/topics">Konular</a>{" "}
+            sayfasÄ±ndan arama yapabilirsiniz.
           </div>
         ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -173,7 +173,7 @@ export default async function Home() {
                   {t.title}
                 </a>
                 <div className="text-xs text-gray-500 mt-1">
-                  {(t.section || "-")} {t.lang ? `· ${t.lang}` : ""}
+                  {(t.section || "-")} {t.lang ? `Â· ${t.lang}` : ""}
                 </div>
                 {t.summary ? (
                   <p className="text-sm text-gray-700 mt-2 line-clamp-2">{t.summary}</p>
@@ -192,14 +192,14 @@ export default async function Home() {
       {/* KILAVUZLAR (Hafif liste) */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl md:text-2xl font-semibold">Kılavuzlar</h2>
+          <h2 className="text-xl md:text-2xl font-semibold">KÄ±lavuzlar</h2>
           <a className="text-sm underline" href="/guidelines">
-            Tümü →
+            TÃ¼mÃ¼ â†’
           </a>
         </div>
         {!guidelines.length ? (
           <div className="rounded-2xl border p-4 bg-white text-sm text-gray-500">
-            Kılavuz listesi boş görünüyor.
+            KÄ±lavuz listesi boÅŸ gÃ¶rÃ¼nÃ¼yor.
           </div>
         ) : (
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -215,8 +215,8 @@ export default async function Home() {
                   )}
                 </div>
                 <div className="text-xs text-gray-500 mt-1">
-                  {(g.org || "—")} {g.year ? `· ${g.year}` : ""} {g.section ? `· ${g.section}` : ""}{" "}
-                  {g.lang ? `· ${g.lang}` : ""}
+                  {(g.org || "â€”")} {g.year ? `Â· ${g.year}` : ""} {g.section ? `Â· ${g.section}` : ""}{" "}
+                  {g.lang ? `Â· ${g.lang}` : ""}
                 </div>
               </li>
             ))}
@@ -224,17 +224,17 @@ export default async function Home() {
         )}
       </section>
 
-      {/* Hızlı Kısayollar */}
+      {/* HÄ±zlÄ± KÄ±sayollar */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <a
           href="/tools"
           className="rounded-2xl border p-5 bg-white hover:shadow-sm transition block"
         >
-          <div className="text-lg font-semibold">Hesaplayıcılar</div>
+          <div className="text-lg font-semibold">HesaplayÄ±cÄ±lar</div>
           <p className="text-sm text-gray-600 mt-1">
-            qSOFA, Wells, TIMI, SLEDAI-2K, KDIGO vb. hızlı araçlar.
+            qSOFA, Wells, TIMI, SLEDAI-2K, KDIGO vb. hÄ±zlÄ± araÃ§lar.
           </p>
-          <div className="text-sm underline mt-2">Göz at →</div>
+          <div className="text-sm underline mt-2">GÃ¶z at â†’</div>
         </a>
 
         <a
@@ -243,20 +243,20 @@ export default async function Home() {
         >
           <div className="text-lg font-semibold">Nefroloji</div>
           <p className="text-sm text-gray-600 mt-1">
-            Glomerülonefritler, AKI, CKD, elektrolit bozuklukları…
+            GlomerÃ¼lonefritler, AKI, CKD, elektrolit bozukluklarÄ±â€¦
           </p>
-          <div className="text-sm underline mt-2">Konu listesi →</div>
+          <div className="text-sm underline mt-2">Konu listesi â†’</div>
         </a>
 
         <a
           href="/premium"
           className="rounded-2xl border p-5 bg-white hover:shadow-sm transition block"
         >
-          <div className="text-lg font-semibold">Premium’a Geç</div>
+          <div className="text-lg font-semibold">Premiumâ€™a GeÃ§</div>
           <p className="text-sm text-gray-600 mt-1">
-            Daha fazla detay, quiz ve üyeye özel içerik.
+            Daha fazla detay, quiz ve Ã¼yeye Ã¶zel iÃ§erik.
           </p>
-          <div className="text-sm underline mt-2">Planları gör →</div>
+          <div className="text-sm underline mt-2">PlanlarÄ± gÃ¶r â†’</div>
         </a>
       </section>
     </div>

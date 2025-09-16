@@ -1,32 +1,32 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
 
 /**
- * SLEDAI-2K — sadeleştirilmiş uygulama (yaygın maddeler; örnek puanlar)
- * Klinik kullanım öncesi kurum protokolünüzle doğrulayın.
+ * SLEDAI-2K â€” sadeleÅŸtirilmiÅŸ uygulama (yaygÄ±n maddeler; Ã¶rnek puanlar)
+ * Klinik kullanÄ±m Ã¶ncesi kurum protokolÃ¼nÃ¼zle doÄŸrulayÄ±n.
  */
 
 type Item = { key: string; label: string; pts: number };
 
 const ITEMS: Item[] = [
-  { key: "seizure", label: "Nöbet", pts: 8 },
+  { key: "seizure", label: "NÃ¶bet", pts: 8 },
   { key: "psychosis", label: "Psikoz", pts: 8 },
-  { key: "cva", label: "Serebrovasküler olay", pts: 8 },
-  { key: "vasculitis", label: "Vaskülit", pts: 8 },
+  { key: "cva", label: "SerebrovaskÃ¼ler olay", pts: 8 },
+  { key: "vasculitis", label: "VaskÃ¼lit", pts: 8 },
   { key: "arthritis", label: "Artrit", pts: 4 },
   { key: "myositis", label: "Miyozit", pts: 4 },
-  { key: "urinary", label: "İdrar sedimenti aktif (hematüri, silendir vb.)", pts: 4 },
-  { key: "proteinuria", label: "Proteinüri (>0.5 g/gün)", pts: 4 },
-  { key: "lowComplement", label: "Düşük kompleman", pts: 2 },
-  { key: "antiDsDNA", label: "Anti-dsDNA yüksek", pts: 2 },
-  { key: "rash", label: "Döküntü", pts: 2 },
+  { key: "urinary", label: "Ä°drar sedimenti aktif (hematÃ¼ri, silendir vb.)", pts: 4 },
+  { key: "proteinuria", label: "ProteinÃ¼ri (>0.5 g/gÃ¼n)", pts: 4 },
+  { key: "lowComplement", label: "DÃ¼ÅŸÃ¼k kompleman", pts: 2 },
+  { key: "antiDsDNA", label: "Anti-dsDNA yÃ¼ksek", pts: 2 },
+  { key: "rash", label: "DÃ¶kÃ¼ntÃ¼", pts: 2 },
   { key: "alopecia", label: "Alopesi", pts: 2 },
-  { key: "mucosal", label: "Ağız/nazal ülser", pts: 2 },
-  { key: "fever", label: "Ateş", pts: 1 },
+  { key: "mucosal", label: "AÄŸÄ±z/nazal Ã¼lser", pts: 2 },
+  { key: "fever", label: "AteÅŸ", pts: 1 },
   { key: "thrombocytopenia", label: "Trombositopeni", pts: 1 },
-  { key: "leukopenia", label: "Lökopeni", pts: 1 },
+  { key: "leukopenia", label: "LÃ¶kopeni", pts: 1 },
 ];
 
 export default function Sledai2kPage() {
@@ -39,11 +39,11 @@ export default function Sledai2kPage() {
 
   const score = ITEMS.reduce((sum, it) => sum + (sel[it.key] ? it.pts : 0), 0);
 
-  let activity = "—";
-  if (score >= 12) activity = "Yüksek aktivite";
+  let activity = "â€”";
+  if (score >= 12) activity = "YÃ¼ksek aktivite";
   else if (score >= 6) activity = "Orta aktivite";
-  else if (score >= 1) activity = "Düşük aktivite";
-  else activity = "Aktif hastalık yok";
+  else if (score >= 1) activity = "DÃ¼ÅŸÃ¼k aktivite";
+  else activity = "Aktif hastalÄ±k yok";
 
   const params: Record<string, string|number> = {};
   ITEMS.forEach(i => { if (sel[i.key]) params[i.key] = 1; });
@@ -67,7 +67,7 @@ export default function Sledai2kPage() {
         <div className="text-xs text-muted-foreground">{activity}</div>
       </div>
       <ToolShare params={params} />
-      <p className="text-xs text-muted-foreground">Eğitim amaçlıdır; resmi skorlama tablolarını doğrulayın.</p>
+      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; resmi skorlama tablolarÄ±nÄ± doÄŸrulayÄ±n.</p>
     </div>
   );
 }

@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
 
-/** CURB-65: Confusion, Urea >7 mmol/L, RR ≥30, SBP<90/DBP≤60, Age ≥65 → her biri 1 puan */
+/** CURB-65: Confusion, Urea >7 mmol/L, RR â‰¥30, SBP<90/DBPâ‰¤60, Age â‰¥65 â†’ her biri 1 puan */
 
 export default function Curb65Page(){
   const search = typeof window !== "undefined" ? new URLSearchParams(window.location.search): null;
@@ -16,10 +16,10 @@ export default function Curb65Page(){
 
   const score = (confusion?1:0) + (ureaHigh?1:0) + (rrHigh?1:0) + (bpLow?1:0) + (age65?1:0);
 
-  let comment = "—";
-  if (score <= 1) comment = "Ayaktan tedavi düşünülebilir (klinik bağlam önemli).";
-  else if (score === 2) comment = "Kısa yatış / yakın takip değerlendirilebilir.";
-  else comment = "Yatış ve ileri değerlendirme önerilir.";
+  let comment = "â€”";
+  if (score <= 1) comment = "Ayaktan tedavi dÃ¼ÅŸÃ¼nÃ¼lebilir (klinik baÄŸlam Ã¶nemli).";
+  else if (score === 2) comment = "KÄ±sa yatÄ±ÅŸ / yakÄ±n takip deÄŸerlendirilebilir.";
+  else comment = "YatÄ±ÅŸ ve ileri deÄŸerlendirme Ã¶nerilir.";
 
   const params = {
     c: confusion?1:"", u: ureaHigh?1:"", r: rrHigh?1:"", b: bpLow?1:"", a: age65?1:""
@@ -29,11 +29,11 @@ export default function Curb65Page(){
     <div className="p-4 md:p-8 max-w-3xl mx-auto space-y-6">
       <h1 className="text-2xl md:text-3xl font-bold">CURB-65</h1>
       <div className="rounded-2xl border p-4 space-y-2 text-sm">
-        <label className="flex items-center gap-2"><input type="checkbox" checked={confusion} onChange={()=>setConfusion(v=>!v)} /> Konfüzyon</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={ureaHigh} onChange={()=>setUreaHigh(v=>!v)} /> Üre &gt; 7 mmol/L</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={rrHigh} onChange={()=>setRrHigh(v=>!v)} /> RR ≥ 30/dk</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={bpLow} onChange={()=>setBpLow(v=>!v)} /> SBP &lt; 90 veya DBP ≤ 60 mmHg</label>
-        <label className="flex items-center gap-2"><input type="checkbox" checked={age65} onChange={()=>setAge65(v=>!v)} /> Yaş ≥ 65</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={confusion} onChange={()=>setConfusion(v=>!v)} /> KonfÃ¼zyon</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={ureaHigh} onChange={()=>setUreaHigh(v=>!v)} /> Ãœre &gt; 7 mmol/L</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={rrHigh} onChange={()=>setRrHigh(v=>!v)} /> RR â‰¥ 30/dk</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={bpLow} onChange={()=>setBpLow(v=>!v)} /> SBP &lt; 90 veya DBP â‰¤ 60 mmHg</label>
+        <label className="flex items-center gap-2"><input type="checkbox" checked={age65} onChange={()=>setAge65(v=>!v)} /> YaÅŸ â‰¥ 65</label>
       </div>
       <div className="rounded-2xl border p-4">
         <div className="text-sm">Skor</div>
@@ -41,7 +41,7 @@ export default function Curb65Page(){
         <div className="text-xs text-muted-foreground mt-1">{comment}</div>
       </div>
       <ToolShare params={params}/>
-      <p className="text-xs text-muted-foreground">Eğitim amaçlıdır; kılavuzlarla doğrulayın.</p>
+      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; kÄ±lavuzlarla doÄŸrulayÄ±n.</p>
     </div>
   );
 }

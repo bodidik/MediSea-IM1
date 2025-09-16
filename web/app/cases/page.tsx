@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import Link from "next/link";
 
@@ -21,7 +21,7 @@ export default function CasesIndexPage() {
     try {
       const r = await fetch("/api/cases", { cache: "no-store" });
       const j: ListResp = await r.json();
-      if (!j.ok) throw new Error(j.error || "Yükleme hatası");
+      if (!j.ok) throw new Error(j.error || "YÃ¼kleme hatasÄ±");
       setRows(j.items || []);
     } catch (e: any) {
       setErr(e?.message || "ERR");
@@ -38,18 +38,18 @@ export default function CasesIndexPage() {
   return (
     <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl md:text-3xl font-bold">Vaka Çözümleri</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">Vaka Ã‡Ã¶zÃ¼mleri</h1>
         <button
           onClick={load}
           className="px-3 py-2 rounded-lg border text-sm"
           disabled={loading}
         >
-          {loading ? "…" : "Yenile"}
+          {loading ? "â€¦" : "Yenile"}
         </button>
       </div>
 
       <p className="text-sm text-muted-foreground">
-        Klinik öykü toplama pratiği için soru soran vaka akışları.
+        Klinik Ã¶ykÃ¼ toplama pratiÄŸi iÃ§in soru soran vaka akÄ±ÅŸlarÄ±.
       </p>
 
       {err && (
@@ -66,7 +66,7 @@ export default function CasesIndexPage() {
         </ul>
       ) : rows.length === 0 ? (
         <div className="text-sm text-muted-foreground">
-          Kayıtlı vaka bulunamadı.
+          KayÄ±tlÄ± vaka bulunamadÄ±.
         </div>
       ) : (
         <ul className="grid gap-3">
@@ -89,7 +89,7 @@ export default function CasesIndexPage() {
                 href={`/cases/${encodeURIComponent(c.slug)}`}
                 className="px-3 py-2 rounded-lg border text-sm"
               >
-                Aç
+                AÃ§
               </Link>
             </li>
           ))}

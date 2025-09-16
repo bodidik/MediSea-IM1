@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -14,7 +14,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const sectRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
-  // dış tıklama ile kapat
+  // dÄ±ÅŸ tÄ±klama ile kapat
   useEffect(() => {
     function onDoc(e: MouseEvent) {
       if (loginRef.current && !loginRef.current.contains(e.target as Node)) setShowLogin(false);
@@ -37,7 +37,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  // rota değişince menüleri kapat
+  // rota deÄŸiÅŸince menÃ¼leri kapat
   useEffect(() => {
     setShowLogin(false);
     setOpenSections(false);
@@ -55,7 +55,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <button
               className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border hover:bg-gray-50"
               onClick={() => setMobileOpen((v) => !v)}
-              aria-label="Menüyü Aç/Kapat"
+              aria-label="MenÃ¼yÃ¼ AÃ§/Kapat"
             >
               {!mobileOpen ? (
                 // hamburger
@@ -74,7 +74,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               MediSea
             </Link>
 
-            {/* Bölümler menüsü (desktop) */}
+            {/* BÃ¶lÃ¼mler menÃ¼sÃ¼ (desktop) */}
             <div className="relative hidden md:block" ref={sectRef}>
               <button
                 onClick={() => setOpenSections((v) => !v)}
@@ -82,7 +82,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 aria-haspopup="menu"
                 aria-expanded={openSections}
               >
-                Bölümler
+                BÃ¶lÃ¼mler
               </button>
               {openSections && (
                 <div
@@ -102,10 +102,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               )}
             </div>
 
-            {/* Üst bağlantılar (desktop) */}
+            {/* Ãœst baÄŸlantÄ±lar (desktop) */}
             <nav className="hidden md:flex items-center gap-1">
               {navConfig.topNav
-                .filter((i) => i.label !== "Bölümler")
+                .filter((i) => i.label !== "BÃ¶lÃ¼mler")
                 .map((item) => (
                   <Link
                     key={item.href}
@@ -131,7 +131,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 onClick={() => setShowLogin((v) => !v)}
                 className="px-3 py-1.5 rounded-lg border hover:bg-gray-50 text-sm"
               >
-                Giriş / Kayıt
+                GiriÅŸ / KayÄ±t
               </button>
               {showLogin && <LoginPopover onClose={() => setShowLogin(false)} />}
             </div>
@@ -149,12 +149,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <footer className="bg-white border-t">
         <div className="mx-auto max-w-7xl px-4 py-6 text-sm text-gray-600">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4">
-            <div>© {new Date().getFullYear()} MediSea</div>
-            <div className="opacity-60">İç Hastalıkları Eğitim Platformu</div>
+            <div>Â© {new Date().getFullYear()} MediSea</div>
+            <div className="opacity-60">Ä°Ã§ HastalÄ±klarÄ± EÄŸitim Platformu</div>
             <div className="md:ml-auto flex items-center gap-3">
-              <Link className="underline" href="/about">Hakkında</Link>
+              <Link className="underline" href="/about">HakkÄ±nda</Link>
               <Link className="underline" href="/privacy">Gizlilik</Link>
-              <Link className="underline" href="/contact">İletişim</Link>
+              <Link className="underline" href="/contact">Ä°letiÅŸim</Link>
             </div>
           </div>
         </div>
@@ -163,7 +163,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* ========================= Parçalar ========================= */
+/* ========================= ParÃ§alar ========================= */
 
 function HeaderSearch() {
   const router = useRouter();
@@ -182,9 +182,9 @@ function HeaderSearch() {
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Ara: behçet, nefrit, KDIGO…"
+          placeholder="Ara: behÃ§et, nefrit, KDIGOâ€¦"
           className="flex-1 outline-none text-sm bg-transparent"
-          aria-label="Hızlı Arama"
+          aria-label="HÄ±zlÄ± Arama"
         />
         <button type="submit" className="text-sm px-2 py-1 rounded-lg border hover:bg-gray-50">
           Ara
@@ -205,12 +205,12 @@ function LoginPopover({ onClose }: { onClose: () => void }) {
         }}
       >
         <input type="email" placeholder="E-posta" className="w-full border px-2 py-2 rounded" required />
-        <input type="password" placeholder="Şifre" className="w-full border px-2 py-2 rounded" required />
+        <input type="password" placeholder="Åifre" className="w-full border px-2 py-2 rounded" required />
         <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-          Giriş
+          GiriÅŸ
         </button>
         <div className="text-xs text-center text-gray-500">
-          Hesabınız yok mu? <Link href="/register" className="underline">Kayıt ol</Link>
+          HesabÄ±nÄ±z yok mu? <Link href="/register" className="underline">KayÄ±t ol</Link>
         </div>
       </form>
     </div>
@@ -242,13 +242,13 @@ function MobileNav({ onClose }: { onClose: () => void }) {
         {/* Top links */}
         <div className="grid grid-cols-2 gap-2">
           {navConfig.topNav.map((item) =>
-            item.label === "Bölümler" ? (
+            item.label === "BÃ¶lÃ¼mler" ? (
               <button
                 key={item.label}
                 onClick={() => setSectionsOpen((s) => !s)}
                 className="px-3 py-2 rounded-lg border text-left"
               >
-                Bölümler
+                BÃ¶lÃ¼mler
               </button>
             ) : (
               <Link
@@ -284,10 +284,10 @@ function MobileNav({ onClose }: { onClose: () => void }) {
           <LangSwitch />
           <div className="ml-auto flex items-center gap-2">
             <Link href="/login" onClick={onClose} className="text-sm px-3 py-2 rounded-lg border">
-              Üye Giriş
+              Ãœye GiriÅŸ
             </Link>
             <Link href="/signup" onClick={onClose} className="text-sm px-3 py-2 rounded-lg border">
-              Kayıt
+              KayÄ±t
             </Link>
           </div>
         </div>
@@ -314,7 +314,7 @@ function MobileSearch({ onAfterSearch }: { onAfterSearch: () => void }) {
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Ara: behçet, nefrit, KDIGO…"
+          placeholder="Ara: behÃ§et, nefrit, KDIGOâ€¦"
           className="flex-1 outline-none text-sm bg-transparent"
           aria-label="Arama"
         />

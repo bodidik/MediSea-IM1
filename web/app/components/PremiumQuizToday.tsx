@@ -1,4 +1,4 @@
-// FILE: web/app/components/PremiumQuizToday.tsx
+﻿// FILE: web/app/components/PremiumQuizToday.tsx
 "use client";
 import React from "react";
 
@@ -41,7 +41,7 @@ export default function PremiumQuizToday() {
         body: JSON.stringify({ quizId: data.quizId, answers }),
       });
       const j = (await r.json()) as SubmitResp;
-      if (!r.ok || !j.ok) throw new Error(j?.error || "Gönderim hatası");
+      if (!r.ok || !j.ok) throw new Error(j?.error || "GÃ¶nderim hatasÄ±");
       setResult(j);
     } catch (e: any) {
       setErr(e?.message || "ERR");
@@ -56,8 +56,8 @@ export default function PremiumQuizToday() {
   if (result) {
     return (
       <div className="rounded-2xl border p-4 space-y-3">
-        <div className="font-semibold">Sonuç ({data.date})</div>
-        <div>Doğru: <b>{result.correct}</b> / {result.total}</div>
+        <div className="font-semibold">SonuÃ§ ({data.date})</div>
+        <div>DoÄŸru: <b>{result.correct}</b> / {result.total}</div>
         <div>Puan: <b>{result.score}</b></div>
         <button className="mt-2 px-3 py-1 bg-gray-200 rounded" onClick={() => location.reload()}>
           Yenile
@@ -90,7 +90,7 @@ export default function PremiumQuizToday() {
         </div>
       ))}
       <button disabled={loading} onClick={handleSubmit} className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50">
-        {loading ? "Gönderiliyor..." : "Cevapları Gönder"}
+        {loading ? "GÃ¶nderiliyor..." : "CevaplarÄ± GÃ¶nder"}
       </button>
     </div>
   );

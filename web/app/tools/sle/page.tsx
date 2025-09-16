@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 
@@ -6,50 +6,50 @@ type Item = {
   key: string;
   label: string;
   points: number;
-  group: "Nöro" | "Renal" | "Kardiyo-Pulmoner" | "Mukokutanöz" | "Kas-İskelet" | "Seroloji" | "Sistemik";
+  group: "NÃ¶ro" | "Renal" | "Kardiyo-Pulmoner" | "MukokutanÃ¶z" | "Kas-Ä°skelet" | "Seroloji" | "Sistemik";
 };
 
-// SLEDAI-2K kriterleri (puan aynı kalır)
+// SLEDAI-2K kriterleri (puan aynÄ± kalÄ±r)
 const ITEMS: Item[] = [
   // 8 puan
-  { key: "seizure", label: "Nöbet (seizure)", points: 8, group: "Nöro" },
-  { key: "psychosis", label: "Psikoz", points: 8, group: "Nöro" },
-  { key: "obs", label: "Organik beyin sendromu (OBS)", points: 8, group: "Nöro" },
-  { key: "visual", label: "Görme bozukluğu (retinal patoloji dâhil)", points: 8, group: "Nöro" },
-  { key: "cranial", label: "Kraniyal sinir tutulumu", points: 8, group: "Nöro" },
-  { key: "lupus_headache", label: "Lupus baş ağrısı", points: 8, group: "Nöro" },
-  { key: "cva", label: "Serebrovasküler olay (CVA)", points: 8, group: "Nöro" },
-  { key: "vasculitis", label: "Vaskülit (kutaneal/organ)", points: 8, group: "Nöro" },
+  { key: "seizure", label: "NÃ¶bet (seizure)", points: 8, group: "NÃ¶ro" },
+  { key: "psychosis", label: "Psikoz", points: 8, group: "NÃ¶ro" },
+  { key: "obs", label: "Organik beyin sendromu (OBS)", points: 8, group: "NÃ¶ro" },
+  { key: "visual", label: "GÃ¶rme bozukluÄŸu (retinal patoloji dÃ¢hil)", points: 8, group: "NÃ¶ro" },
+  { key: "cranial", label: "Kraniyal sinir tutulumu", points: 8, group: "NÃ¶ro" },
+  { key: "lupus_headache", label: "Lupus baÅŸ aÄŸrÄ±sÄ±", points: 8, group: "NÃ¶ro" },
+  { key: "cva", label: "SerebrovaskÃ¼ler olay (CVA)", points: 8, group: "NÃ¶ro" },
+  { key: "vasculitis", label: "VaskÃ¼lit (kutaneal/organ)", points: 8, group: "NÃ¶ro" },
 
   // 4 puan
-  { key: "arthritis", label: "Artrit (≥2 eklem, hassasiyet + şişlik)", points: 4, group: "Kas-İskelet" },
-  { key: "myositis", label: "Miyozit (CK/EMG veya klinik)", points: 4, group: "Kas-İskelet" },
-  { key: "casts", label: "İdrar silendirleri (granüler/eritrosit/hemoglobin/...) ", points: 4, group: "Renal" },
-  { key: "hematuria", label: "Hematüri (eritrosit yüksek, infeksiyon yok)", points: 4, group: "Renal" },
-  { key: "proteinuria", label: "Proteinüri (≥0.5 g/gün veya ≥++ strip)", points: 4, group: "Renal" },
-  { key: "pyuria", label: "Piyüri (lökosit yüksek, infeksiyon yok)", points: 4, group: "Renal" },
+  { key: "arthritis", label: "Artrit (â‰¥2 eklem, hassasiyet + ÅŸiÅŸlik)", points: 4, group: "Kas-Ä°skelet" },
+  { key: "myositis", label: "Miyozit (CK/EMG veya klinik)", points: 4, group: "Kas-Ä°skelet" },
+  { key: "casts", label: "Ä°drar silendirleri (granÃ¼ler/eritrosit/hemoglobin/...) ", points: 4, group: "Renal" },
+  { key: "hematuria", label: "HematÃ¼ri (eritrosit yÃ¼ksek, infeksiyon yok)", points: 4, group: "Renal" },
+  { key: "proteinuria", label: "ProteinÃ¼ri (â‰¥0.5 g/gÃ¼n veya â‰¥++ strip)", points: 4, group: "Renal" },
+  { key: "pyuria", label: "PiyÃ¼ri (lÃ¶kosit yÃ¼ksek, infeksiyon yok)", points: 4, group: "Renal" },
 
   // 2 puan
-  { key: "rash", label: "Döküntü (malar/diğer tipik lupus)", points: 2, group: "Mukokutanöz" },
-  { key: "alopecia", label: "Alopesi (aktif dökülme)", points: 2, group: "Mukokutanöz" },
-  { key: "ulcers", label: "Ağız/nazal ülser", points: 2, group: "Mukokutanöz" },
-  { key: "pleurisy", label: "Plevrit (plevral ağrı/sürtünme/efüzyon)", points: 2, group: "Kardiyo-Pulmoner" },
-  { key: "pericarditis", label: "Perikardit (ağrı/efüzyon/sürtünme)", points: 2, group: "Kardiyo-Pulmoner" },
-  { key: "low_complement", label: "Düşük kompleman (C3/C4)", points: 2, group: "Seroloji" },
-  { key: "anti_dsDNA", label: "Artmış anti-dsDNA", points: 2, group: "Seroloji" },
+  { key: "rash", label: "DÃ¶kÃ¼ntÃ¼ (malar/diÄŸer tipik lupus)", points: 2, group: "MukokutanÃ¶z" },
+  { key: "alopecia", label: "Alopesi (aktif dÃ¶kÃ¼lme)", points: 2, group: "MukokutanÃ¶z" },
+  { key: "ulcers", label: "AÄŸÄ±z/nazal Ã¼lser", points: 2, group: "MukokutanÃ¶z" },
+  { key: "pleurisy", label: "Plevrit (plevral aÄŸrÄ±/sÃ¼rtÃ¼nme/efÃ¼zyon)", points: 2, group: "Kardiyo-Pulmoner" },
+  { key: "pericarditis", label: "Perikardit (aÄŸrÄ±/efÃ¼zyon/sÃ¼rtÃ¼nme)", points: 2, group: "Kardiyo-Pulmoner" },
+  { key: "low_complement", label: "DÃ¼ÅŸÃ¼k kompleman (C3/C4)", points: 2, group: "Seroloji" },
+  { key: "anti_dsDNA", label: "ArtmÄ±ÅŸ anti-dsDNA", points: 2, group: "Seroloji" },
 
   // 1 puan
-  { key: "fever", label: "Ateş (infeksiyon dışı, >38°C)", points: 1, group: "Sistemik" },
-  { key: "thrombocytopenia", label: "Trombositopeni (<100.000/µL)", points: 1, group: "Sistemik" },
-  { key: "leukopenia", label: "Lökopeni (<3.000/µL)", points: 1, group: "Sistemik" },
+  { key: "fever", label: "AteÅŸ (infeksiyon dÄ±ÅŸÄ±, >38Â°C)", points: 1, group: "Sistemik" },
+  { key: "thrombocytopenia", label: "Trombositopeni (<100.000/ÂµL)", points: 1, group: "Sistemik" },
+  { key: "leukopenia", label: "LÃ¶kopeni (<3.000/ÂµL)", points: 1, group: "Sistemik" },
 ];
 
 const GROUP_ORDER: Item["group"][] = [
-  "Nöro",
+  "NÃ¶ro",
   "Renal",
   "Kardiyo-Pulmoner",
-  "Mukokutanöz",
-  "Kas-İskelet",
+  "MukokutanÃ¶z",
+  "Kas-Ä°skelet",
   "Seroloji",
   "Sistemik",
 ];
@@ -62,10 +62,10 @@ function groupItems(items: Item[]) {
 }
 
 function interpret(total: number) {
-  if (total <= 4) return { level: "Düşük aktivite", color: "bg-green-100 text-green-800" };
+  if (total <= 4) return { level: "DÃ¼ÅŸÃ¼k aktivite", color: "bg-green-100 text-green-800" };
   if (total <= 9) return { level: "Orta aktivite", color: "bg-yellow-100 text-yellow-800" };
-  if (total <= 14) return { level: "Yüksek aktivite", color: "bg-orange-100 text-orange-800" };
-  return { level: "Çok yüksek aktivite", color: "bg-red-100 text-red-800" };
+  if (total <= 14) return { level: "YÃ¼ksek aktivite", color: "bg-orange-100 text-orange-800" };
+  return { level: "Ã‡ok yÃ¼ksek aktivite", color: "bg-red-100 text-red-800" };
 }
 
 export default function SLEDAIPage() {
@@ -92,8 +92,8 @@ export default function SLEDAIPage() {
         <div>
           <h1 className="text-2xl md:text-3xl font-bold">SLEDAI Skoru</h1>
           <p className="text-sm text-gray-600">
-            Sistemik Lupus Erythematosus aktivite değerlendirmesi (SLEDAI-2K).
-            Dönem: son 10 gün içindeki bulgular.
+            Sistemik Lupus Erythematosus aktivite deÄŸerlendirmesi (SLEDAI-2K).
+            DÃ¶nem: son 10 gÃ¼n iÃ§indeki bulgular.
           </p>
         </div>
         <div className="text-right">
@@ -107,7 +107,7 @@ export default function SLEDAIPage() {
 
       <div className="flex flex-wrap gap-2 text-sm">
         <button onClick={() => toggleAll(false)} className="px-3 py-2 rounded-lg border">Temizle</button>
-        <button onClick={() => toggleAll(true)} className="px-3 py-2 rounded-lg border">Tümünü İşaretle</button>
+        <button onClick={() => toggleAll(true)} className="px-3 py-2 rounded-lg border">TÃ¼mÃ¼nÃ¼ Ä°ÅŸaretle</button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -141,13 +141,13 @@ export default function SLEDAIPage() {
       <section className="rounded-2xl border p-4 space-y-2 text-sm">
         <div className="font-semibold">Yorum</div>
         <ul className="list-disc pl-5 space-y-1 text-gray-700">
-          <li><b>0–4:</b> Düşük aktivite</li>
-          <li><b>5–9:</b> Orta aktivite</li>
-          <li><b>10–14:</b> Yüksek aktivite</li>
-          <li><b>≥15:</b> Çok yüksek aktivite</li>
+          <li><b>0â€“4:</b> DÃ¼ÅŸÃ¼k aktivite</li>
+          <li><b>5â€“9:</b> Orta aktivite</li>
+          <li><b>10â€“14:</b> YÃ¼ksek aktivite</li>
+          <li><b>â‰¥15:</b> Ã‡ok yÃ¼ksek aktivite</li>
         </ul>
         <div className="text-xs text-gray-500">
-          Not: SLEDAI bir aktivite skorudur; tanı koydurmaz. Klinik yargı, laboratuvar ve görüntüleme ile birlikte değerlendirilmelidir.
+          Not: SLEDAI bir aktivite skorudur; tanÄ± koydurmaz. Klinik yargÄ±, laboratuvar ve gÃ¶rÃ¼ntÃ¼leme ile birlikte deÄŸerlendirilmelidir.
         </div>
       </section>
     </div>

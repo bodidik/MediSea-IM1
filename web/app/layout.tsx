@@ -1,18 +1,18 @@
-// FILE: web/app/layout.tsx
+﻿// FILE: web/app/layout.tsx
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import AppShell from "@/app/components/AppShell";
+import AppShell from "@/components/AppShell";
 
 export const metadata: Metadata = {
   title: {
     default: "Medknowledge",
-    template: "%s · Medknowledge",
+    template: "%s Â· Medknowledge",
   },
-  description: "İç hastalıkları eğitim ve sınav platformu",
+  description: "Ä°Ã§ hastalÄ±klarÄ± eÄŸitim ve sÄ±nav platformu",
   applicationName: "Medknowledge",
   authors: [{ name: "Medknowledge" }],
   keywords: [
-    "iç hastalıkları",
+    "iÃ§ hastalÄ±klarÄ±",
     "nefroloji",
     "hematoloji",
     "endokrinoloji",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Medknowledge",
-    description: "İç hastalıkları eğitim ve sınav platformu",
+    description: "Ä°Ã§ hastalÄ±klarÄ± eÄŸitim ve sÄ±nav platformu",
     type: "website",
     locale: "tr_TR",
     siteName: "Medknowledge",

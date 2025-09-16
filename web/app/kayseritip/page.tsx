@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 export const dynamic = 'force-dynamic';
 import { useEffect, useState } from 'react';
 
@@ -12,7 +12,7 @@ export default function KayseriTip(){
 
   return (
     <div className="p-4">
-      KayseriTIP içerikleri (örnek)
+      KayseriTIP iÃ§erikleri (Ã¶rnek)
     </div>
   );
 }

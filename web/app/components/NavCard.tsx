@@ -1,4 +1,4 @@
- FILE webappcomponentsNavCard.tsx
+﻿ FILE webappcomponentsNavCard.tsx
 import Link from nextlink;
 
 export default function NavCard({

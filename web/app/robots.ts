@@ -1,4 +1,4 @@
-// FILE: web/app/robots.ts
+﻿// FILE: web/app/robots.ts
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      // Eğer admin veya internal yolları engellemek istersen:
+      // EÄŸer admin veya internal yollarÄ± engellemek istersen:
       disallow: ["/admin", "/api"],
     },
     sitemap: `${base}/sitemap.xml`,

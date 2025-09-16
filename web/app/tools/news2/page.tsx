@@ -1,17 +1,17 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
 
 /**
- * NEWS2 skoru — parametre başına 0–3 puan:
- * RR, SpO2, O2 (ek), SBP, Nabız, Bilinç (AVPU/Alert), Sıcaklık.
- * Burada SpO2 için “skor 1” oksijen saturasyon hedef paketi uygulanmaz (varsayılan tablo).
+ * NEWS2 skoru â€” parametre baÅŸÄ±na 0â€“3 puan:
+ * RR, SpO2, O2 (ek), SBP, NabÄ±z, BilinÃ§ (AVPU/Alert), SÄ±caklÄ±k.
+ * Burada SpO2 iÃ§in â€œskor 1â€ oksijen saturasyon hedef paketi uygulanmaz (varsayÄ±lan tablo).
  */
 
 function band(val:number, ranges:[number,number,number,number,number,number]) {
-  // Yardımcı: thresholds’lara göre 0/1/2/3 döndürür (tablolar aşağıda).
-  // ranges: [3-upper, 2-upper, 1-upper, 0-upper, 1-upper-high, 2-upper-high] gibi kullanılacak.
+  // YardÄ±mcÄ±: thresholdsâ€™lara gÃ¶re 0/1/2/3 dÃ¶ndÃ¼rÃ¼r (tablolar aÅŸaÄŸÄ±da).
+  // ranges: [3-upper, 2-upper, 1-upper, 0-upper, 1-upper-high, 2-upper-high] gibi kullanÄ±lacak.
   return 0;
 }
 
@@ -23,7 +23,7 @@ function scoreRR(rr:number){
   return 3; // >=25
 }
 function scoreSpO2(sp:number, onO2:boolean){
-  // Basit tablo: ek O2 varsa +2 (NEWS2’de ek O2 = 2 puan ayrı kalem)
+  // Basit tablo: ek O2 varsa +2 (NEWS2â€™de ek O2 = 2 puan ayrÄ± kalem)
   let base = 0;
   if (sp <= 91) base = 3;
   else if (sp <= 93) base = 2;
@@ -33,24 +33,24 @@ function scoreSpO2(sp:number, onO2:boolean){
 }
 function scoreTemp(t:number){
   if (t <= 35.0) return 3;
-  if (t < 36.1) return 1; // 35.1–36.0
-  if (t <= 38.0) return 0; // 36.1–38.0
-  if (t <= 39.0) return 1; // 38.1–39.0
+  if (t < 36.1) return 1; // 35.1â€“36.0
+  if (t <= 38.0) return 0; // 36.1â€“38.0
+  if (t <= 39.0) return 1; // 38.1â€“39.0
   return 2; // >=39.1
 }
 function scoreSBP(s:number){
   if (s <= 90) return 3;
-  if (s <= 100) return 2; // 91–100
-  if (s <= 110) return 1; // 101–110
-  if (s <= 219) return 0; // 111–219
+  if (s <= 100) return 2; // 91â€“100
+  if (s <= 110) return 1; // 101â€“110
+  if (s <= 219) return 0; // 111â€“219
   return 3; // >=220
 }
 function scorePulse(p:number){
   if (p <= 40) return 3;
-  if (p <= 50) return 1; // 41–50
-  if (p <= 90) return 0; // 51–90
-  if (p <= 110) return 1; // 91–110
-  if (p <= 130) return 2; // 111–130
+  if (p <= 50) return 1; // 41â€“50
+  if (p <= 90) return 0; // 51â€“90
+  if (p <= 110) return 1; // 91â€“110
+  if (p <= 130) return 2; // 111â€“130
   return 3; // >=131
 }
 function scoreAVPU(avpu:string){
@@ -77,8 +77,8 @@ export default function NEWS2Page(){
 
   const total = sc_rr + sc_sp + sc_temp + sc_sbp + sc_hr + sc_avpu;
 
-  let risk = "Düşük";
-  if (total >= 7) risk = "Yüksek";
+  let risk = "DÃ¼ÅŸÃ¼k";
+  if (total >= 7) risk = "YÃ¼ksek";
   else if (total >= 5) risk = "Orta";
   else if ([sc_rr, sc_sp, sc_temp, sc_sbp, sc_hr, sc_avpu].some(v => v === 3)) risk = "Orta";
 
@@ -89,17 +89,17 @@ export default function NEWS2Page(){
       <h1 className="text-2xl md:text-3xl font-bold">NEWS2</h1>
 
       <div className="rounded-2xl border p-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-        <label className="flex items-center gap-2"><span className="w-40 text-xs">Solunum sayısı (/dk)</span><input type="number" value={rr} onChange={e=>setRr(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/></label>
+        <label className="flex items-center gap-2"><span className="w-40 text-xs">Solunum sayÄ±sÄ± (/dk)</span><input type="number" value={rr} onChange={e=>setRr(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/></label>
         <div className="flex items-center gap-2">
-          <span className="w-40 text-xs">SpO₂ (%)</span>
+          <span className="w-40 text-xs">SpOâ‚‚ (%)</span>
           <input type="number" value={spo2} onChange={e=>setSpo2(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/>
         </div>
         <label className="flex items-center gap-2 col-span-1 md:col-span-2"><input type="checkbox" checked={onO2} onChange={()=>setOnO2(v=>!v)} /> Ek oksijen</label>
         <label className="flex items-center gap-2"><span className="w-40 text-xs">Sistolik KB (mmHg)</span><input type="number" value={sbp} onChange={e=>setSbp(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/></label>
-        <label className="flex items-center gap-2"><span className="w-40 text-xs">Nabız (/dk)</span><input type="number" value={hr} onChange={e=>setHr(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/></label>
-        <label className="flex items-center gap-2"><span className="w-40 text-xs">Sıcaklık (°C)</span><input type="number" step="0.1" value={temp} onChange={e=>setTemp(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/></label>
+        <label className="flex items-center gap-2"><span className="w-40 text-xs">NabÄ±z (/dk)</span><input type="number" value={hr} onChange={e=>setHr(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/></label>
+        <label className="flex items-center gap-2"><span className="w-40 text-xs">SÄ±caklÄ±k (Â°C)</span><input type="number" step="0.1" value={temp} onChange={e=>setTemp(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/></label>
         <label className="flex items-center gap-2">
-          <span className="w-40 text-xs">Bilinç (AVPU)</span>
+          <span className="w-40 text-xs">BilinÃ§ (AVPU)</span>
           <select value={avpu} onChange={e=>setAvpu(e.target.value)} className="px-3 py-2 border rounded-lg w-full">
             <option value="A">A (Alert)</option>
             <option value="V">V (Voice)</option>
@@ -116,7 +116,7 @@ export default function NEWS2Page(){
       </div>
 
       <ToolShare params={params}/>
-      <p className="text-xs text-muted-foreground">Eğitim amaçlıdır; resmi NEWS2 tablolarıyla karşılaştırınız.</p>
+      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; resmi NEWS2 tablolarÄ±yla karÅŸÄ±laÅŸtÄ±rÄ±nÄ±z.</p>
     </div>
   );
 }

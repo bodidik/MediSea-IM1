@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 
@@ -20,10 +20,10 @@ export default function PremiumGate({
   return (
     <div className="rounded-2xl border p-4 bg-muted/40">
       <div className="text-sm font-medium">
-        Bu içerik {min === "P" ? "Premium" : min === "M" ? "Üye" : "Ziyaretçi"} ve üzeri planlarda erişilebilir.
+        Bu iÃ§erik {min === "P" ? "Premium" : min === "M" ? "Ãœye" : "ZiyaretÃ§i"} ve Ã¼zeri planlarda eriÅŸilebilir.
       </div>
       <div className="text-xs text-muted-foreground mt-1">
-        Planını yükselterek kilidi açabilirsin.
+        PlanÄ±nÄ± yÃ¼kselterek kilidi aÃ§abilirsin.
       </div>
     </div>
   );

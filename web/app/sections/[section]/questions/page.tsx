@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import { useParams, useSearchParams } from "next/navigation";
-import QuestionRun, { type Question } from "@/app/components/QuestionRun";
+import QuestionRun, { type Question } from "@/components/QuestionRun";
 
 type BackendResp =
   | {
@@ -27,7 +27,7 @@ export default function SectionQuestionsPage() {
     setLoading(true);
     setErr(null);
     try {
-      const planLevel = search.get("planLevel") || ""; // test amaçlı (?planLevel=P|M|V)
+      const planLevel = search.get("planLevel") || ""; // test amaÃ§lÄ± (?planLevel=P|M|V)
       const qs = new URLSearchParams({ module: section });
       if (planLevel) qs.set("planLevel", planLevel);
       const r = await fetch(`/api/questions?${qs.toString()}`, { cache: "no-store" });
@@ -47,17 +47,17 @@ export default function SectionQuestionsPage() {
   }, [section]);
 
   async function onNextBatch() {
-    // İstersek başka modülden öneri getirme akışını burada yaparız.
-    // Şimdilik sayfayı tazeliyoruz (kota uygunsa backend yeni set döndürür).
+    // Ä°stersek baÅŸka modÃ¼lden Ã¶neri getirme akÄ±ÅŸÄ±nÄ± burada yaparÄ±z.
+    // Åimdilik sayfayÄ± tazeliyoruz (kota uygunsa backend yeni set dÃ¶ndÃ¼rÃ¼r).
     await load();
   }
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl md:text-3xl font-bold">{section} — Sorular</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">{section} â€” Sorular</h1>
         <button onClick={load} className="px-3 py-2 rounded-lg border text-sm" disabled={loading}>
-          {loading ? "Yükleniyor…" : "Yenile"}
+          {loading ? "YÃ¼kleniyorâ€¦" : "Yenile"}
         </button>
       </div>
 
@@ -70,9 +70,9 @@ export default function SectionQuestionsPage() {
           <div className="rounded-2xl border p-4 text-sm flex flex-wrap gap-3 items-center">
             <div>Plan: <b>{(data as any).planLevel}</b></div>
             {"remaining" in data && typeof data.remaining === "number" && (
-              <div>Kalan günlük hak: <b>{data.remaining}</b></div>
+              <div>Kalan gÃ¼nlÃ¼k hak: <b>{data.remaining}</b></div>
             )}
-            <div>Gösterilen: <b>{data.visibleCount}</b></div>
+            <div>GÃ¶sterilen: <b>{data.visibleCount}</b></div>
             {"message" in data && data.message && (
               <div className="text-xs text-muted-foreground">({data.message})</div>
             )}

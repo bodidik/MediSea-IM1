@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect } from "react";
 
@@ -9,7 +9,7 @@ export default function LiteProtected({
   children: React.ReactNode;
   userId?: string;
 }) {
-  // sağ tık ve kopya önleme
+  // saÄŸ tÄ±k ve kopya Ã¶nleme
   useEffect(() => {
     const prevent = (e: Event) => e.preventDefault();
     document.addEventListener("contextmenu", prevent);
@@ -23,14 +23,14 @@ export default function LiteProtected({
   }, []);
 
   // watermark string
-  const mark = `MedKnowledge • ${userId || "guest"} • ${new Date().toLocaleDateString()}`;
+  const mark = `MedKnowledge â€¢ ${userId || "guest"} â€¢ ${new Date().toLocaleDateString()}`;
 
   return (
     <div className="relative select-none">
-      {/* Asıl içerik */}
+      {/* AsÄ±l iÃ§erik */}
       <div className="relative z-10">{children}</div>
 
-      {/* Şeffaf watermark overlay */}
+      {/* Åeffaf watermark overlay */}
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
         aria-hidden="true"
@@ -43,7 +43,7 @@ export default function LiteProtected({
               "repeating-linear-gradient(45deg, rgba(0,0,0,.15) 0 80px, transparent 80px 160px)",
           }}
         >
-          {/* yazıyı tekrar basmak için */}
+          {/* yazÄ±yÄ± tekrar basmak iÃ§in */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
             {mark}
           </div>

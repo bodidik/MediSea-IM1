@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
@@ -6,9 +6,9 @@ import ToolShare from "@/app/tools/components/ToolShare";
 /**
  * MELD-Na (2016)
  * MELD = 0.957*ln(Cr) + 0.378*ln(Bilirubin) + 1.120*ln(INR) + 0.643
- * MELD-Na = MELD + 1.59 * (135 - Na)      (Na clamp: 125–137)
- * ln için Cr/Tb/INR <1 ise 1’e yükseltilir.
- * Opsiyonlar: "Diyalizde" (Cr=4 kabul) ve "Cr tavanı=4.0 mg/dL".
+ * MELD-Na = MELD + 1.59 * (135 - Na)      (Na clamp: 125â€“137)
+ * ln iÃ§in Cr/Tb/INR <1 ise 1â€™e yÃ¼kseltilir.
+ * Opsiyonlar: "Diyalizde" (Cr=4 kabul) ve "Cr tavanÄ±=4.0 mg/dL".
  */
 
 function clamp(n:number, min:number, max:number){ return Math.max(min, Math.min(max, n)); }
@@ -68,7 +68,7 @@ export default function MeldNaPage(){
         </label>
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={capCreat4} onChange={()=>setCapCreat4(v=>!v)} />
-          Kreatinin tavanı: 4.0 mg/dL
+          Kreatinin tavanÄ±: 4.0 mg/dL
         </label>
       </div>
 
@@ -78,7 +78,7 @@ export default function MeldNaPage(){
       </div>
 
       <ToolShare params={params}/>
-      <p className="text-xs text-muted-foreground">Eğitim amaçlıdır; laboratuvar birimlerinizi ve protokolleri doğrulayın.</p>
+      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; laboratuvar birimlerinizi ve protokolleri doÄŸrulayÄ±n.</p>
     </div>
   );
 }

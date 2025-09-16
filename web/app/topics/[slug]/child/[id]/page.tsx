@@ -1,7 +1,7 @@
-// FILE: web/app/topics/[slug]/[child]/[id]/page.tsx
+﻿// FILE: web/app/topics/[slug]/[child]/[id]/page.tsx
 "use client";
 import React from "react";
-import Lock from "@/app/components/Lock";
+import Lock from "@/components/Lock";
 import Link from "next/link";
 
 type Resp = {
@@ -53,7 +53,7 @@ export default function ContentView({ params }: { params: { slug:string; child:s
         <div className="text-xl font-semibold">{data.minimal?.title}</div>
         <Lock min={min as any} />
         <div className="text-xs">
-          <Link href={`/topics/${encodeURIComponent(slug)}/${encodeURIComponent(child)}`} className="underline">← Listeye dön</Link>
+          <Link href={`/topics/${encodeURIComponent(slug)}/${encodeURIComponent(child)}`} className="underline">â† Listeye dÃ¶n</Link>
         </div>
       </div>
     );
@@ -63,7 +63,7 @@ export default function ContentView({ params }: { params: { slug:string; child:s
   return (
     <div className="p-4 md:p-8 max-w-3xl mx-auto space-y-4">
       <div className="text-xs">
-        <Link href={`/topics/${encodeURIComponent(slug)}/${encodeURIComponent(child)}`} className="underline">← Listeye dön</Link>
+        <Link href={`/topics/${encodeURIComponent(slug)}/${encodeURIComponent(child)}`} className="underline">â† Listeye dÃ¶n</Link>
       </div>
       <h1 className="text-2xl font-bold">{c.title}</h1>
 
@@ -85,7 +85,7 @@ export default function ContentView({ params }: { params: { slug:string; child:s
   );
 }
 
-/* Basit soru çalıştırıcı */
+/* Basit soru Ã§alÄ±ÅŸtÄ±rÄ±cÄ± */
 function QuestionRunner({ content }: { content: any }){
   const [picked, setPicked] = React.useState<string>("");
   const correct = content.answerKey as string | undefined;
@@ -109,16 +109,16 @@ function QuestionRunner({ content }: { content: any }){
         <div className="mt-2 text-sm">
           {picked===correct ? (
             <div className="text-green-700">
-              ✅ Doğru. {content.explanations?.[picked] || ""}
+              âœ… DoÄŸru. {content.explanations?.[picked] || ""}
               <div className="mt-2 flex gap-2">
-                <a href="/premium" className="underline">Açıklamayı detaylı gör</a>
-                <a href={`/topics/${encodeURIComponent(content.topicSlug||"")}/${encodeURIComponent(content.childKey||"")}`} className="underline">Yeni soruya geç</a>
+                <a href="/premium" className="underline">AÃ§Ä±klamayÄ± detaylÄ± gÃ¶r</a>
+                <a href={`/topics/${encodeURIComponent(content.topicSlug||"")}/${encodeURIComponent(content.childKey||"")}`} className="underline">Yeni soruya geÃ§</a>
               </div>
             </div>
           ) : (
             <div className="text-red-700">
-              ❌ Yanlış. {content.explanations?.[picked] || "Bu seçenek doğru değil."}
-              <div className="mt-2 text-xs opacity-70">İstersen diğer seçenekleri dene veya doğru cevabı gör.</div>
+              âŒ YanlÄ±ÅŸ. {content.explanations?.[picked] || "Bu seÃ§enek doÄŸru deÄŸil."}
+              <div className="mt-2 text-xs opacity-70">Ä°stersen diÄŸer seÃ§enekleri dene veya doÄŸru cevabÄ± gÃ¶r.</div>
             </div>
           )}
         </div>

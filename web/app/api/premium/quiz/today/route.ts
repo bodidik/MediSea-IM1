@@ -1,4 +1,4 @@
-// FILE: web/app/api/premium/quiz/today/route.ts
+﻿// FILE: web/app/api/premium/quiz/today/route.ts
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {

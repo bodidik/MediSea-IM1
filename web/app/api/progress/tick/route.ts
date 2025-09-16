@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+﻿import { NextRequest } from "next/server";
 export async function POST(req: NextRequest) {
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
   const cookies = req.headers.get("cookie") || "";

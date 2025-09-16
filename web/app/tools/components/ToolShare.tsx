@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 
@@ -30,7 +30,7 @@ export default function ToolShare({ params }: { params: KV }) {
       <button className="px-3 py-1 rounded-lg border" onClick={copy}>
         Linki Kopyala
       </button>
-      {copied && <span className="text-green-600">Kopyalandı</span>}
+      {copied && <span className="text-green-600">KopyalandÄ±</span>}
     </div>
   );
 }

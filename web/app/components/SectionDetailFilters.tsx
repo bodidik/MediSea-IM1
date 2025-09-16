@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 
 export type Item = { type: string; id: string; createdAt: string };
@@ -22,7 +22,7 @@ export default function SectionDetailFilters({ items, onChange }: { items: Item[
   return (
     <div className="rounded-2xl border p-3 flex flex-col md:flex-row md:items-end gap-3">
       <div className="flex-1">
-        <div className="text-xs mb-1">Tür</div>
+        <div className="text-xs mb-1">TÃ¼r</div>
         <div className="flex flex-wrap gap-2">
           {TYPES.map(t=> (
             <button key={t} onClick={()=>toggle(t)} className={`px-3 py-1 rounded-full border text-sm ${types.includes(t)?"bg-gray-900 text-white":""}`}>{t}</button>
@@ -31,11 +31,11 @@ export default function SectionDetailFilters({ items, onChange }: { items: Item[
       </div>
       <div className="grid grid-cols-2 gap-2">
         <div className="flex flex-col">
-          <label className="text-xs mb-1">Başlangıç</label>
+          <label className="text-xs mb-1">BaÅŸlangÄ±Ã§</label>
           <input type="date" value={from} onChange={e=>setFrom(e.target.value)} className="px-3 py-2 border rounded-lg" />
         </div>
         <div className="flex flex-col">
-          <label className="text-xs mb-1">Bitiş</label>
+          <label className="text-xs mb-1">BitiÅŸ</label>
           <input type="date" value={to} onChange={e=>setTo(e.target.value)} className="px-3 py-2 border rounded-lg" />
         </div>
       </div>

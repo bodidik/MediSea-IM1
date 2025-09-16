@@ -1,8 +1,8 @@
-// FILE: web/app/api/plan/set/route.ts
+﻿// FILE: web/app/api/plan/set/route.ts
 import { NextRequest } from "next/server";
 
 // POST body: { plan: "free" | "premium" | "pro" }
-// Alternatif: ?plan=premium şeklinde query de kabul edilir.
+// Alternatif: ?plan=premium ÅŸeklinde query de kabul edilir.
 export async function POST(req: NextRequest) {
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
 
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const json = await req.json().catch(() => null);
     if (json?.plan) plan = json.plan;
   } catch {
-    /* body yoksa sorun değil */
+    /* body yoksa sorun deÄŸil */
   }
 
   const url = new URL("/api/plan/set", backend);

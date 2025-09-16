@@ -1,4 +1,4 @@
-// FILE: web/app/api/review/next/route.ts
+﻿// FILE: web/app/api/review/next/route.ts
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 
   const inUrl = new URL(req.url);
   const backendUrl = new URL("/api/review/next", backend);
-  // proxy edilen query’ler
+  // proxy edilen queryâ€™ler
   for (const [k, v] of inUrl.searchParams.entries()) backendUrl.searchParams.set(k, v);
   backendUrl.searchParams.set("externalId", externalId);
 

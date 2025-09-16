@@ -1,4 +1,4 @@
-// FILE: web/app/api/admin/sections/audit/route.ts
+﻿// FILE: web/app/api/admin/sections/audit/route.ts
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {

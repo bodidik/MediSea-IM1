@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -12,7 +12,7 @@ const SECTION_OPTIONS = [
   "endokrinoloji",
   "kardiyoloji",
   "infeksiyon",
-  "göğüs",
+  "gÃ¶ÄŸÃ¼s",
 ];
 
 function buildQuery(base: URLSearchParams, patch: Record<string, string | number>) {
@@ -22,7 +22,7 @@ function buildQuery(base: URLSearchParams, patch: Record<string, string | number
     if (val) sp.set(k, val);
     else sp.delete(k);
   });
-  // her filtre değişiminde sayfayı 1’e al
+  // her filtre deÄŸiÅŸiminde sayfayÄ± 1â€™e al
   sp.set("page", "1");
   return sp.toString();
 }
@@ -55,8 +55,8 @@ export default function TopicsFilters(props: {
   }, [qLocal]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const totalHint = useMemo(() => {
-    if (!total) return "0 sonuç";
-    return `Toplam ${total} kayıt`;
+    if (!total) return "0 sonuÃ§";
+    return `Toplam ${total} kayÄ±t`;
   }, [total]);
 
   return (
@@ -86,7 +86,7 @@ export default function TopicsFilters(props: {
         name="section"
         defaultValue={section}
         className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
-        aria-label="Bölüm"
+        aria-label="BÃ¶lÃ¼m"
         onChange={(e) => {
           const qs = buildQuery(searchParams, { section: e.target.value });
           router.push(`${pathname}?${qs}`);
@@ -94,7 +94,7 @@ export default function TopicsFilters(props: {
       >
         {SECTION_OPTIONS.map((s) => (
           <option key={s || "all"} value={s}>
-            {s ? s : "Bölüm: Hepsi"}
+            {s ? s : "BÃ¶lÃ¼m: Hepsi"}
           </option>
         ))}
       </select>
@@ -103,7 +103,7 @@ export default function TopicsFilters(props: {
         name="q"
         value={qLocal}
         onChange={(e) => setQLocal(e.target.value)}
-        placeholder="Ara: behçet, kdigo, vaskülit…"
+        placeholder="Ara: behÃ§et, kdigo, vaskÃ¼litâ€¦"
         className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
         aria-label="Arama"
       />
@@ -122,18 +122,18 @@ export default function TopicsFilters(props: {
             router.push(`${pathname}?${qs.toString()}`);
           }}
         >
-          Sıfırla
+          SÄ±fÄ±rla
         </button>
 
         <div className="ml-auto flex items-center gap-3 text-xs text-gray-500">
           <span>{totalHint}</span>
-          <span className={isPending ? "animate-pulse" : ""}>{isPending ? "Filtreleniyor…" : ""}</span>
+          <span className={isPending ? "animate-pulse" : ""}>{isPending ? "Filtreleniyorâ€¦" : ""}</span>
         </div>
       </div>
 
-      {/* limit değişimi */}
+      {/* limit deÄŸiÅŸimi */}
       <div className="md:col-span-5 flex items-center gap-2">
-        <label className="text-xs text-gray-600">Sayfa başına:</label>
+        <label className="text-xs text-gray-600">Sayfa baÅŸÄ±na:</label>
         <select
           defaultValue={String(limit)}
           className="px-2 py-1 rounded-lg border text-xs"

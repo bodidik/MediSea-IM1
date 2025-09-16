@@ -1,9 +1,9 @@
-// Backend çıktısını (all/premium/totals) frontend'in beklediği rows yapısına çevirir.
+﻿// Backend Ã§Ä±ktÄ±sÄ±nÄ± (all/premium/totals) frontend'in beklediÄŸi rows yapÄ±sÄ±na Ã§evirir.
 
 export async function GET(_req: Request) {
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
 
-  // Asıl endpoint
+  // AsÄ±l endpoint
   const res = await fetch(`${backend}/api/sections/with-count`, { cache: "no-store" });
 
   if (!res.ok) {
@@ -15,7 +15,7 @@ export async function GET(_req: Request) {
 
   const data = await res.json();
 
-  // data.all → [{ section, count }]
+  // data.all â†’ [{ section, count }]
   const rows = Array.isArray(data?.all)
     ? data.all.map((it: any) => ({
         section: String(it.section || "-"),
@@ -32,7 +32,7 @@ export async function GET(_req: Request) {
     ok: true,
     rows,
     lastUpdatedISO: new Date().toISOString(),
-    // İstersen totals'ı da ileri kullanımlar için geçiriyoruz
+    // Ä°stersen totals'Ä± da ileri kullanÄ±mlar iÃ§in geÃ§iriyoruz
     _raw: { totals: data?.totals ?? null, premium: data?.premium ?? null },
   };
 

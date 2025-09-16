@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
 
 /**
  * SOFA (Sequential Organ Failure Assessment)
- * Parametreler: Solunum (P/F), Koagülasyon (Plt), Karaciğer (Bilirubin),
- * Kardiyovasküler (MAP/vasopressör), SSS (GKS), Renal (Kreatinin/diürez).
- * Basitleştirilmiş uygulamadır; kılavuzları doğrulayın.
+ * Parametreler: Solunum (P/F), KoagÃ¼lasyon (Plt), KaraciÄŸer (Bilirubin),
+ * KardiyovaskÃ¼ler (MAP/vasopressÃ¶r), SSS (GKS), Renal (Kreatinin/diÃ¼rez).
+ * BasitleÅŸtirilmiÅŸ uygulamadÄ±r; kÄ±lavuzlarÄ± doÄŸrulayÄ±n.
  */
 
 function round(n:number, dp=0){ return Math.round(n*Math.pow(10,dp))/Math.pow(10,dp); }
@@ -20,27 +20,27 @@ export default function SOFAPage(){
   const [pf, setPf] = React.useState<number>(parseFloat(s?.get("pf") || "400")); // PaO2/FiO2
   const [respSupport, setRespSupport] = React.useState<boolean>(s?.get("vent")==="1"); // ventilasyon/CPAP
 
-  // Koagülasyon
-  const [plt, setPlt] = React.useState<number>(parseFloat(s?.get("plt") || "200")); // 10^3/µL
+  // KoagÃ¼lasyon
+  const [plt, setPlt] = React.useState<number>(parseFloat(s?.get("plt") || "200")); // 10^3/ÂµL
 
-  // Karaciğer
+  // KaraciÄŸer
   const [bili, setBili] = React.useState<number>(parseFloat(s?.get("bili") || "1")); // mg/dL
 
-  // Kardiyovasküler
+  // KardiyovaskÃ¼ler
   const [map, setMap] = React.useState<number>(parseFloat(s?.get("map") || "75"));
   const [pressor, setPressor] = React.useState<string>(s?.get("press") || "none"); // none/dobu/dopa/epi/norepi
-  const [dose, setDose] = React.useState<number>(parseFloat(s?.get("dose") || "0")); // µg/kg/dk
+  const [dose, setDose] = React.useState<number>(parseFloat(s?.get("dose") || "0")); // Âµg/kg/dk
 
   // SSS (GKS)
   const [gcs, setGcs] = React.useState<number>(parseFloat(s?.get("gcs") || "15"));
 
   // Renal
   const [cr, setCr] = React.useState<number>(parseFloat(s?.get("cr") || "1.0")); // mg/dL
-  const [urine, setUrine] = React.useState<number>(parseFloat(s?.get("ur") || "1000")); // mL/gün
+  const [urine, setUrine] = React.useState<number>(parseFloat(s?.get("ur") || "1000")); // mL/gÃ¼n
 
   // --- Skorlamalar ---
   function scoreResp(){
-    // mg/dL değil; P/F oranı (PaO2/FiO2)
+    // mg/dL deÄŸil; P/F oranÄ± (PaO2/FiO2)
     if (pf >= 400) return 0;
     if (pf < 400 && pf >= 300) return 1;
     if (pf < 300 && pf >= 200) return 2;
@@ -96,7 +96,7 @@ export default function SOFAPage(){
   }
 
   function scoreRenal(){
-    // Cr mg/dL ve idrar çıkışı kriterleri
+    // Cr mg/dL ve idrar Ã§Ä±kÄ±ÅŸÄ± kriterleri
     if (cr < 1.2 && urine >= 500) return 0;
     if ((cr >= 1.2 && cr < 2.0) && urine >= 500) return 1;
     if ((cr >= 2.0 && cr < 3.5) && urine >= 500) return 2;
@@ -125,7 +125,7 @@ export default function SOFAPage(){
       <div className="rounded-2xl border p-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
         {/* Solunum */}
         <div className="rounded-xl border p-3 space-y-2">
-          <div className="font-semibold">Solunum (PaO₂/FiO₂)</div>
+          <div className="font-semibold">Solunum (PaOâ‚‚/FiOâ‚‚)</div>
           <label className="flex items-center gap-2">
             <span className="text-xs w-36">P/F</span>
             <input type="number" value={pf} onChange={e=>setPf(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/>
@@ -137,19 +137,19 @@ export default function SOFAPage(){
           <div className="text-xs text-gray-500">Skor: <b>{resp}</b></div>
         </div>
 
-        {/* Koagülasyon */}
+        {/* KoagÃ¼lasyon */}
         <div className="rounded-xl border p-3 space-y-2">
-          <div className="font-semibold">Koagülasyon</div>
+          <div className="font-semibold">KoagÃ¼lasyon</div>
           <label className="flex items-center gap-2">
-            <span className="text-xs w-36">Trombosit (×10³/µL)</span>
+            <span className="text-xs w-36">Trombosit (Ã—10Â³/ÂµL)</span>
             <input type="number" value={plt} onChange={e=>setPlt(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/>
           </label>
           <div className="text-xs text-gray-500">Skor: <b>{coag}</b></div>
         </div>
 
-        {/* Karaciğer */}
+        {/* KaraciÄŸer */}
         <div className="rounded-xl border p-3 space-y-2">
-          <div className="font-semibold">Karaciğer</div>
+          <div className="font-semibold">KaraciÄŸer</div>
           <label className="flex items-center gap-2">
             <span className="text-xs w-36">Bilirubin (mg/dL)</span>
             <input type="number" step="0.1" value={bili} onChange={e=>setBili(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/>
@@ -157,16 +157,16 @@ export default function SOFAPage(){
           <div className="text-xs text-gray-500">Skor: <b>{liv}</b></div>
         </div>
 
-        {/* Kardiyovasküler */}
+        {/* KardiyovaskÃ¼ler */}
         <div className="rounded-xl border p-3 space-y-2">
-          <div className="font-semibold">Kardiyovasküler</div>
+          <div className="font-semibold">KardiyovaskÃ¼ler</div>
           <label className="flex items-center gap-2">
             <span className="text-xs w-36">MAP (mmHg)</span>
             <input type="number" value={map} onChange={e=>setMap(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/>
           </label>
           <div className="grid grid-cols-2 gap-2">
             <label className="flex items-center gap-2">
-              <span className="text-xs w-24">Vazopresör</span>
+              <span className="text-xs w-24">VazopresÃ¶r</span>
               <select value={pressor} onChange={e=>setPressor(e.target.value)} className="px-3 py-2 border rounded-lg w-full">
                 <option value="none">Yok</option>
                 <option value="dobu">Dobutamin</option>
@@ -176,7 +176,7 @@ export default function SOFAPage(){
               </select>
             </label>
             <label className="flex items-center gap-2">
-              <span className="text-xs w-24">Doz (µg/kg/dk)</span>
+              <span className="text-xs w-24">Doz (Âµg/kg/dk)</span>
               <input type="number" step="0.01" value={dose} onChange={e=>setDose(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/>
             </label>
           </div>
@@ -187,7 +187,7 @@ export default function SOFAPage(){
         <div className="rounded-xl border p-3 space-y-2">
           <div className="font-semibold">SSS (GKS)</div>
           <label className="flex items-center gap-2">
-            <span className="text-xs w-36">GKS (3–15)</span>
+            <span className="text-xs w-36">GKS (3â€“15)</span>
             <input type="number" value={gcs} onChange={e=>setGcs(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full" />
           </label>
           <div className="text-xs text-gray-500">Skor: <b>{scoreCNS()}</b></div>
@@ -202,7 +202,7 @@ export default function SOFAPage(){
               <input type="number" step="0.1" value={cr} onChange={e=>setCr(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/>
             </label>
             <label className="flex items-center gap-2">
-              <span className="text-xs w-24">Diürez (mL/gün)</span>
+              <span className="text-xs w-24">DiÃ¼rez (mL/gÃ¼n)</span>
               <input type="number" value={urine} onChange={e=>setUrine(parseFloat(e.target.value||"0"))} className="px-3 py-2 border rounded-lg w-full"/>
             </label>
           </div>
@@ -216,7 +216,7 @@ export default function SOFAPage(){
       </div>
 
       <ToolShare params={params}/>
-      <p className="text-xs text-muted-foreground">Eğitim amaçlıdır; resmi tablolarla doğrulayın.</p>
+      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; resmi tablolarla doÄŸrulayÄ±n.</p>
     </div>
   );
 }

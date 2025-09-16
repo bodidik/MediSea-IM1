@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useState } from "react";
 
 export default function GuidelinesPage() {
@@ -14,11 +14,11 @@ export default function GuidelinesPage() {
 
   return (
     <div className="max-w-6xl mx-auto p-4 md:p-8 space-y-6">
-      <h1 className="text-2xl md:text-3xl font-bold">Kılavuzlar</h1>
+      <h1 className="text-2xl md:text-3xl font-bold">KÄ±lavuzlar</h1>
       {loading ? (
-        <div>Yükleniyor...</div>
+        <div>YÃ¼kleniyor...</div>
       ) : list.length === 0 ? (
-        <div>Henüz kayıt yok</div>
+        <div>HenÃ¼z kayÄ±t yok</div>
       ) : (
         <ul className="divide-y rounded-2xl border">
           {list.map(g => (
@@ -26,7 +26,7 @@ export default function GuidelinesPage() {
               <span>
                 {g.title} ({g.org}, {g.year}, {g.lang})
               </span>
-              {g.url && <a href={g.url} target="_blank" className="underline">Aç</a>}
+              {g.url && <a href={g.url} target="_blank" className="underline">AÃ§</a>}
             </li>
           ))}
         </ul>

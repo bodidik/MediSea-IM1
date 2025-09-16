@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 
 import React from "react";
-import ProtectedContent from "@/app/components/ProtectedContent";
-import LiteProtected from "@/app/components/LiteProtected";
+import ProtectedContent from "@/components/ProtectedContent";
+import LiteProtected from "@/components/LiteProtected";
 
 /**
- * Soru gövdesini görüntüler.
- * - Premium: DOM'a metin düşmeden canvas'a çizilir (ProtectedContent)
- * - Diğerleri: LiteProtected ile (sağ tık/kopya kapalı + şeffaf watermark overlay)
+ * Soru gÃ¶vdesini gÃ¶rÃ¼ntÃ¼ler.
+ * - Premium: DOM'a metin dÃ¼ÅŸmeden canvas'a Ã§izilir (ProtectedContent)
+ * - DiÄŸerleri: LiteProtected ile (saÄŸ tÄ±k/kopya kapalÄ± + ÅŸeffaf watermark overlay)
  */
 export default function QuestionView({
   premium,
@@ -33,7 +33,7 @@ export default function QuestionView({
         {vignette ? (
           <div className="mt-1 rounded-lg bg-gray-50 p-3 text-[13px] text-gray-700">
             <div className="font-medium mb-1">Vaka</div>
-            {/* İstersek vignette'i de protected chunk'a taşıyabiliriz; şimdilik düz metin. */}
+            {/* Ä°stersek vignette'i de protected chunk'a taÅŸÄ±yabiliriz; ÅŸimdilik dÃ¼z metin. */}
             <div className="whitespace-pre-wrap">{vignette}</div>
           </div>
         ) : null}
@@ -41,11 +41,11 @@ export default function QuestionView({
     );
   }
 
-  // Premium değilse: hafif koruma + watermark overlay
+  // Premium deÄŸilse: hafif koruma + watermark overlay
   return (
     <LiteProtected userId={userId}>
       <div className="whitespace-pre-wrap text-[15px] leading-relaxed">
-        {stem || "Soru metni bulunamadı."}
+        {stem || "Soru metni bulunamadÄ±."}
       </div>
       {vignette && (
         <div className="mt-3 rounded-lg bg-gray-50 p-3 text-[13px] text-gray-700">

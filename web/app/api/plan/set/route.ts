@@ -1,4 +1,4 @@
-// FILE: web/app/api/plan/set/route.ts
+﻿// FILE: web/app/api/plan/set/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
   }
   const plan = (urlPlan || bodyPlan || "free").toLowerCase();
 
-  // backend’e proxy: /api/plan/set
+  // backendâ€™e proxy: /api/plan/set
   const url = new URL("/api/plan/set", backend);
   url.searchParams.set("externalId", externalId);
   url.searchParams.set("plan", plan);
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
   const r = await fetch(url.toString(), { method: "POST" });
   const j = await r.json();
 
-  // Frontend çerezini senkron tut
+  // Frontend Ã§erezini senkron tut
   const res = NextResponse.json(j, { status: r.status });
   const cookieVal = plan === "premium" || plan === "pro" ? "P" : "V"; // V=visitor/basic
   res.cookies.set({
