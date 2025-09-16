@@ -78,10 +78,22 @@ app.use("/api/guidelines", guidelinesRoutes);
 app.use("/api/admin/topics", topicAdminRoutes);
 
 /* --- Healthcheck --- */
+// Basit sağlık ucu (CI/Docker healthcheck için)
+app.get("/health", (_req, res) => {
+  const dbState = mongoose.connection?.readyState; // 0=disconnected,1=connected,2=connecting,3=disconnecting
+  res.status(200).json({
+    status: "ok",
+    dbState,
+    uptime: process.uptime(),
+  });
+});
+
+// Kök rota (opsiyonel bilgi)
 app.get("/", (_req, res) => res.send("Medknowledge API running..."));
 
 /* --- Start --- */
 const PORT = Number(process.env.PORT || 4000);
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`[BOOT] Server running on http://0.0.0.0:${PORT}`);
+const HOST = process.env.HOST || "0.0.0.0"; // Docker için önemli
+app.listen(PORT, HOST, () => {
+  console.log(`[BOOT] Server running on http://${HOST}:${PORT}`);
 });
