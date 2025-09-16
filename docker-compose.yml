@@ -1,0 +1,36 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: mk_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./server        # ← ÖNEMLİ: sadece server klasörü context
+      dockerfile: Dockerfile
+    container_name: mk_api
+    env_file:
+      - ./server/.env.docker
+    environment:
+      - PORT=4000
+      - HOST=0.0.0.0
+      - MONGODB_URI=mongodb://mongo:27017/medknowledge
+      - VIDEO_ALLOWED_ORIGINS=http://localhost:3000
+    ports:
+      - "4000:4000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  mongo_data:

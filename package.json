@@ -1,0 +1,16 @@
+{
+  "name": "medknowledge-root",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev:server": "cd server && npm run dev",
+    "dev:web": "cd web && npm run dev",
+    "dev:all": "concurrently \"npm run dev:server\" \"npm run dev:web\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "sharp": "^0.34.3"
+  }
+}

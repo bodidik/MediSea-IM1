@@ -1,0 +1,18 @@
+{
+  "upsert": true,
+  "items": [
+    {
+      "title": "Glomerülonefritlere Genel Bakış",
+      "slug": "glomerulonefritler-genel-bakis",
+      "section": "nefroloji",
+      "content": "Glomerüler inflamasyonun sınıflaması, patofizyolojiye giriş ve tanısal yaklaşım.",
+      "subtopics": [
+        { "title": "Patogenez ve İmmün Mekanizmalar", "slug": "patogenez-immün-mekanizmalar", "content": "İmmün kompleks, kompleman, pauci-immün paternler." },
+        { "title": "Klinik Sunum ve Temel İdrar Bulguları", "slug": "klinik-sunum-idrar-bulgulari", "content": "Hematüri, proteinüri, nefritik-nefrotik spektrum." },
+        { "title": "Biyopsi Endikasyonları", "slug": "biyopsi-endikasyonlari", "content": "Nefrotik proteinüri, hızlı progresyon, etiyoloji belirsizliği." }
+      ],
+      "relatedTopics": ["membranoz-nefropati", "iga-nefropatisi"],
+      "references": ["Harrison 21e", "KDIGO 2021 Glomerular Diseases"]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "medknowledge-server",
+  "version": "0.1.1",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "mongoose": "^7.8.7",
+    "morgan": "^1.10.1"
+  }
+}
