@@ -1,4 +1,3 @@
-import Link from "next/link";
 'use client';
 
 export default function UpgradeCTA() {
@@ -16,7 +15,8 @@ export default function UpgradeCTA() {
       <div style={{ opacity: 0.8 }}>
         Bu bölümdeki detaylar Premium üyeler için. Yükselterek tüm ders notlarına ve derin açıklamalara erişin.
       </div>
-      <Link href="/premium/upgrade"
+      <a
+        href="/premium/upgrade"
         style={{
           display: 'inline-block',
           marginTop: 10,
@@ -27,8 +27,7 @@ export default function UpgradeCTA() {
         }}
       >
         Premium’a geç
-      </Link>
+      </a>
     </div>
   );
 }
-

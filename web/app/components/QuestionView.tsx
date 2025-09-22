@@ -1,58 +1,91 @@
 ﻿"use client";
 
-import React from "react";
+import * as React from "react";
 import ProtectedContent from "@/components/ProtectedContent";
-import LiteProtected from "@/components/LiteProtected";
+import AddToSRButton from "@/components/AddToSRButton";
+import type { Question } from "@/types/question";
 
-/**
- * Soru gÃ¶vdesini gÃ¶rÃ¼ntÃ¼ler.
- * - Premium: DOM'a metin dÃ¼ÅŸmeden canvas'a Ã§izilir (ProtectedContent)
- * - DiÄŸerleri: LiteProtected ile (saÄŸ tÄ±k/kopya kapalÄ± + ÅŸeffaf watermark overlay)
- */
+type Props = {
+  question: Question;
+  chunkId?: string;           // render edilen parça id'si (UI attribute olarak işaretlenecek)
+  isPremiumAllowed?: boolean; // premium/payload erişimi
+  className?: string;
+};
+
 export default function QuestionView({
-  premium,
+  question,
   chunkId,
-  stem,
-  vignette,
-}: {
-  premium?: boolean;
-  chunkId?: string; // genelde question._id
-  stem?: string;
-  vignette?: string;
-}) {
-  const userId = React.useMemo(() => {
-    if (typeof document === "undefined") return "guest";
-    const m = document.cookie.match(/(?:^|; )mk_uid=([^;]+)/);
-    return m?.[1] || "guest";
-  }, []);
+  isPremiumAllowed = true,
+  className = "",
+}: Props) {
+  const {
+    id,
+    contentId,
+    stem,
+    options = [],
+    answer,
+    explanation,
+    vignette,
+  } = question;
 
-  if (premium) {
-    return (
-      <div className="space-y-3">
-        <ProtectedContent chunkId={chunkId || "unknown"} />
-        {vignette ? (
-          <div className="mt-1 rounded-lg bg-gray-50 p-3 text-[13px] text-gray-700">
-            <div className="font-medium mb-1">Vaka</div>
-            {/* Ä°stersek vignette'i de protected chunk'a taÅŸÄ±yabiliriz; ÅŸimdilik dÃ¼z metin. */}
-            <div className="whitespace-pre-wrap">{vignette}</div>
-          </div>
-        ) : null}
-      </div>
-    );
-  }
-
-  // Premium deÄŸilse: hafif koruma + watermark overlay
   return (
-    <LiteProtected userId={userId}>
-      <div className="whitespace-pre-wrap text-[15px] leading-relaxed">
-        {stem || "Soru metni bulunamadÄ±."}
-      </div>
-      {vignette && (
-        <div className="mt-3 rounded-lg bg-gray-50 p-3 text-[13px] text-gray-700">
+    <div className={`space-y-4 ${className}`}>
+      {/* (1) Protected alan—sadece erişim kontrolü */}
+      <ProtectedContent isAllowed={isPremiumAllowed}>
+        {/* chunkId artık prop değil; UI attribute olarak işaretleniyor */}
+        <div data-chunk={chunkId ?? "unknown"} />
+      </ProtectedContent>
+
+      {/* (2) Vaka (varsa) */}
+      {vignette ? (
+        <div className="mt-1 rounded-lg bg-gray-50 p-3 text-[13px] text-gray-700">
           <div className="font-medium mb-1">Vaka</div>
           <div className="whitespace-pre-wrap">{vignette}</div>
         </div>
+      ) : null}
+
+      {/* (3) Soru kökü */}
+      <div className="text-base leading-relaxed whitespace-pre-wrap">{stem}</div>
+
+      {/* (4) Şıklar */}
+      {options.length > 0 && (
+        <ul className="grid gap-2">
+          {options.map((opt) => (
+            <li
+              key={opt.key}
+              className="rounded-lg border p-3 text-[14px] leading-snug"
+            >
+              <span className="font-medium mr-2">{opt.key}.</span>
+              <span>{opt.text}</span>
+            </li>
+          ))}
+        </ul>
       )}
-    </LiteProtected>
+
+      {/* (5) Doğru cevap / açıklama */}
+      {(answer || explanation) && (
+        <div className="rounded-xl border p-3 space-y-2">
+          {answer && (
+            <div className="text-sm">
+              Doğru cevap: <b>{answer}</b>
+            </div>
+          )}
+          {explanation && (
+            <div className="text-[13px] text-gray-700 whitespace-pre-wrap">
+              {explanation}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* (6) SR butonu */}
+      <div className="pt-1">
+        <AddToSRButton
+          contentId={contentId ?? id}
+          label="SR'ye ekle"
+          className="px-3 py-1 rounded border text-sm"
+        />
+      </div>
+    </div>
   );
 }

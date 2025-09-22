@@ -1,5 +1,4 @@
-import Link from "next/link";
-// FILE: web/app/topics/page.tsx
+﻿// FILE: web/app/topics/page.tsx
 export const dynamic = "force-dynamic";
 
 type TopicLite = {
@@ -83,9 +82,9 @@ export default async function TopicsIndex({
     <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6">
       <div className="flex items-center justify-between gap-3">
         <h1 className="text-2xl md:text-3xl font-bold">Konular</h1>
-        <Link href="/guidelines" className="text-sm underline opacity-80 hover:opacity-100">
+        <a href="/guidelines" className="text-sm underline opacity-80 hover:opacity-100">
           KÄ±lavuzlar â†’
-        </Link>
+        </a>
       </div>
 
       {/* Filtreler */}
@@ -118,9 +117,9 @@ export default async function TopicsIndex({
 
         <div className="md:col-span-5 flex items-center gap-3">
           <button className="px-3 py-2 rounded-lg border text-sm">Uygula</button>
-          <Link href="/topics" className="text-sm underline opacity-70 hover:opacity-100">
+          <a href="/topics" className="text-sm underline opacity-70 hover:opacity-100">
             SÄ±fÄ±rla
-          </Link>
+          </a>
 
           <div className="ml-auto flex items-center gap-3 text-xs text-gray-500">
             {typeof total === "number" ? <span>Toplam {total} kayÄ±t</span> : <span>{items.length} sonuÃ§</span>}
@@ -205,4 +204,3 @@ export default async function TopicsIndex({
     </div>
   );
 }
-

@@ -4,8 +4,8 @@ import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
 
 /**
- * HAS-BLED (kanama riski) â€” Ã¶rnek/ÅŸablon.
- * Maddeler ve yorumlama klinik uygulamaya geÃ§meden doÄŸrulanmalÄ±dÄ±r.
+ * HAS-BLED (kanama riski) — örnek/şablon.
+ * Maddeler ve yorumlama klinik uygulamaya geçmeden doğrulanmalıdır.
  */
 
 type Item = { key: keyof State; label: string; pts: number };
@@ -24,13 +24,13 @@ type State = {
 
 const ITEMS: Item[] = [
   { key: "htn",        label: "Hipertansiyon (SBP >160)", pts: 1 },
-  { key: "abnRenal",   label: "BÃ¶brek fonksiyon bozukluÄŸu", pts: 1 },
-  { key: "abnLiver",   label: "KaraciÄŸer fonksiyon bozukluÄŸu", pts: 1 },
-  { key: "stroke",     label: "GeÃ§irilmiÅŸ inme", pts: 1 },
-  { key: "bleed",      label: "Kanama Ã¶ykÃ¼sÃ¼/riski", pts: 1 },
+  { key: "abnRenal",   label: "Böbrek fonksiyon bozukluğu", pts: 1 },
+  { key: "abnLiver",   label: "Karaciğer fonksiyon bozukluğu", pts: 1 },
+  { key: "stroke",     label: "Geçirilmiş inme", pts: 1 },
+  { key: "bleed",      label: "Kanama öyküsü/riski", pts: 1 },
   { key: "labileINR",  label: "Labile INR", pts: 1 },
-  { key: "elderly65",  label: "YaÅŸ > 65", pts: 1 },
-  { key: "drugs",      label: "Ä°laÃ§lar (antiplatelet/NSAID)", pts: 1 },
+  { key: "elderly65",  label: "Yaş > 65", pts: 1 },
+  { key: "drugs",      label: "İlaçlar (antiplatelet/NSAID)", pts: 1 },
   { key: "alcohol",    label: "Alkol", pts: 1 },
 ];
 
@@ -39,18 +39,19 @@ function readBool(param: string | null) {
 }
 
 export default function HasBledPage() {
-  const search = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+  const search =
+    typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
 
   const [state, setState] = React.useState<State>({
-    htn: readBool(search?.get("htn")),
-    abnRenal: readBool(search?.get("renal")),
-    abnLiver: readBool(search?.get("liver")),
-    stroke: readBool(search?.get("stroke")),
-    bleed: readBool(search?.get("bleed")),
-    labileINR: readBool(search?.get("inr")),
-    elderly65: readBool(search?.get("elderly")),
-    drugs: readBool(search?.get("drugs")),
-    alcohol: readBool(search?.get("alcohol")),
+    htn: readBool(search?.get("htn") || null),
+    abnRenal: readBool(search?.get("renal") || null),
+    abnLiver: readBool(search?.get("liver") || null),
+    stroke: readBool(search?.get("stroke") || null),
+    bleed: readBool(search?.get("bleed") || null),
+    labileINR: readBool(search?.get("inr") || null),
+    elderly65: readBool(search?.get("elderly") || null),
+    drugs: readBool(search?.get("drugs") || null),
+    alcohol: readBool(search?.get("alcohol") || null),
   });
 
   function toggle(k: keyof State) {
@@ -59,10 +60,10 @@ export default function HasBledPage() {
 
   const score = ITEMS.reduce((sum, it) => sum + (state[it.key] ? it.pts : 0), 0);
 
-  let comment = "â€”";
-  if (score >= 3) comment = "YÃ¼ksek kanama riski; yakÄ±ndan izlem ve dÃ¼zeltilebilir riskleri iyileÅŸtirme.";
+  let comment = "—";
+  if (score >= 3) comment = "Yüksek kanama riski; yakından izlem ve düzeltilebilir riskleri iyileştirme.";
   else if (score === 2) comment = "Orta risk; dikkatli takip.";
-  else comment = "DÃ¼ÅŸÃ¼k risk.";
+  else comment = "Düşük risk.";
 
   const shareParams = {
     htn: state.htn ? 1 : "",
@@ -84,7 +85,11 @@ export default function HasBledPage() {
         {ITEMS.map((it) => (
           <label key={it.key} className="flex items-center justify-between py-1">
             <span className="flex items-center gap-2">
-              <input type="checkbox" checked={state[it.key]} onChange={() => toggle(it.key)} />
+              <input
+                type="checkbox"
+                checked={state[it.key]}
+                onChange={() => toggle(it.key)}
+              />
               {it.label}
             </span>
             <span className="text-xs text-gray-500">+{it.pts}</span>
@@ -99,7 +104,9 @@ export default function HasBledPage() {
       </div>
 
       <ToolShare params={shareParams} />
-      <p className="text-xs text-muted-foreground">EÄŸitim amaÃ§lÄ±dÄ±r; kÄ±lavuzlarÄ± doÄŸrulayÄ±n.</p>
+      <p className="text-xs text-muted-foreground">
+        Eğitim amaçlıdır; kılavuzları doğrulayın.
+      </p>
     </div>
   );
 }

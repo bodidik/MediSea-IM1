@@ -1,4 +1,3 @@
-import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 import { cookies } from "next/headers";
@@ -121,9 +120,9 @@ export default async function TopicPage({ params }: { params: { slug: string } }
                   <div className="text-sm text-gray-600 mt-3">
                     Bu bölüm {blk.visibility === "M" ? "üyeler" : "premium"} için.
                     {plan !== "P" && (
-                      <Link href="/premium" className="ml-2 underline">
+                      <a className="ml-2 underline" href="/premium">
                         Yükselt
-                      </Link>
+                      </a>
                     )}
                   </div>
                 )}
@@ -203,11 +202,12 @@ export default async function TopicPage({ params }: { params: { slug: string } }
               <p className="text-sm text-gray-600 mt-1">
                 Geniş soru bankası, vaka atölyeleri ve özelleştirilmiş çalışma planları.
               </p>
-              <Link href="/premium"
+              <a
+                href="/premium"
                 className="inline-block mt-3 text-sm px-3 py-2 rounded-lg border hover:shadow-sm"
               >
                 Paketleri Gör
-              </Link>
+              </a>
             </div>
           </div>
         </aside>
@@ -215,4 +215,3 @@ export default async function TopicPage({ params }: { params: { slug: string } }
     </div>
   );
 }
-

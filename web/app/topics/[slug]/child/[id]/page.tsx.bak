@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import LockComp from "@/components/Lock"; // default export
@@ -134,7 +134,7 @@ function QuestionRunner({ content }: { content: any }) {
             <div className="text-green-700">
               ✅ Doğru. {content.explanations?.[picked] || ""}
               <div className="mt-2 flex gap-2">
-                <Link href="/premium" className="underline">Açıklamayı detaylı gör</Link>
+                <a href="/premium" className="underline">Açıklamayı detaylı gör</a>
                 <a
                   href={`/topics/${encodeURIComponent(content.topicSlug || "")}/${encodeURIComponent(
                     content.childKey || ""
@@ -156,4 +156,3 @@ function QuestionRunner({ content }: { content: any }) {
     </div>
   );
 }
-

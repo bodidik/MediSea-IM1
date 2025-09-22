@@ -16,14 +16,25 @@ type CountsResponse = {
   };
   user: {
     solved: number;
-    accuracy: number;        // 0â€“100 beklenir (compat controller Ã¶yle dÃ¶ndÃ¼rÃ¼yor)
+    accuracy: number;        // 0–100
     streakDays: number;
-    rankPercentile: number;  // 0â€“100
+    rankPercentile: number;  // 0–100
     todaySolved: number;
-    plan?: PlanType;         // "free" | "premium" | "pro"
+    plan?: PlanType;         // "free" | "member" | "premium" | "pro"
   };
   lastUpdatedISO: string;
 };
+
+// RequirePlan / Premium* bileşenlerinin beklediği rol harfleri
+type Role = "V" | "M" | "P";
+
+// "free" | "member" | "premium" | "pro" -> "V" | "M" | "P"
+function toRole(plan: string | undefined): Role {
+  const p = (plan ?? "").toLowerCase();
+  if (p === "premium" || p === "p" || p === "pro") return "P";
+  if (p === "member" || p === "m") return "M";
+  return "V";
+}
 
 export default function ProfilePage() {
   const [data, setData] = useState<CountsResponse | null>(null);
@@ -50,7 +61,11 @@ export default function ProfilePage() {
     };
   }, []);
 
-  const plan: PlanType = (data?.user.plan ?? "free") as PlanType;
+  // Badge gibi kullanıcıya dönük yerlerde orijinal plan metni:
+  const plan = (data?.user.plan ?? "free") as PlanType;
+  // Kapı/koruma bileşenleri için normalize edilmiş rol:
+  const role = toRole(plan);
+
   const updated = data?.lastUpdatedISO
     ? new Date(data.lastUpdatedISO).toLocaleString("tr-TR")
     : "";
@@ -62,7 +77,7 @@ export default function ProfilePage() {
           <h1 className="text-2xl md:text-3xl font-bold">Profil</h1>
           {updated && (
             <div className="text-xs text-muted-foreground mt-1">
-              GÃ¼ncellendi: {updated}
+              Güncellendi: {updated}
             </div>
           )}
         </div>
@@ -73,29 +88,29 @@ export default function ProfilePage() {
         <div className="rounded-xl border p-3 text-sm text-red-600">{err}</div>
       )}
 
-      {/* Free kullanÄ±cÄ±lar iÃ§in hÄ±zlÄ± yÃ¼kseltme kartÄ± */}
+      {/* Free kullanıcılar için hızlı yükseltme kartı */}
       {plan === "free" && <UpgradeCard />}
 
-      {/* KullanÄ±cÄ± Ã¶zet metrikleri */}
+      {/* Kullanıcı özet metrikleri */}
       <div className="rounded-2xl border p-4">
         {loading || !data ? (
           <div className="h-24 bg-gray-100 rounded" />
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
             <div>
-              Ã‡Ã¶zÃ¼len: <b>{data.user.solved}</b>
+              Çözülen: <b>{data.user.solved}</b>
             </div>
             <div>
-              DoÄŸruluk: <b>%{Math.round(data.user.accuracy ?? 0)}</b>
+              Doğruluk: <b>%{Math.round(data.user.accuracy ?? 0)}</b>
             </div>
             <div>
               Streak: <b>{data.user.streakDays}</b>
             </div>
             <div>
-              BugÃ¼n: <b>{data.user.todaySolved}</b>
+              Bugün: <b>{data.user.todaySolved}</b>
             </div>
             <div>
-              Ãœst %: <b>%{Math.round(data.user.rankPercentile ?? 0)}</b>
+              Üst %: <b>%{Math.round(data.user.rankPercentile ?? 0)}</b>
             </div>
             <div>
               Plan: <b>{(plan || "free").toUpperCase()}</b>
@@ -104,12 +119,12 @@ export default function ProfilePage() {
         )}
       </div>
 
-      {/* Premium Ã¶zet alanÄ± (kart iÃ§ine kilitli) */}
-      <RequirePlan plan={plan} min="premium">
+      {/* Premium özet alanı (kart içine kilitli) */}
+      <RequirePlan plan={role} min="P">
         <div className="rounded-2xl border p-4 space-y-2">
-          <div className="font-semibold">Premium Ã–zeti</div>
+          <div className="font-semibold">Premium Özeti</div>
           <div className="text-sm text-muted-foreground">
-            Son Ã§alÄ±ÅŸmalarÄ±na gÃ¶re kiÅŸiselleÅŸtirilmiÅŸ Ã¶neriler burada gÃ¶rÃ¼necek.
+            Son çalışmalarına göre kişiselleştirilmiş öneriler burada görünecek.
           </div>
         </div>
       </RequirePlan>

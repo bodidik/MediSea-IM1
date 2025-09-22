@@ -1,16 +1,38 @@
-﻿ FILE webappcomponentsNavCard.tsx
-import Link from nextlink;
+﻿import Link from "next/link";
+import * as React from "react";
+
+type Props = {
+  href: string;
+  title: string;
+  description?: string;
+  badge?: React.ReactNode;
+  className?: string;
+  children?: React.ReactNode;
+};
 
 export default function NavCard({
-  href, title, desc, badge,
-} { href string; title string; desc string; badge string; }){
+  href,
+  title,
+  description,
+  badge,
+  className = "",
+  children,
+}: Props) {
   return (
-    Link href={href} className=rounded-2xl border p-5 hovershadow-sm transition flex flex-col gap-2
-      div className=flex items-center justify-between
-        h3 className=text-lg font-semibold{title}h3
-        {badge && span className=text-xs px-2 py-1 rounded-full border{badge}span}
-      div
-      p className=text-sm text-gray-600{desc}p
-    Link
+    <Link
+      href={href}
+      className={
+        "block rounded-2xl border p-4 hover:shadow-sm transition-shadow " + className
+      }
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="text-lg font-semibold">{title}</div>
+        {badge ? <div className="text-xs px-2 py-0.5 rounded bg-gray-100">{badge}</div> : null}
+      </div>
+      {description && (
+        <p className="mt-1 text-sm text-neutral-600">{description}</p>
+      )}
+      {children}
+    </Link>
   );
 }

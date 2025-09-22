@@ -1,5 +1,4 @@
-import Link from "next/link";
-export const dynamic = "force-dynamic";
+﻿export const dynamic = "force-dynamic";
 
 type TopicLite = {
   slug: string;
@@ -117,9 +116,9 @@ export default async function Home() {
                   {s}
                 </a>
               ))}
-              <Link href="/topics" className="text-xs px-3 py-1.5 rounded-full border">
+              <a href="/topics" className="text-xs px-3 py-1.5 rounded-full border">
                 TÃ¼mÃ¼ â†’
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -153,14 +152,14 @@ export default async function Home() {
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-xl md:text-2xl font-semibold">Ã–ne Ã‡Ä±kan Konular</h2>
-          <Link href="/topics" className="text-sm underline">
+          <a className="text-sm underline" href="/topics">
             TÃ¼m Konular â†’
-          </Link>
+          </a>
         </div>
 
         {!topics.length ? (
           <div className="rounded-2xl border p-4 bg-white text-sm text-gray-500">
-            HenÃ¼z konu verisi bulunamadÄ±. <Link href="/topics" className="underline">Konular</Link>{" "}
+            HenÃ¼z konu verisi bulunamadÄ±. <a className="underline" href="/topics">Konular</a>{" "}
             sayfasÄ±ndan arama yapabilirsiniz.
           </div>
         ) : (
@@ -194,9 +193,9 @@ export default async function Home() {
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-xl md:text-2xl font-semibold">KÄ±lavuzlar</h2>
-          <Link href="/guidelines" className="text-sm underline">
+          <a className="text-sm underline" href="/guidelines">
             TÃ¼mÃ¼ â†’
-          </Link>
+          </a>
         </div>
         {!guidelines.length ? (
           <div className="rounded-2xl border p-4 bg-white text-sm text-gray-500">
@@ -227,7 +226,8 @@ export default async function Home() {
 
       {/* HÄ±zlÄ± KÄ±sayollar */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <Link href="/tools"
+        <a
+          href="/tools"
           className="rounded-2xl border p-5 bg-white hover:shadow-sm transition block"
         >
           <div className="text-lg font-semibold">HesaplayÄ±cÄ±lar</div>
@@ -235,9 +235,10 @@ export default async function Home() {
             qSOFA, Wells, TIMI, SLEDAI-2K, KDIGO vb. hÄ±zlÄ± araÃ§lar.
           </p>
           <div className="text-sm underline mt-2">GÃ¶z at â†’</div>
-        </Link>
+        </a>
 
-        <Link href="/topics?section=nefroloji"
+        <a
+          href="/topics?section=nefroloji"
           className="rounded-2xl border p-5 bg-white hover:shadow-sm transition block"
         >
           <div className="text-lg font-semibold">Nefroloji</div>
@@ -245,9 +246,10 @@ export default async function Home() {
             GlomerÃ¼lonefritler, AKI, CKD, elektrolit bozukluklarÄ±â€¦
           </p>
           <div className="text-sm underline mt-2">Konu listesi â†’</div>
-        </Link>
+        </a>
 
-        <Link href="/premium"
+        <a
+          href="/premium"
           className="rounded-2xl border p-5 bg-white hover:shadow-sm transition block"
         >
           <div className="text-lg font-semibold">Premiumâ€™a GeÃ§</div>
@@ -255,9 +257,8 @@ export default async function Home() {
             Daha fazla detay, quiz ve Ã¼yeye Ã¶zel iÃ§erik.
           </p>
           <div className="text-sm underline mt-2">PlanlarÄ± gÃ¶r â†’</div>
-        </Link>
+        </a>
       </section>
     </div>
   );
 }
-

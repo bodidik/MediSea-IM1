@@ -2,62 +2,74 @@
 
 import React from "react";
 import { useParams, useSearchParams } from "next/navigation";
-import QuestionRun, { type Question } from "@/components/QuestionRun";
+import QuestionRunComp from "@/components/QuestionRun"; // default export
+import type { Question } from "@/types/question";
 
-type BackendResp =
-  | {
-      ok: true;
-      planLevel: "P" | "M" | "V";
-      visibleCount: number;
-      remaining?: number;
-      message?: string;
-      questions: Question[];
-    }
-  | { ok: false; error: string };
+type QuestionRunProps = {
+  questions: Question[];
+  onExhausted?: () => void;
+  onNextBatch?: () => Promise<void>;
+};
+const QuestionRun = QuestionRunComp as React.ComponentType<QuestionRunProps>;
+
+type BackendOk = {
+  ok: true;
+  planLevel: "P" | "M" | "V";
+  visibleCount: number;
+  remaining?: number;
+  message?: string;
+  questions: Question[];
+};
+type BackendErr = { ok: false; error: string };
+type BackendResp = BackendOk | BackendErr;
 
 export default function SectionQuestionsPage() {
   const params = useParams<{ section: string }>();
   const search = useSearchParams();
-  const section = decodeURIComponent(params.section);
-  const [data, setData] = React.useState<BackendResp | null>(null);
+
+  const raw = params?.section ?? "";
+  const section = decodeURIComponent(Array.isArray(raw) ? raw[0] ?? "" : raw);
+
+  const [data, setData] = React.useState<BackendOk | null>(null);
   const [loading, setLoading] = React.useState(false);
   const [err, setErr] = React.useState<string | null>(null);
 
-  async function load() {
+  const load = React.useCallback(async () => {
     setLoading(true);
     setErr(null);
     try {
-      const planLevel = search.get("planLevel") || ""; // test amaÃ§lÄ± (?planLevel=P|M|V)
+      const planLevel = search.get("planLevel") || "";
       const qs = new URLSearchParams({ module: section });
       if (planLevel) qs.set("planLevel", planLevel);
+
       const r = await fetch(`/api/questions?${qs.toString()}`, { cache: "no-store" });
       const j = (await r.json()) as BackendResp;
-      if (!r.ok || j.ok === false) throw new Error((j as any).error || "load_failed");
-      setData(j);
-    } catch (e: any) {
-      setErr(e?.message || "ERR");
+
+      if (!r.ok || j.ok === false) throw new Error((j as BackendErr).error || "load_failed");
+      setData(j as BackendOk);
+    } catch (e: unknown) {
+      setErr(e instanceof Error ? e.message : "ERR");
+      setData(null);
     } finally {
       setLoading(false);
     }
-  }
+  }, [search, section]);
 
   React.useEffect(() => {
-    load();
+    if (section) void load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [section]);
 
   async function onNextBatch() {
-    // Ä°stersek baÅŸka modÃ¼lden Ã¶neri getirme akÄ±ÅŸÄ±nÄ± burada yaparÄ±z.
-    // Åimdilik sayfayÄ± tazeliyoruz (kota uygunsa backend yeni set dÃ¶ndÃ¼rÃ¼r).
     await load();
   }
 
   return (
     <div className="p-4 md:p-8 max-w-4xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl md:text-3xl font-bold">{section} â€” Sorular</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">{section} — Sorular</h1>
         <button onClick={load} className="px-3 py-2 rounded-lg border text-sm" disabled={loading}>
-          {loading ? "YÃ¼kleniyorâ€¦" : "Yenile"}
+          {loading ? "Yükleniyor…" : "Yenile"}
         </button>
       </div>
 
@@ -68,19 +80,15 @@ export default function SectionQuestionsPage() {
       ) : (
         <>
           <div className="rounded-2xl border p-4 text-sm flex flex-wrap gap-3 items-center">
-            <div>Plan: <b>{(data as any).planLevel}</b></div>
-            {"remaining" in data && typeof data.remaining === "number" && (
-              <div>Kalan gÃ¼nlÃ¼k hak: <b>{data.remaining}</b></div>
-            )}
-            <div>GÃ¶sterilen: <b>{data.visibleCount}</b></div>
-            {"message" in data && data.message && (
-              <div className="text-xs text-muted-foreground">({data.message})</div>
-            )}
+            <div>Plan: <b>{data.planLevel}</b></div>
+            {typeof data.remaining === "number" && <div>Kalan günlük hak: <b>{data.remaining}</b></div>}
+            <div>Gösterilen: <b>{typeof data.visibleCount === "number" ? data.visibleCount : 0}</b></div>
+            {data.message && <div className="text-xs text-muted-foreground">({data.message})</div>}
           </div>
 
           <QuestionRun
-            questions={(data as any).questions || []}
-            onExhausted={() => {/* gerekirse analytics */}}
+            questions={data.questions || []}
+            onExhausted={() => {}}
             onNextBatch={onNextBatch}
           />
         </>
