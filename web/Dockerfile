@@ -1,3 +1,5 @@
+# FILE: web/Dockerfile
+
 # ---- builder ----
 FROM node:20-bullseye AS builder
 WORKDIR /app
@@ -11,8 +13,6 @@ COPY package.json package-lock.json* ./
 RUN npm ci
 
 COPY . .
-
-# Next.js üretim derlemesi (standalone)
 RUN npm run build
 
 # ---- runner ----
@@ -22,8 +22,8 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 
-# Standalone çıktı + public/statics
-COPY --from=builder /app/.next/standalone ./ 
+# Standalone çıktı + public + static
+COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
 

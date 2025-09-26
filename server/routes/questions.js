@@ -5,10 +5,23 @@ import { limitDailyQuestions } from "../middlewares/rate.guard.js";
 
 const router = express.Router();
 
-// Listeleme: V=2 / M=4 / P=∞ günlük sayım (dışarıya görünen “tam soru” akışı için)
-router.get("/", limitDailyQuestions({ pathTag: "questions" }), ctrl.list);
+/**
+ * Guard bypass: ?dev=1 verilirse rate limit atlanır.
+ * (Sadece bu rotada, prod akışını bozmaz.)
+ */
+router.get(
+  "/",
+  (req, res, next) => {
+    if (String(req.query.dev || "") === "1") {
+      return ctrl.list(req, res);
+    }
+    return next();
+  },
+  limitDailyQuestions({ pathTag: "questions" }),
+  ctrl.list
+);
 
-// Tekil soru detayı isterseniz aynı guard'ı buraya da takabilirsiniz.
-// router.get("/:id", limitDailyQuestions({ pathTag: "questions" }), ctrl.detail);
+// Tekil soru (isteğe bağlı guard eklenebilir)
+router.get("/:id", ctrl.detail);
 
 export default router;

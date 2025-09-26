@@ -1,4 +1,4 @@
-// server/seed/seedQuestions_ydus.js
+// FILE: server/seed/seedQuestions_ydus.js
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Question from '../models/Question.js';
@@ -9,6 +9,8 @@ const MONGO = process.env.MONGODB_URI;
 const data = [
   {
     examType: 'ydus',
+    lang: 'TR',
+    isPremium: false,
     section: 'romatoloji',
     title: 'FMF tanısı ile ilgili hangisi doğrudur?',
     stem: 'Tekrarlayan ateş ve serozit atakları olan 23 yaş erkek...',
@@ -24,6 +26,8 @@ const data = [
   },
   {
     examType: 'ydus',
+    lang: 'TR',
+    isPremium: false,
     section: 'nefroloji',
     title: 'Nefrotik sendrom belirtileri',
     stem: 'Aşağıdakilerden hangisi nefrotik sendromun tipik bulgularındandır?',
@@ -41,9 +45,9 @@ const data = [
 
 (async () => {
   try {
-    await mongoose.connect(MONGO);
+    await mongoose.connect(MONGO, { serverSelectionTimeoutMS: 5000, family: 4 });
     await Question.deleteMany({ examType: 'ydus' });
-    await Question.insertMany(data);
+    await Question.insertMany(data, { ordered: false });
     console.log('Seeded YDUS questions:', data.length);
   } catch (e) {
     console.error(e);

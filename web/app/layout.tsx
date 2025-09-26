@@ -1,18 +1,41 @@
 ﻿// FILE: web/app/layout.tsx
 import type { Metadata, Viewport } from "next";
+import { Inter, Merriweather, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import AppShell from "@/components/AppShell";
 
+// Google Fonts (TR/EN uyumlu)
+const inter = Inter({
+  subsets: ["latin-ext"],
+  display: "swap",
+  variable: "--font-sans",
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin-ext"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-serif",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin-ext"],
+  weight: ["400", "700"],
+  display: "swap",
+  variable: "--font-mono",
+});
+
+// Metadata
 export const metadata: Metadata = {
   title: {
     default: "Medknowledge",
-    template: "%s Â· Medknowledge",
+    template: "%s · Medknowledge",
   },
-  description: "Ä°Ã§ hastalÄ±klarÄ± eÄŸitim ve sÄ±nav platformu",
+  description: "İç hastalıkları eğitim ve sınav platformu",
   applicationName: "Medknowledge",
   authors: [{ name: "Medknowledge" }],
   keywords: [
-    "iÃ§ hastalÄ±klarÄ±",
+    "iç hastalıkları",
     "nefroloji",
     "hematoloji",
     "endokrinoloji",
@@ -25,7 +48,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Medknowledge",
-    description: "Ä°Ã§ hastalÄ±klarÄ± eÄŸitim ve sÄ±nav platformu",
+    description: "İç hastalıkları eğitim ve sınav platformu",
     type: "website",
     locale: "tr_TR",
     siteName: "Medknowledge",
@@ -37,17 +60,26 @@ export const metadata: Metadata = {
   },
 };
 
+// Viewport
 export const viewport: Viewport = {
-  themeColor: "#2563eb", // tailwind blue-600
+  themeColor: "#2563eb",
   width: "device-width",
   initialScale: 1,
   colorScheme: "light",
 };
 
+// Tek RootLayout
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" suppressHydrationWarning>
-      <body className="bg-gray-50 text-gray-900 antialiased">
+    <html
+      lang="tr"
+      suppressHydrationWarning
+      className={`${inter.variable} ${merriweather.variable} ${jetbrains.variable}`}
+    >
+      <head>
+        <meta charSet="utf-8" />
+      </head>
+      <body className="font-sans bg-gray-50 text-gray-900 antialiased">
         <AppShell>{children}</AppShell>
       </body>
     </html>

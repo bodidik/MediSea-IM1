@@ -1,6 +1,0 @@
-/* FILE: web/app/globals.css */
-:root { --bg: #ffffff; --fg: #111827; }
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui; }
-a { color: inherit; text-decoration: none; }
-button { cursor: pointer; }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 // FILE: web/app/topics/page.tsx
 export const dynamic = "force-dynamic";
 
@@ -38,7 +39,7 @@ export default async function TopicsIndex({
   const pageStr = getParam(searchParams, "page", "1");
   const page = Math.max(1, parseInt(pageStr || "1", 10));
 
-  // Backendâ€™ten liste Ã§ek
+  // Backend’ten liste çek
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
   const api = new URL(`${backend}/api/topics`);
   if (lang) api.searchParams.set("lang", lang);
@@ -55,7 +56,7 @@ export default async function TopicsIndex({
   const perPage = parseInt(limit, 10) || 20;
   const totalPages = Math.max(1, Math.ceil(total / perPage));
 
-  // BÃ¶lÃ¼m seÃ§enekleri â€“ configâ€™e alabiliriz
+  // Bölüm seçenekleri – (ileride config'e alınabilir)
   const SECTION_OPTIONS = [
     "",
     "romatoloji",
@@ -65,7 +66,7 @@ export default async function TopicsIndex({
     "endokrinoloji",
     "kardiyoloji",
     "infeksiyon",
-    "gÃ¶ÄŸÃ¼s",
+    "göğüs",
   ];
 
   // sayfa url kurucu
@@ -84,7 +85,7 @@ export default async function TopicsIndex({
       <div className="flex items-center justify-between gap-3">
         <h1 className="text-2xl md:text-3xl font-bold">Konular</h1>
         <Link href="/guidelines" className="text-sm underline opacity-80 hover:opacity-100">
-          KÄ±lavuzlar â†’
+          Kılavuzlar →
         </Link>
       </div>
 
@@ -99,11 +100,11 @@ export default async function TopicsIndex({
           name="section"
           defaultValue={section}
           className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
-          aria-label="BÃ¶lÃ¼m"
+          aria-label="Bölüm"
         >
           {SECTION_OPTIONS.map((s) => (
             <option key={s || "all"} value={s}>
-              {s ? s : "BÃ¶lÃ¼m: Hepsi"}
+              {s ? s : "Bölüm: Hepsi"}
             </option>
           ))}
         </select>
@@ -111,7 +112,7 @@ export default async function TopicsIndex({
         <input
           name="q"
           defaultValue={q}
-          placeholder="Ara: behÃ§et, kdigo, vaskÃ¼litâ€¦"
+          placeholder="Ara: behçet, kdigo, vaskülit…"
           className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
           aria-label="Arama"
         />
@@ -119,11 +120,11 @@ export default async function TopicsIndex({
         <div className="md:col-span-5 flex items-center gap-3">
           <button className="px-3 py-2 rounded-lg border text-sm">Uygula</button>
           <Link href="/topics" className="text-sm underline opacity-70 hover:opacity-100">
-            SÄ±fÄ±rla
+            Sıfırla
           </Link>
 
           <div className="ml-auto flex items-center gap-3 text-xs text-gray-500">
-            {typeof total === "number" ? <span>Toplam {total} kayÄ±t</span> : <span>{items.length} sonuÃ§</span>}
+            {typeof total === "number" ? <span>Toplam {total} kayıt</span> : <span>{items.length} sonuç</span>}
           </div>
         </div>
       </form>
@@ -131,10 +132,10 @@ export default async function TopicsIndex({
       {/* Liste */}
       {!data.ok ? (
         <div className="rounded-xl border p-4 text-sm text-red-600 bg-white">
-          {data.error || "Liste alÄ±namadÄ±"}
+          {data.error || "Liste alınamadı"}
         </div>
       ) : items.length === 0 ? (
-        <div className="text-sm text-gray-500">KayÄ±t bulunamadÄ±.</div>
+        <div className="text-sm text-gray-500">Kayıt bulunamadı.</div>
       ) : (
         <>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -142,15 +143,15 @@ export default async function TopicsIndex({
               <li key={t.slug} className="rounded-2xl border p-4 hover:shadow-sm transition bg-white">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <a
+                    <Link
                       href={`/topics/${encodeURIComponent(t.slug)}`}
                       className="text-lg font-semibold underline break-words"
                     >
                       {t.title}
-                    </a>
+                    </Link>
                     {t.section || t.lang ? (
                       <div className="text-xs text-gray-500 mt-1">
-                        {(t.section || "-")} Â· {t.lang || "TR"}
+                        {(t.section || "-")} · {t.lang || "TR"}
                       </div>
                     ) : null}
                     {t.summary ? (
@@ -178,31 +179,26 @@ export default async function TopicsIndex({
 
           {/* Pagination */}
           <div className="flex items-center justify-center gap-2 mt-4">
-            <a
+            <Link
               href={buildUrl(Math.max(1, page - 1))}
               aria-disabled={page <= 1}
-              className={`px-3 py-2 rounded-lg border text-sm ${
-                page <= 1 ? "pointer-events-none opacity-50" : ""
-              }`}
+              className={`px-3 py-2 rounded-lg border text-sm ${page <= 1 ? "pointer-events-none opacity-50" : ""}`}
             >
-              â† Ã–nceki
-            </a>
+              ← Önceki
+            </Link>
             <span className="text-xs text-gray-600">
               Sayfa {page} / {totalPages}
             </span>
-            <a
+            <Link
               href={buildUrl(Math.min(totalPages, page + 1))}
               aria-disabled={page >= totalPages}
-              className={`px-3 py-2 rounded-lg border text-sm ${
-                page >= totalPages ? "pointer-events-none opacity-50" : ""
-              }`}
+              className={`px-3 py-2 rounded-lg border text-sm ${page >= totalPages ? "pointer-events-none opacity-50" : ""}`}
             >
-              Sonraki â†’
-            </a>
+              Sonraki →
+            </Link>
           </div>
         </>
       )}
     </div>
   );
 }
-

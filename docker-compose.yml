@@ -1,4 +1,4 @@
-# FILE: docker-compose.yml  (version satırına gerek yok)
+# FILE: docker-compose.yml
 services:
   mongo:
     image: mongo:7
@@ -9,7 +9,6 @@ services:
     volumes:
       - mongo_data:/data/db
     healthcheck:
-      # mongosh + grep ile daha stabil
       test: ["CMD-SHELL", "mongosh --quiet --eval \"db.runCommand({ ping: 1 }).ok\" | grep 1"]
       interval: 10s
       timeout: 5s
@@ -20,18 +19,18 @@ services:
       context: ./server
       dockerfile: Dockerfile
     container_name: mk_api
-    # NOT: Eğer server/.env.docker içinde MONGODB_URI (Atlas) varsa
-    # ya burayı kullan (mongo servisini kaldır) ya da aşağıdaki local URI'yı kullan.
-    # Karışmaması için ya env_file'dan MONGODB_URI'yi sil, ya da env_file satırını kaldır.
-    # env_file:
-    #   - ./server/.env.docker
     environment:
+      # PROD’DA Atlas kullanacaksan bunu .env’den ver (AŞAĞIDA ÖRNEK VAR):
+      # MONGODB_URI: ${MONGODB_URI}
+      # DEV/LOCAL Mongo için:
+      MONGODB_URI: mongodb://mongo:27017/medknowledge?directConnection=true&serverSelectionTimeoutMS=10000
       HOST: 0.0.0.0
       PORT: 4000
-      # Yerel Mongo kullanıyorsan:
-      MONGODB_URI: mongodb://mongo:27017/medknowledge?directConnection=true&serverSelectionTimeoutMS=10000
       CORS_ORIGIN: http://localhost:3000
       VIDEO_ALLOWED_ORIGINS: http://localhost:3000
+      JWT_SECRET: change_me
+      KAYSERITIP_SECRET: change_me
+      VIDEO_HLS_SECRET: change_me
     ports:
       - "4000:4000"
     depends_on:
@@ -49,12 +48,13 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_BACKEND_URL: "http://localhost:4000" # tarayıcı için (client)
+        NEXT_PUBLIC_BACKEND_URL: "http://localhost:4000"  # tarayıcı (client) görsün
     container_name: mk_web
     environment:
       NODE_ENV: production
       PORT: 3000
-      BACKEND_URL: http://api:4000                      # server-side fetch için (SSR/route.ts)
+      # SSR tarafındaki fetch’lerde kullanacağın env (kodda process.env.BACKEND_URL kullanırsan):
+      BACKEND_URL: http://api:4000
     ports:
       - "3000:3000"
     depends_on:
