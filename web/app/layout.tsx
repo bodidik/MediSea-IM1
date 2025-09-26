@@ -1,8 +1,8 @@
-ï»¿// FILE: web/app/layout.tsx
+// FILE: web/app/layout.tsx
 import type { Metadata, Viewport } from "next";
 import { Inter, Merriweather, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import AppShell from "@/components/AppShell";
+import AppShell from "@/app/components/AppShell";
 
 // Google Fonts (TR/EN uyumlu)
 const inter = Inter({
@@ -29,13 +29,13 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: {
     default: "Medknowledge",
-    template: "%s Â· Medknowledge",
+    template: "%s · Medknowledge",
   },
-  description: "Ä°Ã§ hastalÄ±klarÄ± eÄŸitim ve sÄ±nav platformu",
+  description: "Ýç hastalýklarý eðitim ve sýnav platformu",
   applicationName: "Medknowledge",
   authors: [{ name: "Medknowledge" }],
   keywords: [
-    "iÃ§ hastalÄ±klarÄ±",
+    "iç hastalýklarý",
     "nefroloji",
     "hematoloji",
     "endokrinoloji",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Medknowledge",
-    description: "Ä°Ã§ hastalÄ±klarÄ± eÄŸitim ve sÄ±nav platformu",
+    description: "Ýç hastalýklarý eðitim ve sýnav platformu",
     type: "website",
     locale: "tr_TR",
     siteName: "Medknowledge",
