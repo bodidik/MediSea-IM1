@@ -1,6 +1,7 @@
-import Link from "next/link";
-
 // FILE: web/app/topics/page.tsx
+import Link from "next/link";
+import TopicsFilters from "@/app/components/topics/filters";
+
 export const dynamic = "force-dynamic";
 
 type TopicLite = {
@@ -39,7 +40,7 @@ export default async function TopicsIndex({
   const pageStr = getParam(searchParams, "page", "1");
   const page = Math.max(1, parseInt(pageStr || "1", 10));
 
-  // Backend’ten liste çek
+  // Backend
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
   const api = new URL(`${backend}/api/topics`);
   if (lang) api.searchParams.set("lang", lang);
@@ -56,20 +57,6 @@ export default async function TopicsIndex({
   const perPage = parseInt(limit, 10) || 20;
   const totalPages = Math.max(1, Math.ceil(total / perPage));
 
-  // Bölüm seçenekleri – (ileride config'e alınabilir)
-  const SECTION_OPTIONS = [
-    "",
-    "romatoloji",
-    "nefroloji",
-    "gastroenteroloji",
-    "hematoloji",
-    "endokrinoloji",
-    "kardiyoloji",
-    "infeksiyon",
-    "göğüs",
-  ];
-
-  // sayfa url kurucu
   const buildUrl = (nextPage: number) => {
     const u = new URL("/topics", "http://dummy.local");
     if (lang) u.searchParams.set("lang", lang);
@@ -89,45 +76,8 @@ export default async function TopicsIndex({
         </Link>
       </div>
 
-      {/* Filtreler */}
-      <form className="rounded-2xl border p-4 grid grid-cols-1 md:grid-cols-5 gap-3 bg-white" method="GET">
-        <select name="lang" defaultValue={lang} className="px-3 py-2 rounded-lg border text-sm" aria-label="Dil">
-          <option value="TR">TR</option>
-          <option value="EN">EN</option>
-        </select>
-
-        <select
-          name="section"
-          defaultValue={section}
-          className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
-          aria-label="Bölüm"
-        >
-          {SECTION_OPTIONS.map((s) => (
-            <option key={s || "all"} value={s}>
-              {s ? s : "Bölüm: Hepsi"}
-            </option>
-          ))}
-        </select>
-
-        <input
-          name="q"
-          defaultValue={q}
-          placeholder="Ara: behçet, kdigo, vaskülit…"
-          className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
-          aria-label="Arama"
-        />
-
-        <div className="md:col-span-5 flex items-center gap-3">
-          <button className="px-3 py-2 rounded-lg border text-sm">Uygula</button>
-          <Link href="/topics" className="text-sm underline opacity-70 hover:opacity-100">
-            Sıfırla
-          </Link>
-
-          <div className="ml-auto flex items-center gap-3 text-xs text-gray-500">
-            {typeof total === "number" ? <span>Toplam {total} kayıt</span> : <span>{items.length} sonuç</span>}
-          </div>
-        </div>
-      </form>
+      {/* Client filtre bileşeni */}
+      <TopicsFilters lang={lang} section={section} q={q} limit={perPage} page={page} total={total} />
 
       {/* Liste */}
       {!data.ok ? (

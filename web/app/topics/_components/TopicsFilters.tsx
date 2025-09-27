@@ -1,18 +1,13 @@
-﻿"use client";
-
+﻿// FILE: web/app/components/topics/filters.tsx
+"use client";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import navConfig from "@/app/config/nav";
 
+// Bölüm seçeneklerini tek kaynaktan çek
 const SECTION_OPTIONS = [
   "",
-  "romatoloji",
-  "nefroloji",
-  "gastroenteroloji",
-  "hematoloji",
-  "endokrinoloji",
-  "kardiyoloji",
-  "infeksiyon",
-  "gÃ¶ÄŸÃ¼s",
+  ...navConfig.sections.map((s) => s.href.split("/").pop() || ""),
 ];
 
 function buildQuery(base: URLSearchParams, patch: Record<string, string | number>) {
@@ -22,8 +17,7 @@ function buildQuery(base: URLSearchParams, patch: Record<string, string | number
     if (val) sp.set(k, val);
     else sp.delete(k);
   });
-  // her filtre deÄŸiÅŸiminde sayfayÄ± 1â€™e al
-  sp.set("page", "1");
+  sp.set("page", "1"); // her filtre değişiminde sayfayı 1’e al
   return sp.toString();
 }
 
@@ -43,7 +37,7 @@ export default function TopicsFilters(props: {
   const [qLocal, setQLocal] = useState(q);
   const [isPending, startTransition] = useTransition();
 
-  // debounce
+  // debounce arama
   useEffect(() => {
     const id = setTimeout(() => {
       if (qLocal !== q) {
@@ -52,11 +46,12 @@ export default function TopicsFilters(props: {
       }
     }, 350);
     return () => clearTimeout(id);
-  }, [qLocal]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [qLocal]);
 
   const totalHint = useMemo(() => {
-    if (!total) return "0 sonuÃ§";
-    return `Toplam ${total} kayÄ±t`;
+    if (!total) return "0 sonuç";
+    return `Toplam ${total} kayıt`;
   }, [total]);
 
   return (
@@ -86,7 +81,7 @@ export default function TopicsFilters(props: {
         name="section"
         defaultValue={section}
         className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
-        aria-label="BÃ¶lÃ¼m"
+        aria-label="Bölüm"
         onChange={(e) => {
           const qs = buildQuery(searchParams, { section: e.target.value });
           router.push(`${pathname}?${qs}`);
@@ -94,7 +89,7 @@ export default function TopicsFilters(props: {
       >
         {SECTION_OPTIONS.map((s) => (
           <option key={s || "all"} value={s}>
-            {s ? s : "BÃ¶lÃ¼m: Hepsi"}
+            {s ? s : "Bölüm: Hepsi"}
           </option>
         ))}
       </select>
@@ -103,7 +98,7 @@ export default function TopicsFilters(props: {
         name="q"
         value={qLocal}
         onChange={(e) => setQLocal(e.target.value)}
-        placeholder="Ara: behÃ§et, kdigo, vaskÃ¼litâ€¦"
+        placeholder="Ara: behçet, kdigo, vaskülit…"
         className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
         aria-label="Arama"
       />
@@ -122,18 +117,18 @@ export default function TopicsFilters(props: {
             router.push(`${pathname}?${qs.toString()}`);
           }}
         >
-          SÄ±fÄ±rla
+          Sıfırla
         </button>
 
         <div className="ml-auto flex items-center gap-3 text-xs text-gray-500">
           <span>{totalHint}</span>
-          <span className={isPending ? "animate-pulse" : ""}>{isPending ? "Filtreleniyorâ€¦" : ""}</span>
+          <span className={isPending ? "animate-pulse" : ""}>{isPending ? "Filtreleniyor…" : ""}</span>
         </div>
       </div>
 
-      {/* limit deÄŸiÅŸimi */}
+      {/* limit değişimi */}
       <div className="md:col-span-5 flex items-center gap-2">
-        <label className="text-xs text-gray-600">Sayfa baÅŸÄ±na:</label>
+        <label className="text-xs text-gray-600">Sayfa başına:</label>
         <select
           defaultValue={String(limit)}
           className="px-2 py-1 rounded-lg border text-xs"
@@ -152,3 +147,11 @@ export default function TopicsFilters(props: {
     </form>
   );
 }
+
+
+// FILE: web/app/topics/page.tsx (integration snippet)
+// ...üstteki importlara ekleyin:
+// import TopicsFilters from "@/app/components/topics/filters";
+// ...
+// Filtre formunun olduğu bloğu şununla değiştirin:
+// <TopicsFilters lang={lang} section={section} q={q} limit={perPage} page={page} total={total} />
