@@ -1,5 +1,8 @@
+// FILE: web/app/topics/[slug]/page.tsx
 import { cookies } from "next/headers";
 import Link from "next/link";
+
+export const dynamic = "force-dynamic";
 
 type Ref = { label: string; url?: string; year?: number | null };
 type SectionBlock = { title: string; html: string; visibility: "V" | "M" | "P" };
@@ -38,7 +41,7 @@ export default async function TopicPage({ params }: { params: { slug: string } }
   if (!detailRes.ok) {
     return (
       <div className="p-6 max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold">Topic bulunamadı</h1>
+        <h1 className="text-2xl font-bold">Konu bulunamadı</h1>
         <p className="text-sm text-gray-500 mt-2">Slug: {slug}</p>
       </div>
     );
@@ -74,13 +77,20 @@ export default async function TopicPage({ params }: { params: { slug: string } }
 
           {/* İçerik blokları */}
           <div className="space-y-4">
+            {(!item.sections || item.sections.length === 0) && (
+              <div className="rounded-2xl border p-4 bg-white text-sm text-gray-600">
+                Bu konu için içerik henüz eklenmedi.
+              </div>
+            )}
             {item.sections?.map((blk, i) => {
               const allowed = canSee(blk.visibility, plan);
               return (
                 <div key={i} className="rounded-2xl border p-4 bg-white">
                   <div className="flex items-center justify-between">
                     <h2 className="text-lg font-semibold">{blk.title}</h2>
-                    <span className="text-xs px-2 py-1 rounded bg-gray-50 border">Görünürlük: {blk.visibility}</span>
+                    <span className="text-xs px-2 py-1 rounded bg-gray-50 border">
+                      Görünürlük: {blk.visibility}
+                    </span>
                   </div>
                   {allowed ? (
                     <div className="prose max-w-none mt-2" dangerouslySetInnerHTML={{ __html: blk.html || "" }} />
@@ -172,6 +182,27 @@ export default async function TopicPage({ params }: { params: { slug: string } }
             </div>
           </div>
         </aside>
+      </div>
+    </div>
+  );
+}
+
+// FILE: web/app/topics/[slug]/loading.tsx
+export default function LoadingTopic() {
+  return (
+    <div className="p-6 md:p-10 max-w-6xl mx-auto animate-pulse">
+      <div className="h-4 w-40 bg-gray-200 rounded" />
+      <div className="h-8 w-1/2 bg-gray-200 rounded mt-3" />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+        <div className="lg:col-span-8 space-y-3">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="h-28 bg-gray-200 rounded-2xl" />
+          ))}
+        </div>
+        <div className="lg:col-span-4 space-y-3">
+          <div className="h-40 bg-gray-200 rounded-2xl" />
+          <div className="h-28 bg-gray-200 rounded-2xl" />
+        </div>
       </div>
     </div>
   );

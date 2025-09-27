@@ -1,20 +1,27 @@
-﻿// FILE: web/app/components/SiteHeader.tsx
-"use client";
+﻿// FILE: web/app/components/SiteHeader.tsx (Server Component)
 import Link from "next/link";
-import React from "react";
+import LangSwitch from "@/app/components/LangSwitch"; // client adağı (küçük)
+import HeaderClient from "@/app/components/HeaderClient"; // client: aktif link + menüler
+import navConfig from "@/app/config/nav";
 
-export default function SiteHeader(){
-  return (
-    <header className="border-b bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between">
-        <Link href="/" className="font-bold tracking-tight">Medknowledge</Link>
-        <nav className="flex items-center gap-4 text-sm">
-          <Link href="/sections" className="hover:underline">BÃ¶lÃ¼mler</Link>
-          <Link href="/programs" className="hover:underline">Programlar</Link>
-          <Link href="/tools" className="hover:underline">AraÃ§lar</Link>
-          <Link href="/premium" className="px-3 py-1 rounded-lg border hover:bg-gray-50">Premium</Link>
-        </nav>
-      </div>
-    </header>
-  );
+
+export default function SiteHeader() {
+return (
+<header className="border-b bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-40">
+<div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between gap-3">
+{/* Sol: Logo */}
+<div className="flex items-center gap-3">
+<Link href="/" className="font-bold tracking-tight whitespace-nowrap">Medknowledge</Link>
+</div>
+
+
+{/* Orta: Nav (aktif vurgular ve dropdown/çekmece logic’i HeaderClient’ta) */}
+<HeaderClient navConfig={navConfig} />
+
+
+{/* Sağ: Dil anahtarı (küçük ada) */}
+<div className="hidden md:block"><LangSwitch compact /></div>
+</div>
+</header>
+);
 }
