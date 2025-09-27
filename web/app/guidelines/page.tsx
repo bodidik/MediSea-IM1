@@ -1,4 +1,6 @@
+// FILE: web/app/guidelines/page.tsx
 import Link from "next/link";
+import GuidelinesFilters from "@/app/components/GuidelinesFilters";
 export const dynamic = "force-dynamic";
 
 type Guideline = {
@@ -14,20 +16,20 @@ type Guideline = {
 
 type Resp = { ok: boolean; count?: number; items?: Guideline[]; error?: string };
 
+function getParam(sp: Record<string, string | string[] | undefined>, key: string, def = "") {
+  const v = Array.isArray(sp[key]) ? sp[key]?.[0] : sp[key];
+  return (v ?? def) as string;
+}
+
 export default async function GuidelinesPage({
   searchParams,
 }: {
   searchParams: Record<string, string | string[] | undefined>;
 }) {
-  // URL â†’ filtreler
-  const lang =
-    (Array.isArray(searchParams.lang) ? searchParams.lang[0] : searchParams.lang) || "TR";
-  const section =
-    (Array.isArray(searchParams.section) ? searchParams.section[0] : searchParams.section) || "";
-  const q =
-    (Array.isArray(searchParams.q) ? searchParams.q[0] : searchParams.q) || "";
+  const lang = getParam(searchParams, "lang", "TR");
+  const section = getParam(searchParams, "section", "");
+  const q = getParam(searchParams, "q", "");
 
-  // API Ã§aÄŸrÄ±sÄ±
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
   const api = new URL(`${backend}/api/guidelines`);
   if (lang) api.searchParams.set("lang", lang);
@@ -38,81 +40,25 @@ export default async function GuidelinesPage({
   const data = (await res.json()) as Resp;
   const items = data.ok ? data.items || [] : [];
 
-  const SECTION_OPTIONS = [
-    "",
-    "romatoloji",
-    "nefroloji",
-    "gastroenteroloji",
-    "hematoloji",
-    "endokrinoloji",
-    "kardiyoloji",
-    "infeksiyon",
-    "gÃ¶ÄŸÃ¼s",
-  ];
-
   return (
-    <div className="p-6 md:p-10 max-w-5xl mx-auto space-y-6">
+    <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6">
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-2xl md:text-3xl font-bold">KÄ±lavuzlar</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">Kılavuzlar</h1>
         <Link href="/topics" className="text-sm underline opacity-80 hover:opacity-100">
-          Konular â†’
+          Konular →
         </Link>
       </div>
 
-      {/* Filtreler */}
-      <form
-        className="rounded-2xl border p-4 grid grid-cols-1 md:grid-cols-5 gap-3 bg-white"
-        method="GET"
-      >
-        <select
-          name="lang"
-          defaultValue={lang}
-          className="px-3 py-2 rounded-lg border text-sm"
-          aria-label="Dil"
-        >
-          <option value="TR">TR</option>
-          <option value="EN">EN</option>
-        </select>
-
-        <select
-          name="section"
-          defaultValue={section}
-          className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
-          aria-label="BÃ¶lÃ¼m"
-        >
-          {SECTION_OPTIONS.map((s) => (
-            <option key={s || "all"} value={s}>
-              {s ? s : "BÃ¶lÃ¼m: Hepsi"}
-            </option>
-          ))}
-        </select>
-
-        <input
-          name="q"
-          defaultValue={q}
-          placeholder="Ara: KDIGO, EULAR, ESC, ADAâ€¦"
-          className="px-3 py-2 rounded-lg border text-sm md:col-span-2"
-          aria-label="Arama"
-        />
-
-        <div className="md:col-span-5 flex items-center gap-3">
-          <button className="px-3 py-2 rounded-lg border text-sm">Uygula</button>
-          <Link href="/guidelines" className="text-sm underline opacity-70 hover:opacity-100">
-            SÄ±fÄ±rla
-          </Link>
-          <span className="ml-auto text-xs text-gray-500">
-            {typeof data.count === "number" ? `Toplam ${data.count} kayÄ±t` : `${items.length} sonuÃ§`}
-          </span>
-        </div>
-      </form>
+      {/* Client filtreler */}
+      <GuidelinesFilters lang={lang} section={section} q={q} total={data.count ?? items.length} />
 
       {/* Liste */}
       {!data.ok ? (
         <div className="rounded-xl border p-4 text-sm text-red-600 bg-white">
-          {data.error || "Liste alÄ±namadÄ±"}
+          {data.error || "Liste alınamadı"}
         </div>
       ) : items.length === 0 ? (
-        <div className="text-sm text-gray-500">KayÄ±t bulunamadÄ±.</div>
+        <div className="text-sm text-gray-500">Kayıt bulunamadı.</div>
       ) : (
         <ul className="space-y-3">
           {items.map((g, idx) => (
@@ -129,8 +75,7 @@ export default async function GuidelinesPage({
                     )}
                   </div>
                   <div className="text-xs text-gray-500 mt-1">
-                    {(g.org || "â€”")} {g.year ? `Â· ${g.year}` : ""}{" "}
-                    {g.section ? `Â· ${g.section}` : ""} {g.lang ? `Â· ${g.lang}` : ""}
+                    {(g.org || "—")} {g.year ? `· ${g.year}` : ""} {g.section ? `· ${g.section}` : ""} {g.lang ? `· ${g.lang}` : ""}
                   </div>
                 </div>
                 {g.createdAt && (
@@ -146,4 +91,3 @@ export default async function GuidelinesPage({
     </div>
   );
 }
-
