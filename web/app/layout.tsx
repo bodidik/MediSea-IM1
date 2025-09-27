@@ -29,13 +29,13 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: {
     default: "Medknowledge",
-    template: "%s · Medknowledge",
+    template: "%s ï¿½ Medknowledge",
   },
-  description: "Ýç hastalýklarý eðitim ve sýnav platformu",
+  description: "ï¿½ï¿½ hastalï¿½klarï¿½ eï¿½itim ve sï¿½nav platformu",
   applicationName: "Medknowledge",
   authors: [{ name: "Medknowledge" }],
   keywords: [
-    "iç hastalýklarý",
+    "iï¿½ hastalï¿½klarï¿½",
     "nefroloji",
     "hematoloji",
     "endokrinoloji",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Medknowledge",
-    description: "Ýç hastalýklarý eðitim ve sýnav platformu",
+    description: "ï¿½ï¿½ hastalï¿½klarï¿½ eï¿½itim ve sï¿½nav platformu",
     type: "website",
     locale: "tr_TR",
     siteName: "Medknowledge",
@@ -85,3 +85,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
