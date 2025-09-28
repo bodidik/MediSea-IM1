@@ -1,5 +1,5 @@
-// FILE: web/app/components/HeaderClient.tsx (Client Component)
 "use client";
+// FILE: web/app/components/HeaderClient.tsx (Client Component)
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";

@@ -1,4 +1,5 @@
-﻿// FILE: web/app/sections/[section]/page.tsx
+"use client";
+// FILE: web/app/sections/[section]/page.tsx
 // ISR + Tag’li veri çekimi için sunucu bileşenine çevrildi.
 // Tek dosyada interaktiviteyi korumak için içte küçük bir client bileşeni kullanıyoruz.
 
@@ -51,7 +52,6 @@ export default async function SectionDetail({ params }: { params: { section: str
 
 // === İç client bileşeni (interaktivite: filtre, seçim, SR ekleme) ===
 // Not: aynı dosyada tutuldu, yeni dosya oluşturulmadı.
-"use client";
 import React, { useMemo, useState, useCallback } from "react";
 
 function ClientView({ section, data }: { section: string; data: DetailResp }) {
@@ -156,3 +156,4 @@ function ClientView({ section, data }: { section: string; data: DetailResp }) {
     </div>
   );
 }
+
