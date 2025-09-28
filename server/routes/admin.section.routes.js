@@ -1,9 +1,13 @@
-// FILE: server/routes/admin.section.routes.js
-const express = require("express");
+// FILE: server/routes/admin.section.routes.js (ESM)
+import express from "express";
+import * as ctrl from "../controllers/admin.section.controller.js";
+
+
 const router = express.Router();
-const ctrl = require("../controllers/admin.section.controller");
+
 
 router.get("/audit", ctrl.audit);
 router.post("/normalize", ctrl.normalize);
 
-module.exports = router;
+
+export default router;

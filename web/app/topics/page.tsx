@@ -2,7 +2,18 @@
 import Link from "next/link";
 import TopicsFilters from "@/app/components/topics/filters";
 
-export const dynamic = "force-dynamic";
+// ❌ force-dynamic yerine ISR: yaklaşık 30 gün
+export const revalidate = 60 * 60 * 24 * 30;
+
+// Liste sayfası için cache tag’leri (on‑demand revalidation ile bozulur)
+const listTags = (lang?: string, section?: string, q?: string) => {
+  const tags = ["topics:list"] as string[];
+  if (lang) tags.push(`topics:list:lang:${lang}`);
+  if (section) tags.push(`topics:list:section:${section}`);
+  // Arama sorguları çok çeşitli olabilir; istersen q tabanlı tag’ı kapatabilirsin.
+  if (q) tags.push(`topics:list:q`); // genel arama tag’ı (spesifik değeri değil)
+  return tags;
+};
 
 type TopicLite = {
   slug: string;
@@ -50,7 +61,11 @@ export default async function TopicsIndex({
   api.searchParams.set("page", String(page));
   api.searchParams.set("sort", "-updatedAt");
 
-  const res = await fetch(api.toString(), { cache: "no-store" });
+  // ✅ ISR’lı fetch: CDN cache, on-demand revalidate ile tazelenir
+  const res = await fetch(api.toString(), {
+    next: { revalidate, tags: listTags(lang, section, q) },
+  });
+
   const data = (await res.json()) as ListResp;
   const items = data.ok ? data.items || [] : [];
   const total = data.total ?? items.length;

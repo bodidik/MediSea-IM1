@@ -32,6 +32,44 @@ async function ensureUniqueSlug(seed) {
   return candidate;
 }
 
+// ---- Normalizasyon katmanı (kalıcı şema ile geri uyum) ----
+function normalizeReferences(refs) {
+  if (!Array.isArray(refs)) return [];
+  return refs.map((r) => {
+    if (!r) return null;
+    if (typeof r === "string") return { label: r };
+    return {
+      label: String(r.label || "").trim() || "Kaynak",
+      url: r.url ? String(r.url) : undefined,
+      year: typeof r.year === "number" ? r.year : undefined,
+    };
+  }).filter(Boolean);
+}
+
+function normalizeSections(doc) {
+  const blocks = Array.isArray(doc.sections) ? doc.sections : [];
+  if (blocks.length > 0) {
+    return blocks.map((b) => ({
+      title: String(b?.title || "").trim() || "Bölüm",
+      html: String(b?.html || ""),
+      visibility: ["V","M","P"].includes(String(b?.visibility)) ? b.visibility : "V",
+    }));
+  }
+  // Geri uyumluluk: eski content varsa tek blok döndür
+  if (doc.content && String(doc.content).trim().length > 0) {
+    return [{ title: "Özet", html: String(doc.content), visibility: "V" }];
+  }
+  return [];
+}
+
+function pickTopicForOutput(doc) {
+  // Lean doc (plain object) bekliyoruz
+  const out = { ...doc };
+  out.sections = normalizeSections(doc);
+  out.references = normalizeReferences(doc.references);
+  return out;
+}
+
 /* ====== Controller’lar ====== */
 
 /** GET /api/topics
@@ -62,7 +100,7 @@ export async function list(req, res) {
       }
     }
 
-    const [items, total] = await Promise.all([
+    const [raw, total] = await Promise.all([
       Topic.find(filter)
         .select("-__v")
         .sort(sortSpec)
@@ -72,6 +110,7 @@ export async function list(req, res) {
       Topic.countDocuments(filter),
     ]);
 
+    const items = raw.map(pickTopicForOutput);
     res.json({ ok: true, page, limit, total, items });
   } catch (err) {
     res.status(500).json({ ok: false, error: err.message });
@@ -84,7 +123,8 @@ export async function detail(req, res) {
     const slug = String(req.params.slug || "");
     const doc = await Topic.findOne({ slug }).lean();
     if (!doc) return res.status(404).json({ ok: false, error: "not_found" });
-    res.json({ ok: true, item: doc });
+    const item = pickTopicForOutput(doc);
+    res.json({ ok: true, item });
   } catch (err) {
     res.status(500).json({ ok: false, error: err.message });
   }
@@ -104,6 +144,10 @@ export async function create(req, res) {
     if (!slug) slug = baseSlugify(title);
     slug = await ensureUniqueSlug(slug);
 
+    // Yeni alanlar
+    const sections = normalizeSections({ sections: body.sections, content: body.content });
+    const references = normalizeReferences(body.references);
+
     let subtopics = Array.isArray(body.subtopics) ? body.subtopics : [];
     subtopics = subtopics.map((st) => ({
       title: String(st?.title || "").trim(),
@@ -115,17 +159,21 @@ export async function create(req, res) {
       title,
       slug,
       section,
+      // Eski content alanı (geri uyum için saklıyoruz)
       content: String(body.content || ""),
+      // Yeni alanlar
+      sections,
+      references,
+      // Diğerleri
       subtopics,
       relatedTopics: Array.isArray(body.relatedTopics) ? body.relatedTopics.map(String) : [],
       relatedCases:  Array.isArray(body.relatedCases)  ? body.relatedCases.map(String)  : [],
-      references:    Array.isArray(body.references)    ? body.references.map(String)    : [],
       tags:          Array.isArray(body.tags) ? body.tags.map(String) : [],
       lang:          (body.lang || "TR").toUpperCase() === "EN" ? "EN" : "TR",
       summary:       String(body.summary || ""),
     });
 
-    res.status(201).json({ ok: true, item: doc });
+    res.status(201).json({ ok: true, item: pickTopicForOutput(doc.toObject()) });
   } catch (err) {
     res.status(400).json({ ok: false, error: err.message });
   }
@@ -147,6 +195,14 @@ export async function update(req, res) {
     if (body.lang !== undefined)    doc.lang = String(body.lang).toUpperCase() === "EN" ? "EN" : "TR";
     if (body.tags !== undefined)    doc.tags = Array.isArray(body.tags) ? body.tags.map(String) : [];
 
+    if (body.sections !== undefined) {
+      doc.sections = normalizeSections({ sections: body.sections, content: body.content ?? doc.content });
+    }
+
+    if (body.references !== undefined) {
+      doc.references = normalizeReferences(body.references);
+    }
+
     if (body.subtopics !== undefined) {
       const arr = Array.isArray(body.subtopics) ? body.subtopics : [];
       doc.subtopics = arr.map((st) => ({
@@ -161,10 +217,6 @@ export async function update(req, res) {
     if (body.relatedCases !== undefined) {
       doc.relatedCases = Array.isArray(body.relatedCases) ? body.relatedCases.map(String) : [];
     }
-    if (body.references !== undefined) {
-      doc.references = Array.isArray(body.references) ? body.references.map(String) : [];
-    }
-
     if (body.slug !== undefined) {
       const wanted = String(body.slug || "").trim() || baseSlugify(doc.title || "");
       if (wanted !== doc.slug) {
@@ -173,7 +225,7 @@ export async function update(req, res) {
     }
 
     await doc.save();
-    res.json({ ok: true, item: doc });
+    res.json({ ok: true, item: pickTopicForOutput(doc.toObject()) });
   } catch (err) {
     res.status(400).json({ ok: false, error: err.message });
   }
@@ -207,7 +259,7 @@ export async function search(req, res) {
     const filter = { $text: { $search: q } };
     if (section) filter.section = section;
 
-    const [items, total] = await Promise.all([
+    const [raw, total] = await Promise.all([
       Topic.find(filter, { score: { $meta: "textScore" } })
         .sort({ score: { $meta: "textScore" }, updatedAt: -1 })
         .skip((page - 1) * limit)
@@ -216,6 +268,7 @@ export async function search(req, res) {
       Topic.countDocuments(filter),
     ]);
 
+    const items = raw.map(pickTopicForOutput);
     res.json({ ok: true, q, page, limit, total, items });
   } catch (err) {
     res.status(500).json({ ok: false, error: err.message });
@@ -284,7 +337,7 @@ export async function similar(req, res) {
       return { ...t, score };
     })
     .filter(x => x.score > 0)
-    .sort((a, b) => b.score - a.score || new Date(b.updatedAt) - new Date(a.updatedAt))
+    .sort((a, b) => b.score - a.score || new Date(b.updatedAt) - new Date(a.updatedAt)) 
     .slice(0, limit);
 
     if (scored.length === 0) {

@@ -1,8 +1,8 @@
-// FILE: server/controllers/topic.admin.controller.js
 // Amaç: Topic içeriğini toplu (JSON/CSV) ekleme/güncelleme ve slug kontrol uçları.
 // Not: ESM (import/export) kullanıyoruz.
 
 import Topic from "../models/topic.js";
+import express from "express"; // CSV text parser için route açıklamasında kullanılıyor
 
 /* =========================================================
  * Yardımcılar
@@ -36,16 +36,43 @@ async function ensureUniqueSlug(seed) {
   return candidate;
 }
 
-/** Alt başlıkları normalize et */
+/** Alt başlıkları normalize et (eski alan) */
 function normalizeSubtopics(arr) {
   if (!Array.isArray(arr)) return [];
   return arr.map((st) => ({
     title: String(st?.title || "").trim(),
-    slug:
-      String(st?.slug || "").trim() ||
-      baseSlugify(String(st?.title || "")),
+    slug:  String(st?.slug || "").trim() || baseSlugify(String(st?.title || "")),
     content: String(st?.content || ""),
   }));
+}
+
+/** Yeni blok şeması */
+function normalizeSections(input, fallbackContent = "") {
+  const list = Array.isArray(input) ? input : [];
+  if (list.length > 0) {
+    return list.map((b) => ({
+      title: String(b?.title || "").trim() || "Bölüm",
+      html: String(b?.html || ""),
+      visibility: ["V","M","P"].includes(String(b?.visibility)) ? b.visibility : "V",
+    }));
+  }
+  if (fallbackContent && String(fallbackContent).trim()) {
+    return [{ title: "Özet", html: String(fallbackContent), visibility: "V" }];
+  }
+  return [];
+}
+
+function normalizeReferences(refs) {
+  if (!Array.isArray(refs)) return [];
+  return refs.map((r) => {
+    if (!r) return null;
+    if (typeof r === "string") return { label: r };
+    return {
+      label: String(r.label || "").trim() || "Kaynak",
+      url: r.url ? String(r.url) : undefined,
+      year: typeof r.year === "number" ? r.year : undefined,
+    };
+  }).filter(Boolean);
 }
 
 /* =========================================================
@@ -156,11 +183,7 @@ export async function bulkUpsertTopics(req, res) {
 
     let items = [];
     if (ct.includes("text/csv")) {
-      // Bazı ortamlar raw text'i req.body'ye string olarak düşürmez, bu yüzden fallback ekliyoruz.
-      const text =
-        (typeof req.body === "string" && req.body) ||
-        req.rawBody?.toString?.() ||
-        "";
+      const text = (typeof req.body === "string" && req.body) || req.rawBody?.toString?.() || "";
       items = parseCsv(text);
     } else {
       items = Array.isArray(req.body?.items) ? req.body.items : [];
@@ -191,6 +214,8 @@ export async function bulkUpsertTopics(req, res) {
         title,
         section,
         content: String(data.content || ""),
+        sections: normalizeSections(data.sections, data.content),
+        references: normalizeReferences(data.references),
         subtopics: normalizeSubtopics(data.subtopics),
         relatedTopics: Array.isArray(data.relatedTopics)
           ? data.relatedTopics.map(String)
@@ -198,9 +223,9 @@ export async function bulkUpsertTopics(req, res) {
         relatedCases: Array.isArray(data.relatedCases)
           ? data.relatedCases.map(String)
           : [],
-        references: Array.isArray(data.references)
-          ? data.references.map(String)
-          : [],
+        tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+        lang: (data.lang || "TR").toUpperCase() === "EN" ? "EN" : "TR",
+        summary: String(data.summary || ""),
       };
 
       const existing = await Topic.findOne({ slug });
@@ -238,25 +263,3 @@ export async function checkSlug(req, res) {
     res.status(500).json({ ok: false, error: err.message });
   }
 }
-
-/* =========================================================
- * (Opsiyonel) Tekli JSON örneği:
- * {
- *   "items": [
- *     {
- *       "title": "Glomerülonefritler",
- *       "slug": "glomerulonefritler",
- *       "section": "nefroloji",
- *       "content": "kısa özet",
- *       "subtopics": [
- *         { "title":"Membranöz", "slug":"membranoz", "content":"..." },
- *         { "title":"IgA nefropatisi", "content":"..." }
- *       ],
- *       "relatedTopics": ["diyabetik-nefropati"],
- *       "relatedCases": ["vaka-1"],
- *       "references": ["Harrison 21e","KDIGO 2021"]
- *     }
- *   ],
- *   "overwrite": true
- * }
- * =======================================================*/

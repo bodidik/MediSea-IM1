@@ -2,11 +2,10 @@
 FROM node:20-alpine AS runtime
 WORKDIR /app
 
-# Yalnızca bağımlılık manifestleri (cache dostu)
+# Sadece manifestleri kopyala (cache dostu)
 COPY package*.json ./
 
-# Sadece prod bağımlılıkları
-# npm v7+ için --omit=dev de olur: npm ci --omit=dev
+# Prod bağımlılıkları
 RUN npm ci --only=production
 
 # Uygulama kaynakları
@@ -20,14 +19,11 @@ COPY calculators ./calculators
 COPY seed ./seed
 COPY scripts ./scripts
 
-# Ortam değişkenleri runtime'da verilecek
 ENV NODE_ENV=production
 ENV PORT=4000
-
 EXPOSE 4000
 
-# Güvenlik: non-root kullanıcı (opsiyonel ama önerilir)
-# node imajında 'node' kullanıcısı hazır
+# Non-root olarak çalış (node user hazır gelir)
 USER node
 
 CMD ["node", "server.js"]

@@ -1,7 +1,19 @@
 // FILE: web/app/guidelines/page.tsx
 import Link from "next/link";
 import GuidelinesFilters from "@/app/components/GuidelinesFilters";
-export const dynamic = "force-dynamic";
+
+// ✅ ISR: yaklaşık 30 gün
+export const revalidate = 60 * 60 * 24 * 30;
+
+// Liste için cache tag’leri (on‑demand revalidation ile bozulur)
+const listTags = (lang?: string, section?: string, q?: string) => {
+  const tags = ["guidelines:list"] as string[];
+  if (lang) tags.push(`guidelines:list:lang:${lang}`);
+  if (section) tags.push(`guidelines:list:section:${section}`);
+  // Arama için çok ince taneli tag vermiyoruz; genel bir tag yeterli
+  if (q) tags.push("guidelines:list:q");
+  return tags;
+};
 
 type Guideline = {
   _id?: string;
@@ -36,7 +48,10 @@ export default async function GuidelinesPage({
   if (section) api.searchParams.set("section", section);
   if (q) api.searchParams.set("q", q);
 
-  const res = await fetch(api.toString(), { cache: "no-store" });
+  // ✅ ISR + tag’li fetch
+  const res = await fetch(api.toString(), {
+    next: { revalidate, tags: listTags(lang, section, q) },
+  });
   const data = (await res.json()) as Resp;
   const items = data.ok ? data.items || [] : [];
 
@@ -67,7 +82,7 @@ export default async function GuidelinesPage({
                 <div className="min-w-0">
                   <div className="text-base font-semibold">
                     {g.url ? (
-                      <a className="underline break-words" href={g.url} target="_blank">
+                      <a className="underline break-words" href={g.url} target="_blank" rel="noreferrer">
                         {g.title}
                       </a>
                     ) : (
@@ -91,3 +106,5 @@ export default async function GuidelinesPage({
     </div>
   );
 }
+
+

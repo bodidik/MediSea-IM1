@@ -1,4 +1,9 @@
 // FILE: web/app/sections/endokrinoloji/page.tsx
+// FILE: web/app/sections/<bolum>/page.tsx
+export { default } from "../[section]/page";
+export const dynamic = "force-dynamic";
+
+
 const topicsEndo = [
 { title: "Tip 2 Diyabet – Tanı ve Tedavi", slug: "t2dm-tani-tedavi" },
 { title: "Tip 1 Diyabet ve İnsülin Yönetimi", slug: "t1dm-insulin-yonetimi" },

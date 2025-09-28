@@ -1,10 +1,15 @@
-// FILE: server/routes/admin.import.routes.js
-const express = require("express");
-const router = express.Router();
-const ctrl = require("../controllers/admin.import.controller");
+// FILE: server/routes/admin.import.routes.js (ESM)
+import express from "express";
+import * as ctrl from "../controllers/admin.import.controller.js";
 
-// Basit JSON body bekler (CSV de "data" alanı içinde string)
+
+const router = express.Router();
+
+
+// JSON body bekler (CSV ise gövde içinde string alanı kullanın)
+// Not: server.js'te global express.json var; burada tekrar etmek optional.
 router.post("/videos", ctrl.importVideos);
 router.post("/notes", ctrl.importNotes);
 
-module.exports = router;
+
+export default router;

@@ -1,7 +1,11 @@
 ﻿// FILE: web/app/cases/page.tsx
-"use client";
-import React from "react";
 import Link from "next/link";
+
+// ✅ ISR: yaklaşık 30 gün
+export const revalidate = 60 * 60 * 24 * 30;
+
+// Liste için cache tag’leri (on‑demand revalidation ile bozulur)
+const listTags = ["cases:list"] as const;
 
 type CaseRow = {
   slug: string;
@@ -9,55 +13,39 @@ type CaseRow = {
   createdAt?: string;
   updatedAt?: string;
 };
+
 type ListResp = { ok: boolean; items?: CaseRow[]; error?: string };
 
-export default function CasesIndexPage() {
-  const [rows, setRows] = React.useState<CaseRow[] | null>(null);
-  const [err, setErr] = React.useState<string | null>(null);
-  const [loading, setLoading] = React.useState(true);
+export default async function CasesIndexPage() {
+  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
 
-  async function load() {
-    setLoading(true);
-    setErr(null);
-    try {
-      const r = await fetch("/api/cases", { cache: "no-store" });
-      const j: ListResp = await r.json();
-      if (!j.ok) throw new Error(j.error || "Yükleme hatası");
-      setRows(j.items || []);
-    } catch (e: any) {
-      setErr(e?.message || "ERR");
-      setRows([]);
-    } finally {
-      setLoading(false);
-    }
+  // ✅ ISR + tag’li fetch
+  const r = await fetch(`${backend}/api/cases`, {
+    next: { revalidate, tags: [...listTags] },
+  });
+
+  if (!r.ok) {
+    return (
+      <div className="p-4 md:p-8 max-w-5xl mx-auto">
+        <div className="rounded-xl border p-3 text-sm text-red-600 bg-white">Liste alınamadı</div>
+      </div>
+    );
   }
 
-  React.useEffect(() => {
-    load();
-  }, []);
+  const data = (await r.json()) as ListResp;
+  const rows = data.ok ? data.items || [] : [];
 
   return (
     <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl md:text-3xl font-bold">Vaka Çözümleri</h1>
-        <button onClick={load} className="px-3 py-2 rounded-lg border text-sm" disabled={loading}>
-          {loading ? "…" : "Yenile"}
-        </button>
+        {/* İstersen client taraflı bir yenile düğmesi yerine sayfayı yeniden ziyaret etmek yeterli */}
+        <Link href="/cases" className="px-3 py-2 rounded-lg border text-sm">Yenile</Link>
       </div>
 
-      <p className="text-sm text-gray-600">
-        Klinik öykü toplama pratiği için soru soran vaka akışları.
-      </p>
+      <p className="text-sm text-gray-600">Klinik öykü toplama pratiği için soru soran vaka akışları.</p>
 
-      {err && <div className="rounded-xl border p-3 text-sm text-red-600 bg-white">{err}</div>}
-
-      {!rows ? (
-        <ul className="grid gap-3">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <li key={i} className="h-20 rounded-2xl bg-gray-100" />
-          ))}
-        </ul>
-      ) : rows.length === 0 ? (
+      {rows.length === 0 ? (
         <div className="text-sm text-gray-500">Kayıtlı vaka bulunamadı.</div>
       ) : (
         <ul className="grid gap-3">
@@ -81,3 +69,5 @@ export default function CasesIndexPage() {
     </div>
   );
 }
+
+

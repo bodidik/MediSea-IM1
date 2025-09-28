@@ -1,9 +1,17 @@
 // FILE: web/app/cases/[slug]/page.tsx
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
+// ✅ ISR: yaklaşık 30 gün
+export const revalidate = 60 * 60 * 24 * 30;
+
+// Tekil vaka için tag seti
+const caseTags = (slug: string) => [
+  `case:${slug}`,
+  "cases:detail",
+];
 
 type Ref = { label: string; url?: string; year?: number | null };
+
 type SimilarLite = { slug: string; title: string; section?: string; updatedAt?: string };
 
 type CaseDetail = {
@@ -23,9 +31,10 @@ export default async function CaseDetailPage({ params }: { params: { slug: strin
   const slug = decodeURIComponent(params.slug);
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
 
+  // ✅ ISR + tag’li fetch (detay + benzerler)
   const [detailRes, similarRes] = await Promise.all([
-    fetch(`${backend}/api/cases/${encodeURIComponent(slug)}`, { cache: "no-store" }),
-    fetch(`${backend}/api/cases/${encodeURIComponent(slug)}/similar?limit=6`, { cache: "no-store" }),
+    fetch(`${backend}/api/cases/${encodeURIComponent(slug)}`, { next: { revalidate, tags: caseTags(slug) } }),
+    fetch(`${backend}/api/cases/${encodeURIComponent(slug)}/similar?limit=6`, { next: { revalidate, tags: ["cases:list"] } }),
   ]);
 
   if (!detailRes.ok) {
@@ -130,4 +139,3 @@ export default async function CaseDetailPage({ params }: { params: { slug: strin
     </div>
   );
 }
-

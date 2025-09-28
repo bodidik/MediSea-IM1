@@ -1,4 +1,7 @@
 // FILE: web/app/sections/gastroenteroloji/page.tsx
+export { default } from "../[section]/page";
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import NavCard from "@/app/components/NavCard";
 
