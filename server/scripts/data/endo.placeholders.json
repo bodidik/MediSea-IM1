@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "slug": "endo-placeholder-1",
+      "title": "Endokrin Placeholder 1",
+      "section": "endokrinoloji",
+      "summary": "Geçici içerik — güncellenecek",
+      "status": "draft"
+    },
+    {
+      "slug": "endo-placeholder-2",
+      "title": "Endokrin Placeholder 2",
+      "section": "endokrinoloji",
+      "summary": "Geçici içerik — detay eklenecek",
+      "status": "draft"
+    }
+  ]
+}
