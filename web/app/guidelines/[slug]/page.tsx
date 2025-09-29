@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // FILE: web/app/guidelines/[slug]/page.tsx
 import Link from "next/link";
 
@@ -96,3 +97,4 @@ export default async function GuidelineDetail({ params }: { params: { slug: stri
     </div>
   );
 }
+
