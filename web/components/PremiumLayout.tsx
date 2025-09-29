@@ -1,6 +1,4 @@
 // FILE: components/PremiumLayout.tsx
-"use client";
-
 import Link from "next/link";
 import React from "react";
 
@@ -66,3 +64,4 @@ export default function PremiumLayout({ children }: { children: React.ReactNode 
     </div>
   );
 }
+
