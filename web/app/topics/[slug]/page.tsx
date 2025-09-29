@@ -1,5 +1,5 @@
 /** GET /api/topics/:slug */
-export async function detail(req, res) {
+async function detail(req, res) {
   try {
     const slug = String(req.params.slug || "");
     const doc = await Topic.findOne({ slug }).lean();
@@ -27,3 +27,4 @@ export async function detail(req, res) {
     res.status(500).json({ ok: false, error: err.message });
   }
 }
+
