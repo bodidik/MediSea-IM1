@@ -1,6 +1,6 @@
 // FILE: web/app/topics/page.tsx
 import Link from "next/link";
-import TopicsFilters from "@/components/topics/filters";
+import TopicsFilters from "@/app/topics/_components/TopicsFilters";
 
 // ❌ force-dynamic yerine ISR: yaklaşık 30 gün
 export const revalidate = 60 * 60 * 24 * 30;
@@ -167,4 +167,5 @@ export default async function TopicsIndex({
     </div>
   );
 }
+
 
