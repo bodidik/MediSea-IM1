@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+const TopicsFilters = dynamic(() => import("@/app/topics/_components/TopicsFilters"), { ssr: false }) as any;
 // FILE: web/app/topics/page.tsx
 import Link from "next/link";
 // ❌ force-dynamic yerine ISR: yaklaşık 30 gün
