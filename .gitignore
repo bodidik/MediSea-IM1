@@ -32,3 +32,12 @@ Thumbs.db
 
 # Coverage
 coverage/
+# --- mediSea web ignores ---
+web/.next/
+web/dist/
+web/coverage/
+web/tsconfig.tsbuildinfo
+web/*.tsbuildinfo
+web/*.bak
+web/*ts-error*.txt
+web/node_modules.zip
