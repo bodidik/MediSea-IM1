@@ -3,6 +3,7 @@
 export type Option = { key: string; text: string };
 
 export type Question = {
+  section?: string;
   title?: string;
   id: string;                 // question id (UI tarafı)
   contentId?: string;         // SR/işaretleme vb. için tekil id
@@ -12,4 +13,5 @@ export type Question = {
   explanation?: string;       // açıklama
   vignette?: string;          // vaka metni (opsiyonel)
 };
+
 
