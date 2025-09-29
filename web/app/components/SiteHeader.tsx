@@ -20,8 +20,7 @@ return (
 
 
 {/* Sağ: Dil anahtarı (küçük ada) */}
-<div className="hidden md:block"><LangSwitch compact /></div>
-</div>
++ <div className="hidden md:block"><LangSwitch /></div></div>
 </header>
 );
 }
