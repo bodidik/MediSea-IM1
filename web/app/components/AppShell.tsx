@@ -1,5 +1,7 @@
 ﻿// FILE: web/app/components/AppShell.tsx
 import SiteHeader from "@/app/components/SiteHeader";
+import Link from "next/link";
+import React from "react";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
@@ -12,9 +14,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <div>© {new Date().getFullYear()} MediSea</div>
             <div className="opacity-60">İç Hastalıkları Eğitim Platformu</div>
             <div className="md:ml-auto flex items-center gap-3">
-              <a className="underline" href="/about">Hakkında</a>
-              <a className="underline" href="/privacy">Gizlilik</a>
-              <a className="underline" href="/contact">İletişim</a>
+              <Link href="/about" className="underline">Hakkında</Link>
+              <Link href="/privacy" className="underline">Gizlilik</Link>
+              <Link href="/contact" className="underline">İletişim</Link>
             </div>
           </div>
         </div>
