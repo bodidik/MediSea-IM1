@@ -28,6 +28,14 @@ export type DetailResp = {
 };
 
 export default async function SectionDetail({ params }: { params: { section: string } }) {
+  /* PLACEHOLDER_GATE */
+  if (process.env.NEXT_PUBLIC_PLACEHOLDER === "1") {
+    return (
+      <div className="mx-auto max-w-3xl p-4 text-gray-600">
+        Sayfa içeriği yakında.
+      </div>
+    );
+  }
   const section = decodeURIComponent(params.section);
   const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
 
@@ -158,4 +166,5 @@ function ClientView({ section, data }: { section: string; data: DetailResp }) {
     </div>
   );
 }
+
 
