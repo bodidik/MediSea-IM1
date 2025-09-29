@@ -1,4 +1,4 @@
-﻿// FILE: web/app/components/topics/filters.tsx
+// FILE: web/app/components/topics/filters.tsx
 "use client";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -155,3 +155,4 @@ export default function TopicsFilters(props: {
 // ...
 // Filtre formunun olduğu bloğu şununla değiştirin:
 // <TopicsFilters lang={lang} section={section} q={q} limit={perPage} page={page} total={total} />
+
