@@ -1,4 +1,5 @@
-﻿// FILE: web/app/cases/page.tsx
+export const dynamic = "force-dynamic";
+// FILE: web/app/cases/page.tsx
 import Link from "next/link";
 
 // ✅ ISR: yaklaşık 30 gün
@@ -69,5 +70,6 @@ export default async function CasesIndexPage() {
     </div>
   );
 }
+
 
 
