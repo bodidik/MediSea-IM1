@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-async-client-component */
+
 "use client";
 // FILE: web/app/sections/[section]/page.tsx
 // ISR + Tag’li veri çekimi için sunucu bileşenine çevrildi.
