@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 export const dynamic = 'force-dynamic';
 import { useEffect, useState } from 'react';
 
-const API = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:4000';
+const API = process.env.NEXT_PUBLIC_BACKEND_URL || '${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}';
 
 export default function KayseriTip(){
   const [watermark,setWatermark] = useState('');
@@ -16,3 +16,4 @@ export default function KayseriTip(){
     </div>
   );
 }
+

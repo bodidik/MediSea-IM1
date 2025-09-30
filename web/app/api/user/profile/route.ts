@@ -1,4 +1,4 @@
-﻿// FILE: web/app/api/user/profile/route.ts
+// FILE: web/app/api/user/profile/route.ts
 import { NextRequest } from "next/server";
 
 function getUidFromCookie(req: NextRequest) {
@@ -8,7 +8,7 @@ function getUidFromCookie(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
   const externalId = getUidFromCookie(req);
   const url = new URL("/api/user/profile", backend);
   url.searchParams.set("externalId", externalId);
@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   // alias: POST ile track deÄŸiÅŸtirmeyi de destekleyelim (forward)
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
   const externalId = getUidFromCookie(req);
   const body = await req.json().catch(() => ({}));
   const url = new URL("/api/user/track", backend);
@@ -33,3 +33,4 @@ export async function POST(req: NextRequest) {
   const j = await r.json();
   return new Response(JSON.stringify(j), { headers: { "Content-Type": "application/json" } });
 }
+

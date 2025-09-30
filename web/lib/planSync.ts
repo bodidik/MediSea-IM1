@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 
 export async function syncPlan() {
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
   const cookieStore = cookies();
   const externalId = cookieStore.get("mk_uid")?.value || "guest";
 
@@ -28,3 +28,4 @@ export async function syncPlan() {
     console.error("syncPlan error", e);
   }
 }
+

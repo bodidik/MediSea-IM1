@@ -1,8 +1,8 @@
-﻿// FILE: web/app/api/plan/upgrade/route.ts
+// FILE: web/app/api/plan/upgrade/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
 
   // mk_uid â†’ externalId
   const cookies = req.headers.get("cookie") || "";
@@ -30,3 +30,4 @@ export async function POST(req: NextRequest) {
   }
   return res;
 }
+

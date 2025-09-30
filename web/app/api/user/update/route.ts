@@ -1,8 +1,8 @@
-﻿// FILE: web/app/api/user/update/route.ts
+// FILE: web/app/api/user/update/route.ts
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
 
   const cookies = req.headers.get("cookie") || "";
   const m = cookies.match(/(?:^|; )mk_uid=([^;]+)/);
@@ -20,3 +20,4 @@ export async function POST(req: NextRequest) {
     headers: { "Content-Type": "application/json" },
   });
 }
+

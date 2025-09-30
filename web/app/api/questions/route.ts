@@ -1,4 +1,4 @@
-﻿import { cookies } from "next/headers";
+import { cookies } from "next/headers";
 
 /**
  * Proxy: /api/questions  â†’  BACKEND:/api/questions
@@ -8,7 +8,7 @@ export async function GET(req: Request) {
   try {
     const backend =
       process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/+$/, "") ||
-      "http://127.0.0.1:4000";
+      "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
 
     const inUrl = new URL(req.url);
 
@@ -67,3 +67,4 @@ export async function GET(req: Request) {
     });
   }
 }
+

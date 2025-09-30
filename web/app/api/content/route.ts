@@ -1,8 +1,8 @@
-﻿// FILE: web/app/api/admin/content/route.ts
+// FILE: web/app/api/admin/content/route.ts
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest){
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
   const url = new URL("/api/admin/content", backend);
   // Query aynen geÃ§ir
   req.nextUrl.searchParams.forEach((v, k) => url.searchParams.set(k, v));
@@ -14,3 +14,4 @@ export async function GET(req: NextRequest){
     status: r.status
   });
 }
+
