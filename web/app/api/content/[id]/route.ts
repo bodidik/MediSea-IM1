@@ -3,7 +3,6 @@ import { backendBase } from "@/lib/backend";
 import { NextRequest } from "next/server";
 
 export async function GET(_req: NextRequest, context: { params: { id: string } }) {
-const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const backend = backendBase();
   const id = context.params.id;
   const r = await fetch(`${backend}/api/content/${encodeURIComponent(id)}`, { cache: "no-store" });
@@ -13,6 +12,7 @@ const backend = backendBase();
     status: r.status,
   });
 }
+
 
 
 

@@ -3,7 +3,6 @@ import { backendBase } from "@/lib/backend";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest){
-const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const backend = backendBase();
   const ids = req.nextUrl.searchParams.getAll("ids"); // Ã§oklu ids desteÄŸi
   const url = new URL("/api/content/preview", backend);
@@ -20,6 +19,7 @@ const backend = backendBase();
     status: r.status
   });
 }
+
 
 
 

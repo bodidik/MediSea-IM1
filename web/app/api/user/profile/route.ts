@@ -9,7 +9,6 @@ function getUidFromCookie(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const backend = backendBase();
   const externalId = getUidFromCookie(req);
   const url = new URL("/api/user/profile", backend);
@@ -21,7 +20,6 @@ const backend = backendBase();
 
 export async function POST(req: NextRequest) {
   // alias: POST ile track deÄŸiÅŸtirmeyi de destekleyelim (forward)
-const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const backend = backendBase();
   const externalId = getUidFromCookie(req);
   const body = await req.json().catch(() => ({}));
@@ -36,6 +34,7 @@ const backend = backendBase();
   const j = await r.json();
   return new Response(JSON.stringify(j), { headers: { "Content-Type": "application/json" } });
 }
+
 
 
 

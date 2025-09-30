@@ -2,7 +2,6 @@ import { cookies } from "next/headers";
 import { backendBase } from "@/lib/backend";
 
 export async function GET(req: Request) {
-const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const backend = backendBase();
 
   const jar = cookies();
@@ -26,6 +25,7 @@ const backend = backendBase();
     );
   }
 }
+
 
 
 

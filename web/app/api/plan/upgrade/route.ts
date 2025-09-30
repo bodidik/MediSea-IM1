@@ -3,7 +3,6 @@ import { backendBase } from "@/lib/backend";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const backend = backendBase();
 
   // mk_uid â†’ externalId
@@ -32,6 +31,7 @@ const backend = backendBase();
   }
   return res;
 }
+
 
 
 

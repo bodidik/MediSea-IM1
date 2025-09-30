@@ -2,7 +2,6 @@ import { backendBase } from "@/lib/backend";
 // Backend Ã§Ä±ktÄ±sÄ±nÄ± (all/premium/totals) frontend'in beklediÄŸi rows yapÄ±sÄ±na Ã§evirir.
 
 export async function GET(_req: Request) {
-const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const backend = backendBase();
 
   // AsÄ±l endpoint
@@ -43,6 +42,7 @@ const backend = backendBase();
     headers: { "Content-Type": "application/json" },
   });
 }
+
 
 
 

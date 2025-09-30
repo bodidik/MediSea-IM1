@@ -3,7 +3,6 @@ import { backendBase } from "@/lib/backend";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const backend = backendBase();
 
   const cookies = req.headers.get("cookie") || "";
@@ -22,6 +21,7 @@ const backend = backendBase();
     headers: { "Content-Type": "application/json" },
   });
 }
+
 
 
 

@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
+import { backendBase } from "@/lib/backend";
 
 export const runtime = "nodejs";          // edge deÄŸil, Node runtime
 export const dynamic = "force-dynamic";   // cache yok
 
 export async function GET(req: Request) {
   // Ã–nce server runtime env, sonra public, en sonda dev fallback
-const backendBase = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
-const backend = backendBase.replace(/\/+$/, "");
+const backend = backendBase();
 
   const { search } = new URL(req.url);
 
@@ -40,6 +40,7 @@ const backend = backendBase.replace(/\/+$/, "");
     );
   }
 }
+
 
 
 

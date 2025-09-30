@@ -3,7 +3,6 @@ import { backendBase } from "@/lib/backend";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest){
-const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const backend = backendBase();
   const url = new URL("/api/admin/content", backend);
   // Query aynen geÃ§ir
@@ -16,6 +15,7 @@ const backend = backendBase();
     status: r.status
   });
 }
+
 
 
 
