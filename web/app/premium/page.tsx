@@ -1,4 +1,5 @@
-﻿// FILE: web/app/premium/page.tsx
+import dynamic from "next/dynamic";
+// FILE: web/app/premium/page.tsx
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -128,3 +129,4 @@ export default function PremiumPage() {
     </div>
   );
 }
+
