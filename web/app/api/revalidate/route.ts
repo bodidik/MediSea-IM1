@@ -1,5 +1,6 @@
 // FILE: web/app/api/revalidate/route.ts
 // On-Demand Revalidation for App Router (Next.js 14)
+import { backendBase } from "@/lib/backend";
 // Secure with Bearer token. Supports tag(s) and path(s).
 
 import { NextResponse } from "next/server";
@@ -58,3 +59,4 @@ export function GET() {
   // Optional health endpoint (does not revalidate). Useful for uptime checks.
   return NextResponse.json({ ok: true, service: "revalidate" });
 }
+

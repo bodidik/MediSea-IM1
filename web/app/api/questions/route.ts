@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { backendBase } from "@/lib/backend";
 
 /**
  * Proxy: /api/questions  â†’  BACKEND:/api/questions
@@ -7,7 +8,7 @@ import { cookies } from "next/headers";
 export async function GET(req: Request) {
   try {
 const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
-const backend = backendBase.replace(/\/+$/, "");
+const backend = backendBase();
 
     const inUrl = new URL(req.url);
 
@@ -66,6 +67,7 @@ const backend = backendBase.replace(/\/+$/, "");
     });
   }
 }
+
 
 
 

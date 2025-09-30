@@ -1,4 +1,5 @@
 // FILE: web/app/api/programs/[...path]/route.ts
+import { backendBase } from "@/lib/backend";
 import type { NextRequest } from "next/server";
 
 const BACKEND =
@@ -78,3 +79,4 @@ export async function DELETE(req: NextRequest, ctx: { params: { path?: string[] 
 export async function OPTIONS(req: NextRequest, ctx: { params: { path?: string[] } }) {
   return proxy(req, "OPTIONS", getPathParam(ctx.params));
 }
+

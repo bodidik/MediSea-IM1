@@ -1,9 +1,10 @@
 // FILE: web/app/api/admin/import/[type]/route.ts
+import { backendBase } from "@/lib/backend";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest, { params }: { params: { type: string } }) {
 const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
-const backend = backendBase.replace(/\/+$/, "");
+const backend = backendBase();
   const { type } = params; // "videos" | "notes"
   const body = await req.json().catch(()=> ({}));
 
@@ -17,6 +18,7 @@ const backend = backendBase.replace(/\/+$/, "");
   const j = await r.json();
   return new Response(JSON.stringify(j), { headers: { "Content-Type": "application/json" } });
 }
+
 
 
 
