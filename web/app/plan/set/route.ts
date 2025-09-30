@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 // POST body: { plan: "free" | "premium" | "pro" }
 // Alternatif: ?plan=premium ÅŸeklinde query de kabul edilir.
 export async function POST(req: NextRequest) {
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
+const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 
   // cookie'den userId
   const cookies = req.headers.get("cookie") || "";
@@ -28,4 +28,5 @@ export async function POST(req: NextRequest) {
   const j = await r.json();
   return new Response(JSON.stringify(j), { headers: { "Content-Type": "application/json" } });
 }
+
 

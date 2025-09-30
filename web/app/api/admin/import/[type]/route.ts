@@ -2,7 +2,7 @@
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest, { params }: { params: { type: string } }) {
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
   const { type } = params; // "videos" | "notes"
   const body = await req.json().catch(()=> ({}));
 
@@ -16,3 +16,4 @@ export async function POST(req: NextRequest, { params }: { params: { type: strin
   const j = await r.json();
   return new Response(JSON.stringify(j), { headers: { "Content-Type": "application/json" } });
 }
+

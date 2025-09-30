@@ -2,7 +2,7 @@
 import { NextRequest } from "next/server";
 
 export async function GET(_req: NextRequest, context: { params: { id: string } }) {
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000";
+const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
   const id = context.params.id;
   const r = await fetch(`${backend}/api/content/${encodeURIComponent(id)}`, { cache: "no-store" });
   const j = await r.json();
@@ -11,3 +11,4 @@ export async function GET(_req: NextRequest, context: { params: { id: string } }
     status: r.status,
   });
 }
+
