@@ -1,8 +1,8 @@
 // FILE: web/app/components/SiteHeader.tsx (Server Component)
 import Link from "next/link";
-import LangSwitch from "@/app/components/LangSwitch"; // client adağı (küçük)
 import navConfig from "@/app/config/nav";
 import dynamic from "next/dynamic";
+const LangSwitch = dynamic(() => import("./LangSwitch"), { ssr: false });
 const HeaderClient = dynamic(() => import("./HeaderClient"), { ssr: false });
 
 
