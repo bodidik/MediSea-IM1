@@ -41,3 +41,5 @@ web/*.tsbuildinfo
 web/*.bak
 web/*ts-error*.txt
 web/node_modules.zip
+
+web/.env.local
