@@ -37,7 +37,7 @@ export default async function CaseDetailPage({ params }: { params: { slug: strin
     );
   }
   const slug = decodeURIComponent(params.slug);
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
+const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
 
   // ✅ ISR + tag’li fetch (detay + benzerler)
   const [detailRes, similarRes] = await Promise.all([
@@ -147,4 +147,5 @@ export default async function CaseDetailPage({ params }: { params: { slug: strin
     </div>
   );
 }
+
 

@@ -35,7 +35,7 @@ export default async function GuidelineDetail({ params }: { params: { slug: stri
     );
   }
   const slug = decodeURIComponent(params.slug);
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
+const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
 
   // ✅ ISR + tag’li fetch
   const res = await fetch(`${backend}/api/guidelines/${slug}`, {
@@ -105,5 +105,6 @@ export default async function GuidelineDetail({ params }: { params: { slug: stri
     </div>
   );
 }
+
 
 

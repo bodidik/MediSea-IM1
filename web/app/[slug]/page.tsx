@@ -40,7 +40,7 @@ async function fetchJSON<T>(url: string): Promise<T | null> {
 
 export default async function TopicPage({ params }: { params: { slug: string } }) {
   const slug = decodeURIComponent(params.slug);
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
+const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
 
   const jar = cookies();
   const plan = (jar.get("mk_plan")?.value?.toUpperCase() || "V") as "V" | "M" | "P";
@@ -215,4 +215,5 @@ export default async function TopicPage({ params }: { params: { slug: string } }
     </div>
   );
 }
+
 

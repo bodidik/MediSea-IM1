@@ -37,7 +37,7 @@ export default async function SectionDetail({ params }: { params: { section: str
     );
   }
   const section = decodeURIComponent(params.section);
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:4000";
+const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
 
   // ✅ ISR + tag’li fetch (CDN cache + /api/revalidate ile anında tazeleme)
   const r = await fetch(`${backend}/api/sections/${encodeURIComponent(section)}`,
@@ -166,5 +166,6 @@ function ClientView({ section, data }: { section: string; data: DetailResp }) {
     </div>
   );
 }
+
 
 

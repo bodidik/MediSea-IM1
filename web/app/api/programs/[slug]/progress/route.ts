@@ -8,7 +8,7 @@ function getUid(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
-const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
   const externalId = getUid(req);
   const url = new URL(`/api/programs/${params.slug}/progress`, backend);
   url.searchParams.set("externalId", externalId);
@@ -18,7 +18,7 @@ const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 }
 
 export async function POST(req: NextRequest, { params }: { params: { slug: string } }) {
-const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
   const externalId = getUid(req);
   const body = await req.json().catch(()=> ({}));
   const url = new URL(`/api/programs/${params.slug}/progress/tick`, backend);
@@ -27,4 +27,5 @@ const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
   const j = await r.json();
   return new Response(JSON.stringify(j), { headers: { "Content-Type": "application/json" } });
 }
+
 

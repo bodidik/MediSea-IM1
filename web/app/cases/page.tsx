@@ -18,7 +18,7 @@ type CaseRow = {
 type ListResp = { ok: boolean; items?: CaseRow[]; error?: string };
 
 export default async function CasesIndexPage() {
-const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
 
   // ✅ ISR + tag’li fetch
   const r = await fetch(`${backend}/api/cases`, {
@@ -70,6 +70,7 @@ const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
     </div>
   );
 }
+
 
 
 

@@ -41,7 +41,7 @@ export default async function GuidelinesPage({
   const lang = getParam(searchParams, "lang", "TR");
   const section = getParam(searchParams, "section", "");
   const q = getParam(searchParams, "q", "");
-const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
   const api = new URL(`${backend}/api/guidelines`);
   if (lang) api.searchParams.set("lang", lang);
   if (section) api.searchParams.set("section", section);
@@ -105,6 +105,7 @@ const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
     </div>
   );
 }
+
 
 
 
