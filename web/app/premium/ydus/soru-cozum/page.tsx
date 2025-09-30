@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-
-const API = process.env.NEXT_PUBLIC_API_URL || '${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}';
+const API = process.env.NEXT_PUBLIC_API_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 const PAGE_SIZE = 10;
 
 type Opt = { key: string; text: string };
@@ -150,4 +149,6 @@ export default function YdusSoruCozum() {
     </main>
   );
 }
+
+
 

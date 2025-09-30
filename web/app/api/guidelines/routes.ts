@@ -8,7 +8,7 @@ export async function GET(req: Request) {
   const backend =
     process.env.BACKEND_URL ||
     process.env.NEXT_PUBLIC_BACKEND_URL ||
-    "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
+    process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 
   const { search } = new URL(req.url);
 
@@ -42,4 +42,5 @@ export async function GET(req: Request) {
     );
   }
 }
+
 

@@ -1,7 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-
-const API = process.env.NEXT_PUBLIC_API_URL || '${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}';
+const API = process.env.NEXT_PUBLIC_API_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 
 type Opt = { key:string; text:string };
 type Q = { _id?:string; title:string; stem:string; options:Opt[]; correct?:string; explain?:string };
@@ -114,4 +113,6 @@ export default function YdusDeneme(){
     </main>
   );
 }
+
+
 

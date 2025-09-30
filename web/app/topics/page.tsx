@@ -52,7 +52,7 @@ export default async function TopicsIndex({
   const page = Math.max(1, parseInt(pageStr || "1", 10));
 
   // Backend
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
+const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
   const api = new URL(`${backend}/api/topics`);
   if (lang) api.searchParams.set("lang", lang);
   if (section) api.searchParams.set("section", section);
@@ -167,6 +167,7 @@ export default async function TopicsIndex({
     </div>
   );
 }
+
 
 
 

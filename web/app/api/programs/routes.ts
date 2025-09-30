@@ -2,7 +2,7 @@
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const backend = process.env.NEXT_PUBLIC_BACKEND_URL || "${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000"}";
+const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
   const inUrl = new URL(req.url);
   const url = new URL("/api/programs", backend);
   const track = inUrl.searchParams.get("track");
@@ -11,4 +11,5 @@ export async function GET(req: NextRequest) {
   const j = await r.json();
   return new Response(JSON.stringify(j), { headers: { "Content-Type": "application/json" } });
 }
+
 
