@@ -1,8 +1,9 @@
-﻿// FILE: web/app/components/SiteHeader.tsx (Server Component)
+// FILE: web/app/components/SiteHeader.tsx (Server Component)
 import Link from "next/link";
 import LangSwitch from "@/app/components/LangSwitch"; // client adağı (küçük)
-import HeaderClient from "@/app/components/HeaderClient"; // client: aktif link + menüler
 import navConfig from "@/app/config/nav";
+import dynamic from "next/dynamic";
+const HeaderClient = dynamic(() => import("./HeaderClient"), { ssr: false });
 
 
 export default function SiteHeader() {
