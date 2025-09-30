@@ -2,7 +2,8 @@
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest){
-const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
+const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = backendBase.replace(/\/+$/, "");
   const url = new URL("/api/admin/content", backend);
   // Query aynen geÃ§ir
   req.nextUrl.searchParams.forEach((v, k) => url.searchParams.set(k, v));
@@ -14,6 +15,7 @@ const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000")
     status: r.status
   });
 }
+
 
 
 

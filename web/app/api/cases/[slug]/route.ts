@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
 
 export async function GET(req: Request) {
-const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
+const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = backendBase.replace(/\/+$/, "");
 
   const jar = cookies();
   const mk = jar.get("mk_uid")?.value || "guest";
@@ -24,5 +25,6 @@ const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000")
     );
   }
 }
+
 
 

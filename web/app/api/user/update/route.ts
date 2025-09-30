@@ -2,7 +2,8 @@
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
+const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = backendBase.replace(/\/+$/, "");
 
   const cookies = req.headers.get("cookie") || "";
   const m = cookies.match(/(?:^|; )mk_uid=([^;]+)/);
@@ -20,6 +21,7 @@ const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000")
     headers: { "Content-Type": "application/json" },
   });
 }
+
 
 
 

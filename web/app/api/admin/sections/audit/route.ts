@@ -2,7 +2,8 @@
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
-const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
+const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = backendBase.replace(/\/+$/, "");
   const inUrl = new URL(req.url);
   const url = new URL("/api/admin/sections/audit", backend);
   const models = inUrl.searchParams.get("models") || "videos,notes";
@@ -13,6 +14,7 @@ const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000")
   const j = await r.json();
   return new Response(JSON.stringify(j), { headers: { "Content-Type": "application/json" } });
 }
+
 
 
 

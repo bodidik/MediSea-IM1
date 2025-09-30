@@ -6,9 +6,8 @@ import { cookies } from "next/headers";
  */
 export async function GET(req: Request) {
   try {
-    const backend =
-      process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/+$/, "") ||
-      process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = backendBase.replace(/\/+$/, "");
 
     const inUrl = new URL(req.url);
 
@@ -67,5 +66,6 @@ export async function GET(req: Request) {
     });
   }
 }
+
 
 

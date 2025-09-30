@@ -2,7 +2,8 @@
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest){
-const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000").replace(/\/+$/, "");
+const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = backendBase.replace(/\/+$/, "");
   const ids = req.nextUrl.searchParams.getAll("ids"); // Ã§oklu ids desteÄŸi
   const url = new URL("/api/content/preview", backend);
   if (ids.length) {
@@ -18,6 +19,7 @@ const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000")
     status: r.status
   });
 }
+
 
 
 
