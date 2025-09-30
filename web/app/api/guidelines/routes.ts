@@ -5,10 +5,8 @@ export const dynamic = "force-dynamic";   // cache yok
 
 export async function GET(req: Request) {
   // Ã–nce server runtime env, sonra public, en sonda dev fallback
-  const backend =
-    process.env.BACKEND_URL ||
-    process.env.NEXT_PUBLIC_BACKEND_URL ||
-    process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backendBase = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
+const backend = backendBase.replace(/\/+$/, "");
 
   const { search } = new URL(req.url);
 
@@ -42,5 +40,6 @@ export async function GET(req: Request) {
     );
   }
 }
+
 
 
