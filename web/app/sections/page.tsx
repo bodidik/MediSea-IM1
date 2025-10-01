@@ -1,8 +1,8 @@
 // FILE: web/app/sections/page.tsx
 import Link from "next/link";
 import navConfig from "@/app/config/nav";
+export const revalidate = 0;
 export const dynamic = "force-dynamic";
-
 export default function SectionsIndex() {
   return (
     <div className="p-6 md:p-10 max-w-6xl mx-auto space-y-6">
@@ -24,5 +24,7 @@ export default function SectionsIndex() {
     </div>
   );
 }
+
+
 
 

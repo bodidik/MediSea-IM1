@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Merriweather, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import AppShell from "@/app/components/AppShell";
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 // Google Fonts (TR/EN uyumlu)
 const inter = Inter({
@@ -85,4 +87,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
 

@@ -1,5 +1,5 @@
+﻿"use client";
 // FILE: web/app/topics/error.tsx
-"use client";
 export default function ErrorTopics({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
 return (
 <div className="p-6 max-w-4xl mx-auto">
@@ -9,3 +9,4 @@ return (
 </div>
 );
 }
+

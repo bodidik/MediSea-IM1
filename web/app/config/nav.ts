@@ -1,4 +1,4 @@
-﻿// FILE: web/app/config/nav.ts
+// FILE: web/app/config/nav.ts
 
 // Üst gezinme menüsü
 export const topNav = [
@@ -29,3 +29,4 @@ export const sections = [
 // Tek export ile erişilebilir
 const navConfig = { topNav, sections };
 export default navConfig;
+

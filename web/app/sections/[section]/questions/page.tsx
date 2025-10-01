@@ -1,10 +1,11 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import QuestionRunComp from "@/components/QuestionRun"; // default export
 import type { Question } from "@/types/question";
-
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 type QuestionRunProps = {
   questions: Question[];
   onExhausted?: () => void;
@@ -96,3 +97,5 @@ export default function SectionQuestionsPage() {
     </div>
   );
 }
+
+

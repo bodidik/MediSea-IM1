@@ -43,3 +43,7 @@ web/*ts-error*.txt
 web/node_modules.zip
 
 web/.env.local
+
+server/.env
+server/.env
+web/.env.local

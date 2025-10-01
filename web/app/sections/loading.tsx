@@ -1,3 +1,5 @@
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 // FILE: web/app/sections/loading.tsx
 export default function LoadingSectionsIndex() {
   return (
@@ -11,3 +13,4 @@ export default function LoadingSectionsIndex() {
     </div>
   );
 }
+

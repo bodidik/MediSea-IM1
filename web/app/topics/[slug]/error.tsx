@@ -1,6 +1,5 @@
-
+﻿"use client";
 // FILE: web/app/topics/[slug]/error.tsx
-"use client";
 export default function ErrorTopic({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <div className="p-6 max-w-4xl mx-auto">

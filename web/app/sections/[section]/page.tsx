@@ -11,7 +11,7 @@ import SectionDetailFilters, { type Item } from "@/components/SectionDetailFilte
 import AddToSRButton from "@/components/AddToSRButton";
 
 // === ISR ayarı: bölüm sayfası varsayılan olarak 1 günde bir yeniden oluşturulsun ===
-export const revalidate = 0; // 1 gün (isteğe göre artırılabilir)
+// 1 gün (isteğe göre artırılabilir)
 
 // Tag’ler: on‑demand revalidation için
 const sectionTags = (section: string) => [
@@ -63,7 +63,8 @@ const backend = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000")
 // === İç client bileşeni (interaktivite: filtre, seçim, SR ekleme) ===
 // Not: aynı dosyada tutuldu, yeni dosya oluşturulmadı.
 import React, { useMemo, useState, useCallback } from "react";
-
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 function ClientView({ section, data }: { section: string; data: DetailResp }) {
   const [filtered, setFiltered] = useState<Item[] | null>(data.latest || []);
   const [selected, setSelected] = useState<Record<string, boolean>>({});
@@ -166,6 +167,8 @@ function ClientView({ section, data }: { section: string; data: DetailResp }) {
     </div>
   );
 }
+
+
 
 
 

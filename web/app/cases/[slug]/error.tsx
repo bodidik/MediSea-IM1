@@ -1,5 +1,5 @@
+﻿"use client";
 // FILE: web/app/cases/[slug]/error.tsx
-"use client";
 export default function ErrorCase({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <div className="p-6 max-w-4xl mx-auto">
@@ -9,3 +9,4 @@ export default function ErrorCase({ error, reset }: { error: Error & { digest?: 
     </div>
   );
 }
+
