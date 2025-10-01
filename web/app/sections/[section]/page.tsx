@@ -11,7 +11,7 @@ import SectionDetailFilters, { type Item } from "@/components/SectionDetailFilte
 import AddToSRButton from "@/components/AddToSRButton";
 
 // === ISR ayarı: bölüm sayfası varsayılan olarak 1 günde bir yeniden oluşturulsun ===
-export const revalidate = 60 * 60 * 24; // 1 gün (isteğe göre artırılabilir)
+export const revalidate = 0; // 1 gün (isteğe göre artırılabilir)
 
 // Tag’ler: on‑demand revalidation için
 const sectionTags = (section: string) => [
@@ -166,6 +166,7 @@ function ClientView({ section, data }: { section: string; data: DetailResp }) {
     </div>
   );
 }
+
 
 
 
