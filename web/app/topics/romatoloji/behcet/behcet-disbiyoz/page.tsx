@@ -1,18 +1,18 @@
-export const revalidate = 0;
+﻿export const revalidate = 0;
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 
 const RELATED = [
-  { title: "BH ve mikroorganizmalar (tetikleyiciler)", href: "/topics/behcet/behcet-mikroorganizmalar" },
-  { title: "Mikrobiyota modülasyonu: probiyotik/prebiyotik", href: "/topics/behcet/mikrobiyota-modulasyon" },
-  { title: "Oral ülserler: patogenez ve yönetim", href: "/topics/behcet/oral-ulserler" },
-  { title: "Göz tutulumu (üveit): tanı ve tedavi", href: "/topics/behcet/uveit" },
-  { title: "Vasküler tutulum: tromboz/anevrizma", href: "/topics/behcet/vaskuler-tutulum" },
-  { title: "Nöro-Behçet: klinik spektrum ve görüntüleme", href: "/topics/behcet/neuro-behcet" },
-  { title: "Muko-kutanöz bulgular ve algoritma", href: "/topics/behcet/mukokutanoz" },
-  { title: "Gebelik ve Behçet: ilaç güvenliği/izlem", href: "/topics/behcet/gebelik" },
-  { title: "Tedavi: kolşisin, anti-TNF, apremilast, yeni ajanlar", href: "/topics/behcet/tedavi" }
+  { title: "BH ve mikroorganizmalar (tetikleyiciler)", href: "/topics/romatoloji/behcet/behcet-mikroorganizmalar" },
+  { title: "Mikrobiyota modülasyonu: probiyotik/prebiyotik", href: "/topics/romatoloji/behcet/mikrobiyota-modulasyon" },
+  { title: "Oral ülserler: patogenez ve yönetim", href: "/topics/romatoloji/behcet/oral-ulserler" },
+  { title: "Göz tutulumu (üveit): tanı ve tedavi", href: "/topics/romatoloji/behcet/uveit" },
+  { title: "Vasküler tutulum: tromboz/anevrizma", href: "/topics/romatoloji/behcet/vaskuler-tutulum" },
+  { title: "Nöro-Behçet: klinik spektrum ve görüntüleme", href: "/topics/romatoloji/behcet/neuro-behcet" },
+  { title: "Muko-kutanöz bulgular ve algoritma", href: "/topics/romatoloji/behcet/mukokutanoz" },
+  { title: "Gebelik ve Behçet: ilaç güvenliği/izlem", href: "/topics/romatoloji/behcet/gebelik" },
+  { title: "Tedavi: kolşisin, anti-TNF, apremilast, yeni ajanlar", href: "/topics/romatoloji/behcet/tedavi" }
 ];
 
 export default function Page() {
