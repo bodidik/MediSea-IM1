@@ -3,19 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3002 -H 0.0.0.0",
+    "dev": "next dev -p 3200 -H 0.0.0.0",
     "build": "next build",
-    "start": "next start -p 3100 -H 0.0.0.0",
+    "start": "next start -p 3300 -H 0.0.0.0",
     "lint": "next lint",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
     "gray-matter": "^4.0.3",
-    "next": "^14.2.32",
+    "next": "^14.2.3",
     "next-mdx-remote": "^5.0.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "remark-gfm": "^4.0.1",
     "tslib": "^2.8.1"
   },
