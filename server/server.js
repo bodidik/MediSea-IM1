@@ -14,7 +14,8 @@ import sectionsContentRoutes from "./routes/sections.js";
 import sectionsCountsRoutes from "./routes/sectionsCounts.js";
 import topicRoutes from "./routes/topic.routes.js";
 import guidelinesRoutes from "./routes/guidelines.routes.js";
-import topicAdminRoutes from "./routes/topic.admin.routes.js"; // â¬…ï¸ Admin bulk
+import topicAdminRoutes from "./routes/topic.admin.routes.js"; 
+import translateRoutes from "./routes/translate.routes.js"; // 🆕 Translate ekledik
 
 dotenv.config();
 
@@ -33,11 +34,11 @@ app.use(
   })
 );
 
-// JSON body parser (CSV iÃ§in router iÃ§inde express.text kullanÄ±yoruz)
+// JSON body parser (CSV için router içinde express.text kullanıyoruz)
 app.use(express.json({ limit: "2mb" }));
 app.use(morgan("dev"));
 
-/* --- MongoDB (kalÄ±cÄ± & dayanÄ±klÄ± baÄŸlanma) --- */
+/* --- MongoDB --- */
 const MONGO =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/medknowledge";
 let DB_LAST_ERROR = null;
@@ -46,8 +47,8 @@ let DB_READY = false;
 async function connectMongo() {
   try {
     await mongoose.connect(MONGO, {
-      serverSelectionTimeoutMS: 5000, // hÄ±zlÄ± fail
-      family: 4, // IPv4
+      serverSelectionTimeoutMS: 5000,
+      family: 4,
     });
     DB_READY = true;
     DB_LAST_ERROR = null;
@@ -56,12 +57,11 @@ async function connectMongo() {
     DB_READY = false;
     DB_LAST_ERROR = err?.message || String(err);
     console.error("[BOOT] Mongo connection error:", DB_LAST_ERROR);
-    // Not: Sunucuyu kapatmÄ±yoruz; API ayakta kalsÄ±n.
   }
 }
 connectMongo();
 
-/* --- Basit rol taÅŸÄ±ma (demo) --- */
+/* --- Basit rol taşıma --- */
 app.use((req, _res, next) => {
   const role = (req.query.role || "V").toString(); // V / M / P
   req.user = { role };
@@ -74,26 +74,18 @@ app.use("/api/sections", sectionsCountsRoutes);
 app.use("/api/questions", questionsRoutes);
 app.use("/api/exams", examsRoutes);
 app.use("/api/cases", caseRoutes);
-
-// MedSea uyumluluk katmanÄ± (counts, progress, quiz, review vb.)
 app.use("/api", medseaCompatRoutes);
-
-// Premium korumalÄ± iÃ§erik
 app.use("/api/protected", protectedRoutes);
-
-// Topics (liste/detay/CRUD)
 app.use("/api/topics", topicRoutes);
-
-// Guidelines
 app.use("/api/guidelines", guidelinesRoutes);
-
-// Admin: topics bulk import & slug kontrol
 app.use("/api/admin/topics", topicAdminRoutes);
 
+// 🆕 Translate endpoint
+app.use("/translate", translateRoutes);
+
 /* --- Healthcheck --- */
-// Eski health (korunuyor)
 app.get("/health", (_req, res) => {
-  const dbState = mongoose.connection?.readyState; // 0=disconnected,1=connected,2=connecting,3=disconnecting
+  const dbState = mongoose.connection?.readyState;
   res.status(200).json({
     status: "ok",
     dbState,
@@ -103,9 +95,8 @@ app.get("/health", (_req, res) => {
   });
 });
 
-// Frontend/monitoring ile hizalÄ± health (API altÄ±nda)
 app.get("/api/health", (_req, res) => {
-  const dbState = mongoose.connection?.readyState; // 0..3
+  const dbState = mongoose.connection?.readyState;
   res.status(200).json({
     ok: true,
     service: "medknowledge-api",
@@ -117,15 +108,11 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
-// KÃ¶k rota (opsiyonel bilgi)
 app.get("/", (_req, res) => res.send("Medknowledge API running..."));
 
 /* --- Start --- */
 const PORT = Number(process.env.PORT || 4000);
-const HOST = process.env.HOST || "0.0.0.0"; // Docker iÃ§in Ã¶nemli
-app.get("/health", (_req, res) => {
-  res.json({ ok: true, status: "up" });
-});
+const HOST = process.env.HOST || "0.0.0.0";
 app.listen(PORT, HOST, () => {
   console.log(`[BOOT] Server running on http://${HOST}:${PORT}`);
 });
