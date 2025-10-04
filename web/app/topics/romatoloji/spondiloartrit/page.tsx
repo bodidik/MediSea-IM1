@@ -10,6 +10,10 @@ export default function Page() {
       <hr className="my-6" />
       <p><Link className="underline" href="/topics/romatoloji">← Romatoloji dizine dön</Link></p>
       <p><Link className="underline" href="/topics/romatoloji/behcet">Behçet dizinine git</Link></p>
-    </article>
+    <hr className="my-6" />
+<section className="text-sm opacity-70 mt-4">
+  📖 Kaynaklar: Harrison, Cecil, UpToDate, EULAR, ACR, Kelly’s, Firestein, Dubois, Oxford, ACR Primer
+</section>
+</article>
   );
 }

@@ -1,3 +1,4 @@
+"use client";
 // FILE: web/app/components/SiteHeader.tsx (Server Component)
 import Link from "next/link";
 import navConfig from "@/app/config/nav";
