@@ -17,7 +17,7 @@ const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
 
     const cookiePlan = cookieStore.get("plan")?.value || "V";
     if (cookiePlan !== backendPlan) {
-      cookieStore.set("plan", backendPlan, {
+      (cookieStore as any).set("plan", backendPlan, {
         httpOnly: false,
         sameSite: "lax",
         path: "/",
@@ -28,5 +28,6 @@ const backend = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://127.0.0.1:4000";
     console.error("syncPlan error", e);
   }
 }
+
 
 

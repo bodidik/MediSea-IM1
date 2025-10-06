@@ -41,3 +41,5 @@ export default function ContentCard({ item, role }:{ item:any; role:'V'|'M'|'P' 
     </article>
   );
 }
+
+

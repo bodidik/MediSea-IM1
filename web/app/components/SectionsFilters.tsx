@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 
 type Row = { section: string; topics: number; boardQuestions: number; cases: number; videos: number; notes: number; total: number };
@@ -53,3 +53,6 @@ export default function SectionsFilters({ rows, onChange }: { rows: Row[]; onCha
     </div>
   );
 }
+
+
+

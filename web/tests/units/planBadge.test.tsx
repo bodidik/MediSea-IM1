@@ -8,3 +8,4 @@ describe('PlanBadge', () => {
     expect(screen.getByText('Free')).toBeInTheDocument();
   });
 });
+

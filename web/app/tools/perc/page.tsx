@@ -1,4 +1,4 @@
-﻿// FILE: app/tools/perc/page.tsx
+// FILE: app/tools/perc/page.tsx
 "use client";
 
 import React from "react";
@@ -167,3 +167,6 @@ export default function PERCPage() {
     </div>
   );
 }
+
+
+

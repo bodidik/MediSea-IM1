@@ -1,19 +1,13 @@
-export const revalidate = 0;
-export const dynamic = "force-dynamic";
-import Link from "next/link";
+import ChildLinks from '@/components/ChildLinks';
 
 export default function Page() {
   return (
-    <article className="prose prose-neutral max-w-4xl mx-auto p-6">
+    <main className="prose prose-neutral max-w-none">
       <h1>Vaskülit Sendromları</h1>
-      <p className="opacity-70">Bu sayfa placeholder’dır. İçerik eklenecektir.</p>
-      <hr className="my-6" />
-      <p><Link className="underline" href="/topics/romatoloji">← Romatoloji dizine dön</Link></p>
-      <p><Link className="underline" href="/topics/romatoloji/behcet">Behçet dizinine git</Link></p>
-    <hr className="my-6" />
-<section className="text-sm opacity-70 mt-4">
-  📖 Kaynaklar: Harrison, Cecil, UpToDate, EULAR, ACR, Kelly’s, Firestein, Dubois, Oxford, ACR Primer
-</section>
-</article>
+<p>Damar duvarının inflamatuvar hastalıkları; tutulan damar çapına göre sınıflanır.</p>
+<h2>Örnekler</h2>
+<ul><li>Büyük damar: Dev hücreli arterit, Takayasu.</li><li>Küçük damar: GPA, MPA, EGPA.</li></ul>
+      <ChildLinks appSubPath="topics/romatoloji/vaskulit-sindromlari" premiumHref="/premium/ydus" premiumLabel="PREMİUM YDUS" />
+    </main>
   );
 }

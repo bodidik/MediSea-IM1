@@ -1,8 +1,10 @@
+import ChildLinks from "@/components/ChildLinks";
+export const runtime = 'nodejs';
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
 import Link from "next/link";
 
-const items = ;
+const items = [];
 
 export default function Page() {
   return (
@@ -16,6 +18,10 @@ export default function Page() {
           </Link>
         ))}
       </div>
-    </main>
+      <ChildLinks appSubPath="topics/topics/kardiyoloji" premiumHref="/premium/ydus" premiumLabel="PREMİUM YDUS" />
+</main>
   );
 }
+
+
+

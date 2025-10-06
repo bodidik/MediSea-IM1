@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import * as React from "react";
 
 type Props = {
@@ -36,3 +36,5 @@ export default function NavCard({
     </Link>
   );
 }
+
+

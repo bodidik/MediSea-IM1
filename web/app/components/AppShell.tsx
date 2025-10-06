@@ -1,4 +1,4 @@
-﻿// FILE: web/app/components/AppShell.tsx
+// FILE: web/app/components/AppShell.tsx
 import SiteHeader from "@/app/components/SiteHeader";
 import Link from "next/link";
 import React from "react";
@@ -24,3 +24,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
+
+
+

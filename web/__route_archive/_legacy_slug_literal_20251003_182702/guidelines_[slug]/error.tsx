@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 // FILE: web/app/guidelines/[slug]/error.tsx
 export default function ErrorGuidelineDetail({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
@@ -9,4 +9,5 @@ export default function ErrorGuidelineDetail({ error, reset }: { error: Error & 
     </div>
   );
 }
+
 

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 // FILE: web/app/cases/[slug]/error.tsx
 export default function ErrorCase({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
@@ -9,4 +9,5 @@ export default function ErrorCase({ error, reset }: { error: Error & { digest?: 
     </div>
   );
 }
+
 

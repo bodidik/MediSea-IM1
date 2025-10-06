@@ -30,3 +30,4 @@ export default function EnrollPage({ params }: PageProps) {
     </div>
   );
 }
+

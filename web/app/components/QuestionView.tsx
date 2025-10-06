@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import ProtectedContent from "@/components/ProtectedContent";
@@ -141,3 +141,6 @@ export default function QuestionView({
     </article>
   );
 }
+
+
+

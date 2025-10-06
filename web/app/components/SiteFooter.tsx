@@ -1,4 +1,4 @@
-﻿// FILE: web/app/components/SiteHeader.tsx
+// FILE: web/app/components/SiteHeader.tsx
 "use client";
 import Link from "next/link";
 import React from "react";
@@ -18,3 +18,6 @@ export default function SiteHeader(){
     </header>
   );
 }
+
+
+

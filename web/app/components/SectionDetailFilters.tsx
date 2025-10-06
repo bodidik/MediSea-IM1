@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 
 export type Item = { type: string; id: string; createdAt: string };
@@ -42,3 +42,6 @@ export default function SectionDetailFilters({ items, onChange }: { items: Item[
     </div>
   );
 }
+
+
+

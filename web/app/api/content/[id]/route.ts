@@ -1,10 +1,9 @@
 // FILE: web/app/api/content/[id]/route.ts
 import { backendBase } from "@/lib/backend";
-import { NextRequest } from "next/server";
 
-export async function GET(_req: NextRequest, context: { params: { id: string } }) {
+export async function GET(req: Request) {
 const backend = backendBase();
-  const id = context.params.id;
+  const { id } = await (context as any).params;
   const r = await fetch(`${backend}/api/content/${encodeURIComponent(id)}`, { cache: "no-store" });
   const j = await r.json();
   return new Response(JSON.stringify(j), {

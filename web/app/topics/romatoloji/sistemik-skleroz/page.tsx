@@ -1,19 +1,13 @@
-export const revalidate = 0;
-export const dynamic = "force-dynamic";
-import Link from "next/link";
+import ChildLinks from '@/components/ChildLinks';
 
 export default function Page() {
   return (
-    <article className="prose prose-neutral max-w-4xl mx-auto p-6">
-      <h1>Sistemik Skleroz (Skleroderma) ve İlişkili Bozukluklar</h1>
-      <p className="opacity-70">Bu sayfa placeholder’dır. İçerik eklenecektir.</p>
-      <hr className="my-6" />
-      <p><Link className="underline" href="/topics/romatoloji">← Romatoloji dizine dön</Link></p>
-      <p><Link className="underline" href="/topics/romatoloji/behcet">Behçet dizinine git</Link></p>
-    <hr className="my-6" />
-<section className="text-sm opacity-70 mt-4">
-  📖 Kaynaklar: Harrison, Cecil, UpToDate, EULAR, ACR, Kelly’s, Firestein, Dubois, Oxford, ACR Primer
-</section>
-</article>
+    <main className="prose prose-neutral max-w-none">
+      <h1>Sistemik Skleroz</h1>
+<p>Fibrozis, mikrovasküler hasar ve otoimmünite ile karakterize sistemik hastalık.</p>
+<h2>Tedavi</h2>
+<ul><li>Raynaud’da kalsiyum kanal blokeri, ILD’de MMF veya siklofosfamid.</li></ul>
+      <ChildLinks appSubPath="topics/romatoloji/sistemik-skleroz" premiumHref="/premium/ydus" premiumLabel="PREMİUM YDUS" />
+    </main>
   );
 }

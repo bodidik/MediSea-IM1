@@ -1,4 +1,6 @@
-﻿export const revalidate = 0;
+import ChildLinks from "@/components/ChildLinks";
+export const runtime = 'nodejs';
+export const revalidate = 0;
 export const dynamic = "force-dynamic";
 import Link from "next/link";
 
@@ -16,6 +18,11 @@ export default function Page() {
           </Link>
         ))}
       </div>
-    </main>
+      <ChildLinks appSubPath="topics/hematoloji/multiple-myelom-ve-mgüs" />
+</main>
+
   );
 }
+
+
+

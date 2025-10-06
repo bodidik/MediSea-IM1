@@ -20,7 +20,8 @@ async function getItems(): Promise<Item[]> {
       .map(d => d.name)
       .filter(slug => fs.existsSync(path.join(dir, slug, "page.tsx")));
   } catch { entries = []; }
-  const items = entries.map(slug => ({ slug, title: toTitle(slug), href: /en/topics/romatoloji/ }));
+  const sectionEn = 'hematology';
+  const items = entries.map(slug => ({ slug, title: toTitle(slug), href: `/en/topics/${sectionEn}/${slug}` }));
   items.sort((a,b)=>a.title.localeCompare(b.title));
   return items;
 }
@@ -45,3 +46,5 @@ export default async function Page() {
     </main>
   );
 }
+
+

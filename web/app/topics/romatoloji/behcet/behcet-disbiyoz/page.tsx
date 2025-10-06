@@ -1,4 +1,4 @@
-﻿export const revalidate = 0;
+export const revalidate = 0;
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
@@ -94,3 +94,6 @@ export default function Page() {
     </div>
   );
 }
+
+
+

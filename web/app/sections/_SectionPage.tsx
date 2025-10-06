@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 export default function SectionPageView({ section }: { section: string }) {
   const s = section.toLowerCase();
   const title = s === "behcet" ? "Behçet Hastalığı" : section.charAt(0).toUpperCase() + section.slice(1);
@@ -16,3 +16,5 @@ export default function SectionPageView({ section }: { section: string }) {
     </div>
   );
 }
+
+

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 
 export default function QuestionRun() {
@@ -8,3 +8,6 @@ export default function QuestionRun() {
     </div>
   );
 }
+
+
+

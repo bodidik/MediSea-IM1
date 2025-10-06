@@ -34,3 +34,4 @@ export default function SectionPage({ params, searchParams }:{ params:{section:s
     </main>
   );
 }
+

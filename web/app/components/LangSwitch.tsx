@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { setLang, getLangFromCookie, type Lang } from "@/app/lib/i18n";
 export default function LangSwitch(){ const [lang, setL] = React.useState<Lang>(getLangFromCookie()); return (
@@ -7,3 +7,6 @@ export default function LangSwitch(){ const [lang, setL] = React.useState<Lang>(
     <button onClick={()=> setLang("en")} className={`px-2 py-1 rounded ${lang==="en"?"border font-semibold":"border-transparent"}`}>EN</button>
   </div>
 ); }
+
+
+

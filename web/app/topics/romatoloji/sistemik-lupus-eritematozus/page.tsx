@@ -1,3 +1,5 @@
+import ChildLinks from "@/components/ChildLinks";
+export const runtime = 'nodejs';
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
 
@@ -68,3 +70,51 @@ export default function Page() {
     </article>
   );
 }
+
+
+
+
+
+<main className="prose max-w-3xl px-4 py-8">
+  <h1>sistemik-lupus-eritematozus</h1>
+    <h2>Tanım</h2>
+  <ul>
+    <li>…</li>
+  </ul>
+  <h2>Epidemiyoloji</h2>
+  <ul>
+    <li>…</li>
+  </ul>
+  <h2>Klinik</h2>
+  <ul>
+    <li>…</li>
+  </ul>
+  <h2>Tanı</h2>
+  <ul>
+    <li>…</li>
+  </ul>
+  <h2>Tedavi</h2>
+  <ul>
+    <li>…</li>
+  </ul>
+  <h2>İzlem</h2>
+  <ul>
+    <li>…</li>
+  </ul>
+  <h2>Kaynaklar</h2>
+  <ul className="text-sm">
+    <li>Harrison’s Principles of Internal Medicine</li>
+    <li>UpToDate (ilgili başlıklar)</li>
+    <li>Goldman–Cecil Medicine</li>
+    <li>Kelley & Firestein’s Textbook of Rheumatology</li>
+    <li>EULAR / ACR kılavuzları</li>
+    <li>Oxford Handbook / Oxford Medicine Online</li>
+    <li>NEJM & Lancet (review)</li>
+    <li>StatPearls / Medscape</li>
+    <li>İlgili alt disiplin temel kaynakları</li>
+  </ul>
+  <ChildLinks appSubPath="topics/romatoloji/sistemik-lupus-eritematozus"
+              premiumHref="/premium/ydus"
+              premiumLabel="PREMİUM YDUS" />
+</main>
+

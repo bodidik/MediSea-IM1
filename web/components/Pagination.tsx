@@ -24,3 +24,5 @@ export default function Pagination({ page, total, pageSize = 24, onPage }: Props
     </div>
   );
 }
+
+

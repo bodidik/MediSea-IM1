@@ -1,4 +1,4 @@
-﻿// FILE: web/app/profile/page.tsx
+// FILE: web/app/profile/page.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -131,3 +131,6 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+
+

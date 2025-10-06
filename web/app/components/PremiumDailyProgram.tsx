@@ -1,4 +1,4 @@
-﻿// FILE: web/app/components/PremiumDailyProgram.tsx
+// FILE: web/app/components/PremiumDailyProgram.tsx
 "use client";
 import React, { useEffect, useState } from "react";
 
@@ -48,3 +48,6 @@ export default function PremiumDailyProgram(){
     </div>
   );
 }
+
+
+

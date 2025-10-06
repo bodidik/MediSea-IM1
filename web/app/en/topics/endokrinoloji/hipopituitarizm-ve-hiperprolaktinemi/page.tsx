@@ -1,3 +1,5 @@
+import ChildLinks from "@/components/ChildLinks";
+export const runtime = 'nodejs';
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
 import Link from "next/link";
@@ -23,6 +25,11 @@ export default function Page() {
           View TR topic
         </Link>
       </p>
-    </main>
+      <ChildLinks appSubPath="en/topics/hipopituitarizm-ve-hiperprolaktinemi/page.tsx" />
+</main>
+
   );
 }
+
+
+

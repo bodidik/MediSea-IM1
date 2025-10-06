@@ -1,5 +1,0 @@
-- Route groups: app/topics/(static) (dizin), app/topics/(dynamic) (içerik).
-- Romatoloji: linkli ana dizin + uzman içerikli TR/EN sayfalar (RA, SLE, SSc, MCTD vb.).
-- Çeviri altyapısı: /translate route (server) eklendi.
-- Build stabilizasyonu: SiteHeader 'use client'; Node/port ve .next temizliği talimatları.
-- Kaynak standardı: placeholderlarda 📖 Kaynaklar bloğu.

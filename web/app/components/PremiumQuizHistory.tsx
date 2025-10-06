@@ -1,4 +1,4 @@
-﻿// FILE: web/app/components/PremiumQuizHistory.tsx
+// FILE: web/app/components/PremiumQuizHistory.tsx
 "use client";
 import React from "react";
 
@@ -86,3 +86,7 @@ export default function PremiumQuizHistory({ days = 30 }: { days?: number }) {
     </div>
   );
 }
+
+
+
+

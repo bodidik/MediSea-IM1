@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import ToolShare from "@/app/tools/components/ToolShare";
@@ -71,3 +71,6 @@ export default function Sledai2kPage() {
     </div>
   );
 }
+
+
+

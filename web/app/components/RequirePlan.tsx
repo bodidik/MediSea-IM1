@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 
 export default function RequirePlan({
@@ -10,3 +10,6 @@ export default function RequirePlan({
   if (!ok) return <div className="text-sm opacity-70">Bu iÃ§erik iÃ§in daha yÃ¼ksek Ã¼yelik gerekiyor.</div>;
   return <>{children}</>;
 }
+
+
+

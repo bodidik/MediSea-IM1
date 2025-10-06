@@ -1,3 +1,5 @@
+import ChildLinks from "@/components/ChildLinks";
+export const runtime = 'nodejs';
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
 
@@ -5,20 +7,13 @@ import Link from "next/link";
 
 const TOPICS = [
   { slug: "sistemik-lupus-eritematozus", title: "Sistemik Lupus Eritematozus (SLE)" },
-  { slug: "romatoid-artrit", title: "Romatoid Artrit" },
-  { slug: "antifosfolipid-sendromu", title: "Antifosfolipid Sendromu" },
-  { slug: "vaskulit-sendromlari", title: "Vaskülit Sendromları" },
-  { slug: "sjogren", title: "Sjögren Sendromu" },
-  { slug: "sistemik-skleroz", title: "Sistemik Skleroz (Skleroderma)" },
-  { slug: "behcet", title: "Behçet Sendromu" },
-  { slug: "sarkoidoz", title: "Sarkoidoz" },
-  { slug: "inflamatuvar-myopatiler", title: "İnflamatuvar Myopatiler" },
-  { slug: "osteoartrit", title: "Osteoartrit" },
-  { slug: "gut-ve-kristal-artrit", title: "Gut ve Kristal Artritler" },
-  { slug: "fibromiyalji", title: "Fibromiyalji" },
-  { slug: "fmf-otoenflamatuvar", title: "FMF ve Otoenflamatuvar Hastalıklar" },
-  { slug: "igg4-iliskili-hastalik", title: "IgG4-İlişkili Hastalık" },
-  { slug: "relapsing-polichondritis", title: "Relapsing Polikondrit" }
+  { slug: "romatoid-artrit",             title: "Romatoid Artrit" },
+  { slug: "sistemik-skleroz",            title: "Sistemik Skleroz (Skleroderma)" },
+  { slug: "mikst-bag-dokusu-hastaligi",  title: "Mikst Bağ Dokusu Hastalığı (MCTD)" },
+  { slug: "behcet",                      title: "Behçet Sendromu" },
+  { slug: "vaskulit-sindromlari",        title: "Vaskülit Sendromları" },
+  { slug: "sjogrens-hastaligi",          title: "Sjögren Hastalığı" },
+  { slug: "inflamatuvar-miyopatiler",    title: "İnflamatuvar Miyopatiler" }
 ];
 
 export default function RomatolojiIndex() {
@@ -33,6 +28,11 @@ export default function RomatolojiIndex() {
           </li>
         ))}
       </ul>
-    </main>
+      <ChildLinks appSubPath="topics/(static)/romatoloji" />
+</main>
+
   );
 }
+
+
+

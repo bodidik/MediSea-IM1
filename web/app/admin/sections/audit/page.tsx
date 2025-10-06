@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 
 type Report = {
@@ -77,3 +77,6 @@ export default function AuditPage() {
     </div>
   );
 }
+
+
+

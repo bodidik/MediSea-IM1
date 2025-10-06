@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState } from "react";
 
 async function post(url: string) {
@@ -49,3 +49,6 @@ export default function StudyQuickActions() {
     </div>
   );
 }
+
+
+

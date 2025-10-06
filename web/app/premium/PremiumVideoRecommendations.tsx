@@ -1,4 +1,4 @@
-﻿// FILE: web/app/components/PremiumVideoRecommendations.tsx
+// FILE: web/app/components/PremiumVideoRecommendations.tsx
 "use client";
 import React, { useEffect, useState } from "react";
 
@@ -49,3 +49,6 @@ export default function PremiumVideoRecommendations({ limit = 3 }: { limit?: num
     </ul>
   );
 }
+
+
+
