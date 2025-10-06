@@ -25,6 +25,7 @@ package-lock.json
 package.json
 playwright.config.ts
 scan-backend-fields.txt
+server-filelist.txt
 start-web.ps1
 tailwind.config.js
 topic.json
