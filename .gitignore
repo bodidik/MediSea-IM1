@@ -47,3 +47,4 @@ web/.env.local
 server/.env
 server/.env
 web/.env.local
+web/.vercel/

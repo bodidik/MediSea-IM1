@@ -1,11 +1,9 @@
+export const runtime = "nodejs";
+export const revalidate = 7776000;
 import ChildLinks from "@/components/ChildLinks";
-export const runtime = 'nodejs';
-export const revalidate = 0;
-export const dynamic = "force-dynamic";
 import Link from "next/link";
 
 const items = [];
-
 export default function Page() {
   return (
     <main className="max-w-5xl mx-auto p-6">
@@ -22,6 +20,11 @@ export default function Page() {
 </main>
   );
 }
+
+
+
+
+
 
 
 

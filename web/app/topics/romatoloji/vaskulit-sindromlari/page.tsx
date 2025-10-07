@@ -1,5 +1,4 @@
-import ChildLinks from '@/components/ChildLinks';
-
+import ChildLinks from "@/components/ChildLinks";
 export default function Page() {
   return (
     <main className="prose prose-neutral max-w-none">
@@ -11,3 +10,4 @@ export default function Page() {
     </main>
   );
 }
+

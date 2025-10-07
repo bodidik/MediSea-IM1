@@ -1,6 +1,5 @@
 export const revalidate = 7776000;
 import ChildLinks from "@/components/ChildLinks";
-
 export default function Page() {
   return (
     <main className="prose max-w-3xl px-4 py-8">
@@ -40,3 +39,4 @@ export default function Page() {
     </main>
   );
 }
+
